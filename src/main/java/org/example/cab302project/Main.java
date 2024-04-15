@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 
 public class Main extends Application {
-
     public static void main(String[] args) {
         launch(args);
     }
