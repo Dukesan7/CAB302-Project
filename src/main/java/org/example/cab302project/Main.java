@@ -16,7 +16,9 @@ public class Main extends Application {
 
         TabPane tabPane = new TabPane();
 
-        Tab tab1 = new Tab("Home", new HomeTab());
+        tabPane.setStyle("-fx-background-color: white;");
+
+        Tab tab1 = new Tab("Home", new HomeTab());  
         Tab tab2 = new Tab("Tasks"  , new TasksTab());
         Tab tab3 = new Tab("Profiles" , new ProfilesTab());
         Tab tab4 = new Tab("Notes" , new NotesTab());
