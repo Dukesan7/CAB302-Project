@@ -1,38 +1,37 @@
 package org.example.cab302project;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.Tab;
 import javafx.stage.Stage;
-import javafx.scene.control.TabPane.TabClosingPolicy;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.VBox;
+import java.io.IOException;
 
 public class Main extends Application {
+    private Stage primaryStage;
+
     public static void main(String[] args) {
         launch(args);
     }
 
     public void start(Stage primaryStage) {
-
-        TabPane tabPane = new TabPane();
-
-        tabPane.setStyle("-fx-background-color: white;");
-
-        Tab tab1 = new Tab("Home", new HomeTab());  
-        Tab tab2 = new Tab("Tasks"  , new TasksTab());
-        Tab tab3 = new Tab("Profiles" , new ProfilesTab());
-        Tab tab4 = new Tab("Notes" , new NotesTab());
-        Tab tab5 = new Tab("Report" , new ReportTab());
-
-        tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
-
-        tabPane.getTabs().addAll(tab1, tab2, tab3, tab4, tab5);
-
-        Scene scene = new Scene(tabPane, 800, 600);
-
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("JavaFX App");
-
+        this.primaryStage = primaryStage;
+        goToPage("Home");
+        primaryStage.setTitle("idk app name here");
         primaryStage.show();
     }
+
+    public void goToPage(String pageName) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageName + ".fxml"));
+            VBox root = loader.load();
+            Scene scene = new Scene(root, 800, 600);
+            primaryStage.setScene(scene);
+
+            PageController controller = loader.getController();
+            controller.setMainApp(this);
+        } catch (IOException error) {
+            error.printStackTrace();
+        }
+    }
+
 }
