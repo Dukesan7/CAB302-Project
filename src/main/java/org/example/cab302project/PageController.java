@@ -14,7 +14,7 @@ public class PageController {
     public void goToPage(javafx.event.ActionEvent event) {
         Button button = (Button) event.getSource();
         String pageName = switch (button.getId()) {
-            case "homeButton" -> "Home";
+            case "dashboardButton" -> "Dashboard";
             case "tasksButton" -> "Tasks";
             case "profilesButton" -> "Profiles";
             case "notesButton" -> "Notes";

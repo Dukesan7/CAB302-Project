@@ -6,8 +6,6 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.Label?>
-
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.cab302project.PageController">
     <left>
         <VBox spacing="10" style="-fx-background-color: #d3d3d3; -fx-padding: 10;" prefWidth="200">
@@ -20,11 +18,7 @@
     </left>
     <center>
         <VBox spacing="10">
-
-            <StackPane style="-fx-background-color: #add8e6;" VBox.vgrow="ALWAYS">
-                <Label text="Tasks" />
-            </StackPane>
-
+            <StackPane style="-fx-background-color: #add8e6;" VBox.vgrow="ALWAYS"/>
             <HBox spacing="10">
                 <StackPane style="-fx-background-color: #90ee90;" HBox.hgrow="ALWAYS"/>
                 <StackPane style="-fx-background-color: #ffb6c1;" HBox.hgrow="ALWAYS"/>

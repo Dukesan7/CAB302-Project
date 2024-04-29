@@ -1,0 +1,21 @@
+/* styles.css */
+
+/* Default button style */
+.button {
+    -fx-background-color: #f5f5f5;
+    -fx-padding: 10;
+    -fx-font-size: 14px;
+}
+
+/* Active button style */
+.active {
+    -fx-background-color: #4caf50;
+    -fx-text-fill: white;
+    -fx-padding: 10;
+    -fx-font-size: 14px;
+}
+
+/* Sidebar button hover style */
+.sidebar .button:hover {
+    -fx-background-color: #e0e0e0;
+}

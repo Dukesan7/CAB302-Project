@@ -1,6 +1,8 @@
 package org.example.cab302project;
 import javafx.application.Application;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
@@ -15,7 +17,7 @@ public class Main extends Application {
 
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        goToPage("Home");
+        goToPage("Dashboard");
         primaryStage.setTitle("idk app name here");
         primaryStage.show();
     }
@@ -23,7 +25,9 @@ public class Main extends Application {
     public void goToPage(String pageName) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(pageName + ".fxml"));
-            VBox root = loader.load();
+            Parent root = loader.load();
+
+            // Set the scene with the loaded root
             Scene scene = new Scene(root, 800, 600);
             primaryStage.setScene(scene);
 
