@@ -9,7 +9,9 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 
 public class Main extends Application {
+
     private Stage primaryStage;
+
 
     public static void main(String[] args) {
         launch(args);

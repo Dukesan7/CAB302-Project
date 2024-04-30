@@ -23,6 +23,10 @@
 
             <StackPane style="-fx-background-color: #add8e6;" VBox.vgrow="ALWAYS">
                 <Label text="Profiles" />
+                <Button text="Switch Profile" />
+                <Button text="Switch Study Mode" />
+                <Button text="Change Security Question" />
+                <Button text="Change Password" />
             </StackPane>
 
             <HBox spacing="10">
