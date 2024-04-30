@@ -12,6 +12,11 @@ import java.io.IOException;
 public class ProfilesPageController {
 
     @FXML
+    public void handleBackButtonAction() {
+        return;
+    }
+
+    @FXML
     public void goToPage(ActionEvent event) {
         Button button = (Button) event.getSource();
         String pageName = button.getId();

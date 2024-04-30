@@ -6,30 +6,27 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.example.cab302project.ProfilesPageController"
       spacing="10" style="-fx-background-color: #f0f0f0;"
-      fillHeight="true">
+>
 
     <!-- Sidebar with buttons on the left -->
     <VBox spacing="10" minWidth="200" maxWidth="200"
           style="-fx-background-color: #d3d3d3; -fx-padding: 10;">
-        <Button text="Dashboard" fx:id="dashboardButton" onAction="#goToPage"
+        <Button text="Dashboard" fx:id="Dashboard" onAction="#goToPage"
                 style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;"
                 maxWidth="180" minWidth="180" alignment="CENTER" />
-        <Button text="Tasks" fx:id="tasksButton" onAction="#goToPage"
+        <Button text="Tasks" fx:id="Tasks" onAction="#goToPage"
                 style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;"
                 maxWidth="180" minWidth="180" alignment="CENTER" />
-        <Button text="Notes" fx:id="notesButton" onAction="#goToPage"
+        <Button text="Notes" fx:id="Notes" onAction="#goToPage"
                 style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;"
                 maxWidth="180" minWidth="180" alignment="CENTER" />
-        <Button text="Reports" fx:id="reportsButton" onAction="#goToPage"
-                style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;"
-                maxWidth="180" minWidth="180" alignment="CENTER" />
-        <Button text="Profiles" fx:id="profilesButton" onAction="#goToPage"
+        <Button text="Profiles" fx:id="Profiles" onAction="#goToPage"
                 style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;"
                 maxWidth="180" minWidth="180" alignment="CENTER" />
     </VBox>
 
     <!-- Home button placed in the top left corner -->
-    <Button text="Back" fx:id="backButton" onAction="#goToPage"
+    <Button text="Back" fx:id="backButton" onAction="#handleBackButtonAction"
             style="-fx-padding: 10; -fx-font-size: 14px; -fx-background-color: #f5f5f5;"
             alignment="CENTER_LEFT" />
 

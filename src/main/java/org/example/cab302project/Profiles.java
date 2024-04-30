@@ -4,6 +4,11 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 
 public class Profiles {
+
+    public void handleBackButtonAction() {
+        return;
+    }
+
     private String profileName;
     private ArrayList<String> smName = new ArrayList<String>();
 

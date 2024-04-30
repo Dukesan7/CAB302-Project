@@ -10,19 +10,16 @@
     <!-- Sidebar with buttons on the left -->
     <VBox spacing="10" minWidth="200" maxWidth="200"
           style="-fx-background-color: #d3d3d3; -fx-padding: 10;">
-        <Button text="Dashboard" fx:id="dashboardButton" onAction="#goToPage"
+        <Button text="Dashboard" fx:id="Dashboard" onAction="#goToPage"
                 style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;"
                 maxWidth="180" minWidth="180" alignment="CENTER" />
-        <Button text="Tasks" fx:id="tasksButton" onAction="#goToPage"
+        <Button text="Tasks" fx:id="Tasks" onAction="#goToPage"
                 style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;"
                 maxWidth="180" minWidth="180" alignment="CENTER" />
-        <Button text="Notes" fx:id="notesButton" onAction="#goToPage"
+        <Button text="Notes" fx:id="Notes" onAction="#goToPage"
                 style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;"
                 maxWidth="180" minWidth="180" alignment="CENTER" />
-        <Button text="Reports" fx:id="reportsButton" onAction="#goToPage"
-                style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;"
-                maxWidth="180" minWidth="180" alignment="CENTER" />
-        <Button text="Profiles" fx:id="profilesButton" onAction="#goToPage"
+        <Button text="Profiles" fx:id="Profiles" onAction="#goToPage"
                 style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;"
                 maxWidth="180" minWidth="180" alignment="CENTER" />
     </VBox>

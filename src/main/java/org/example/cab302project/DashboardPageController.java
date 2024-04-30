@@ -11,6 +11,8 @@ import java.io.IOException;
 
 public class DashboardPageController {
 
+
+
     @FXML
     public void goToPage(ActionEvent event) {
         Button button = (Button) event.getSource();
