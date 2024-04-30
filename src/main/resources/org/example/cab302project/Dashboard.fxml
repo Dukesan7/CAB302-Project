@@ -1,28 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
+<HBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.cab302project.PageController"
+      spacing="10" style="-fx-background-color: #f0f0f0;"
+      fillHeight="true">
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.cab302project.PageController">
-    <left>
-        <VBox spacing="10" style="-fx-background-color: #d3d3d3; -fx-padding: 10;" prefWidth="200">
-            <Button fx:id="dashboardButton" text="Dashboard" maxWidth="Infinity" onAction="#goToPage"/>
-            <Button fx:id="tasksButton" text="Tasks" maxWidth="Infinity" onAction="#goToPage"/>
-            <Button fx:id="notesButton" text="Notes" maxWidth="Infinity" onAction="#goToPage"/>
-            <Button fx:id="reportButton" text="Reports" maxWidth="Infinity" onAction="#goToPage"/>
-            <Button fx:id="profilesButton" text="Profiles" maxWidth="Infinity" onAction="#goToPage"/>
-        </VBox>
-    </left>
-    <center>
-        <VBox spacing="10">
-            <StackPane style="-fx-background-color: #add8e6;" VBox.vgrow="ALWAYS"/>
-            <HBox spacing="10">
-                <StackPane style="-fx-background-color: #90ee90;" HBox.hgrow="ALWAYS"/>
-                <StackPane style="-fx-background-color: #ffb6c1;" HBox.hgrow="ALWAYS"/>
-            </HBox>
-        </VBox>
-    </center>
-</BorderPane>
+    <!-- Sidebar with buttons on the left -->
+    <VBox spacing="10" minWidth="200" maxWidth="200"
+          style="-fx-background-color: #d3d3d3; -fx-padding: 10;">
+        <Button text="Dashboard" fx:id="dashboardButton" onAction="#goToPage"
+                style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;"
+                maxWidth="180" minWidth="180" alignment="CENTER" />
+        <Button text="Tasks" fx:id="tasksButton" onAction="#goToPage"
+                style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;"
+                maxWidth="180" minWidth="180" alignment="CENTER" />
+        <Button text="Notes" fx:id="notesButton" onAction="#goToPage"
+                style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;"
+                maxWidth="180" minWidth="180" alignment="CENTER" />
+        <Button text="Reports" fx:id="reportsButton" onAction="#goToPage"
+                style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;"
+                maxWidth="180" minWidth="180" alignment="CENTER" />
+        <Button text="Profiles" fx:id="profilesButton" onAction="#goToPage"
+                style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;"
+                maxWidth="180" minWidth="180" alignment="CENTER" />
+    </VBox>
+
+    <!-- Right side container that can resize with the window -->
+    <VBox spacing="10" HBox.hgrow="ALWAYS">
+        <!-- Top container -->
+        <StackPane fx:id="topContainer" style="-fx-background-color:#add8e6;" VBox.vgrow="ALWAYS">
+            <Label>Container 1</Label>
+        </StackPane>
+
+        <!-- Bottom containers (HBox with two containers) -->
+        <HBox spacing="10" VBox.vgrow="ALWAYS">
+            <StackPane fx:id="bottomLeftContainer" style="-fx-background-color: #90ee90;" HBox.hgrow="ALWAYS">
+                <Label>Container 2</Label>
+            </StackPane>
+
+            <StackPane fx:id="bottomRightContainer" style="-fx-background-color: #ffb6c1;" HBox.hgrow="ALWAYS">
+                <Label>Container 3</Label>
+            </StackPane>
+        </HBox>
+    </VBox>
+</HBox>
