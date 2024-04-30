@@ -23,10 +23,10 @@
 <BorderPane prefHeight="583.0" prefWidth="752.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="org.example.cab302project.StartSessPageController">
     <left>
         <VBox prefWidth="200" spacing="10" style="-fx-background-color: #d3d3d3; -fx-padding: 10;">
-            <Button fx:id="dashboardButton" maxWidth="Infinity" onAction="#goToPage" text="Dashboard" />
-            <Button fx:id="tasksButton" maxWidth="Infinity" onAction="#goToPage" text="Tasks" />
-            <Button fx:id="notesButton" maxWidth="Infinity" onAction="#goToPage" text="Notes" />
-            <Button fx:id="profilesButton" maxWidth="Infinity" onAction="#goToPage" text="Profiles" />
+            <Button fx:id="Dashboard" maxWidth="Infinity" onAction="#goToPage" text="Dashboard" />
+            <Button fx:id="Tasks" maxWidth="Infinity" onAction="#goToPage" text="Tasks" />
+            <Button fx:id="Notes" maxWidth="Infinity" onAction="#goToPage" text="Notes" />
+            <Button fx:id="Profile" maxWidth="Infinity" onAction="#goToPage" text="Profiles" />
         </VBox>
     </left>
     <center>
