@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.cab302project.RegisterPageController"
+      alignment="CENTER"
+      spacing="20"
+      prefHeight="800.0"
+      prefWidth="500.0"
+      style="-fx-padding: 20; -fx-background-color: #f0f0f0;">
+
+    <Text text="Register" style="-fx-font-size: 25; -fx-fill: Black; -fx-font-weight: bold;" />
+
+    <VBox spacing="10" alignment="CENTER">
+        <VBox spacing="5">
+            <Label text="Email:" />
+            <TextField fx:id="emailField" prefWidth="250" />
+        </VBox>
+
+        <VBox spacing="5">
+            <Label text="Name:" />
+            <TextField fx:id="nameField" prefWidth="250" />
+        </VBox>
+
+        <VBox spacing="5">
+            <Label text="Password:" />
+            <PasswordField fx:id="passwordField" prefWidth="250" />
+        </VBox>
+
+        <VBox spacing="5">
+            <Label text="Confirm Password:" />
+            <PasswordField fx:id="confirmPasswordField" prefWidth="250" />
+        </VBox>
+    </VBox>
+
+    <Button text="Register"/>
+
+    <Label fx:id="statusLabel" style="-fx-text-fill: red;" />
+
+</VBox>
