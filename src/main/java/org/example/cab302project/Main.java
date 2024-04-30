@@ -10,6 +10,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        CreateDB.createDatabase();
         Parent root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
         primaryStage.setTitle("JavaFX Multi-page App");
         primaryStage.setScene(new Scene(root, 600, 400));
