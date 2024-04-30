@@ -6,17 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="aa8951fd-875e-4d98-8f33-3fbc54a210fc" name="Changes" comment="each page has controller&#10;fixed page navigation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/DashboardPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/DashboardPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/NotesPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/NotesPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Profiles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Profiles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Profiles.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/ProfilesPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/ProfilesPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/ReportPageController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/TasksPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/TasksPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/Dashboard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/Notes.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/Notes.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/Profiles.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/Profiles.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/Reports.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/Tasks.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/Tasks.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="per-page-functions" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -81,7 +72,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "per-page-functions",
+    "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "settings.editor.selected.configurable": "preferences.JavaFX"
   }
@@ -189,7 +180,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714353527334</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="added per page functionality">
+      <option name="closed" value="true" />
+      <created>1714467000665</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1714467000665</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

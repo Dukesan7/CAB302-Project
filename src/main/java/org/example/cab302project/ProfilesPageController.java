@@ -8,8 +8,34 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import java.io.IOException;
-
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.text.MessageFormat;
+import java.util.ArrayList;
 public class ProfilesPageController {
+
+    private String profileName;
+    private ArrayList<String> smName = new ArrayList<String>();
+
+    public void AddNewProfile(String profileName) {
+        this.profileName = profileName;
+    }
+
+    public String AppendStudyMode(String nameofMode) {
+        int count = smName.size();
+
+        //checks for duplicates
+        for (String s : smName) {
+            if (s.equals(nameofMode)) { return "Please try a different name for the study mode."; }
+        }
+
+        smName.add(nameofMode);
+        // checks to see if string is successfully added
+        if (smName.size() <= count) { return "The Study Mode was unable to be added, please try again."; }
+
+        return MessageFormat.format("Study Mode {0} Successfully added.", smName);
+    }
+
 
     @FXML
     public void handleBackButtonAction() {
