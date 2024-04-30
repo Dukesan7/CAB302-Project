@@ -8,14 +8,14 @@
 
 <?import javafx.scene.control.Label?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.cab302project.PageController">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.cab302project.ProfilesPageController">
     <left>
         <VBox spacing="10" style="-fx-background-color: #d3d3d3; -fx-padding: 10;" prefWidth="200">
-            <Button fx:id="dashboardButton" text="Dashboard" maxWidth="Infinity" onAction="#goToPage"/>
-            <Button fx:id="tasksButton" text="Tasks" maxWidth="Infinity" onAction="#goToPage"/>
-            <Button fx:id="notesButton" text="Notes" maxWidth="Infinity" onAction="#goToPage"/>
-            <Button fx:id="reportButton" text="Reports" maxWidth="Infinity" onAction="#goToPage"/>
-            <Button fx:id="profilesButton" text="Profiles" maxWidth="Infinity" onAction="#goToPage"/>
+            <Button fx:id="Dashboard" text="Dashboard" maxWidth="Infinity" onAction="#goToPage"/>
+            <Button fx:id="Tasks" text="Tasks" maxWidth="Infinity" onAction="#goToPage"/>
+            <Button fx:id="Notes" text="Notes" maxWidth="Infinity" onAction="#goToPage"/>
+            <Button fx:id="Report" text="Reports" maxWidth="Infinity" onAction="#goToPage"/>
+            <Button fx:id="Profiles" text="Profiles" maxWidth="Infinity" onAction="#goToPage"/>
         </VBox>
     </left>
     <center>
