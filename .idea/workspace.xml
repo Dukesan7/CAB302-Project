@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa8951fd-875e-4d98-8f33-3fbc54a210fc" name="Changes" comment="moved fxml to correct directory">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/Dashboard.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/PageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/PageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/Home.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/Notes.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/Notes.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/Profiles.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/Profiles.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/Report.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/Report.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/Tasks.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/Tasks.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="aa8951fd-875e-4d98-8f33-3fbc54a210fc" name="Changes" comment="moved fxml to correct directory" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -79,8 +68,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Dashboard-addition",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Allan Li/QUT/Year 2/Semester 1/CAB302 Software Development/CAB302-Project",
     "settings.editor.selected.configurable": "preferences.JavaFX"
   }
 }]]></component>
