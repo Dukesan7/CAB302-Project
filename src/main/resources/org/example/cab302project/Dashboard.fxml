@@ -6,6 +6,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
 
 <HBox prefHeight="485.0" prefWidth="727.0" spacing="10" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cab302project.DashboardPageController">
 
@@ -20,8 +23,8 @@
     <!-- Right side container that can resize with the window -->
     <VBox spacing="10" HBox.hgrow="ALWAYS">
         <!-- Top container -->
-        <StackPane fx:id="topContainer" style="-fx-background-color:#add8e6;" VBox.vgrow="ALWAYS">
-            <Label>Container 1</Label>
+        <StackPane fx:id="topContainer" style="-fx-background-color:#add8e6; -fx-padding: 0 0 0 5;" VBox.vgrow="ALWAYS" alignment="TOP_LEFT">
+            <Label fx:id="welcomeLabel" style="-fx-text-fill: white; -fx-font-size: 30px; -fx-font-weight: bold;" >Welcome</Label>
          <Button fx:id="InitSess" mnemonicParsing="false" onAction="#goToPage" prefHeight="66.0" prefWidth="123.0" text="Start Focus Session&#10;▶" textAlignment="CENTER">
             <StackPane.margin>
                <Insets right="300.0" />
@@ -31,12 +34,12 @@
 
         <!-- Bottom containers (HBox with two containers) -->
         <HBox spacing="10" VBox.vgrow="ALWAYS">
-            <StackPane fx:id="bottomLeftContainer" style="-fx-background-color: #90ee90;" HBox.hgrow="ALWAYS">
-                <Label>Container 2</Label>
+            <StackPane fx:id="bottomLeftContainer" style="-fx-background-color: #90ee90; -fx-padding: 0 0 0 5;" HBox.hgrow="ALWAYS" alignment="TOP_LEFT">
+                <Label style="-fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold;">To-do Short Term</Label>
             </StackPane>
 
-            <StackPane fx:id="bottomRightContainer" style="-fx-background-color: #ffb6c1;" HBox.hgrow="ALWAYS">
-                <Label>Container 3</Label>
+            <StackPane fx:id="bottomRightContainer" style="-fx-background-color: #ffb6c1; -fx-padding: 0 0 0 5;" HBox.hgrow="ALWAYS" alignment="TOP_LEFT">
+                <Label style="-fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold;">To-do Long Term</Label>
             </StackPane>
         </HBox>
     </VBox>

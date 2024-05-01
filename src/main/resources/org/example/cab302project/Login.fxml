@@ -27,7 +27,8 @@
         </VBox>
     </VBox>
 
-    <Button text="Login"/>
+    <Button text="Login" onAction="#loginUser"/>
+    <Button text="Register" onAction="#goToRegisterPage"/>
 
     <Label fx:id="statusLabel" style="-fx-text-fill: red;" />
 

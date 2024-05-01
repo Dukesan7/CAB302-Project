@@ -1,62 +1,120 @@
 package org.example.cab302project;
 
-//import java.sql.Connection;
-//import java.sql.DriverManager;
-//import java.sql.PreparedStatement;
-//import java.sql.SQLException;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import java.io.IOException;
+import java.sql.*;
+import java.util.Objects;
 
 public class RegisterPageController {
-/*
-    @FXML
-    private TextField usernameField;
 
     @FXML
     private TextField nameField;
-
+    @FXML
+    private TextField emailField;
     @FXML
     private PasswordField passwordField;
-
     @FXML
     private PasswordField confirmPasswordField;
+    @FXML
+
+    private static final String DB_FILE_PATH = "CAB302-Project/src/main/resources/org/example/cab302project/ToDo.db";
+
+    private Connection connect() throws SQLException {
+        return DriverManager.getConnection("jdbc:sqlite:" + DB_FILE_PATH);
+    }
 
     @FXML
-    private Label statusLabel;
+    private void registerUser() {
+        String fullName = nameField.getText().trim();
+        String email = emailField.getText().trim();
+        String pass = passwordField.getText();
+        String confirmPass = confirmPasswordField.getText();
 
-    // Database connection parameters
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/your_database_name";
-    private static final String DB_USERNAME = "your_db_username";
-    private static final String DB_PASSWORD = "your_db_password";
-
-    @FXML
-    protected void handleRegisterAction(ActionEvent event) {
-        // Get user inputs from the form fields
-        String username = usernameField.getText().trim();
-        String name = nameField.getText().trim();
-        String password = passwordField.getText();
-        String confirmPassword = confirmPasswordField.getText();
-
-        // Check if password and confirm password match
-        if (!password.equals(confirmPassword)) {
-            statusLabel.setText("Passwords do not match.");
+        if (!pass.equals(confirmPass)) {
+            showAlert(AlertType.ERROR, "Registration Error", "Password does not match !");
             return;
         }
 
-        // Register the user in the database
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
-            String sql = "INSERT INTO users (username, name, password) VALUES (?, ?, ?)";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, username);
-            statement.setString(2, name);
-            statement.setString(3, password);
-
-            int rowsInserted = statement.executeUpdate();
-            if (rowsInserted > 0) {
-                statusLabel.setText("User registered successfully.");
-            } else {
-                statusLabel.setText("Failed to register user.");
-            }
-        } catch (SQLException e) {
-            statusLabel.setText("Database error: " + e.getMessage());
+        if (fullName.isEmpty() || email.isEmpty() || pass.isEmpty()) {
+            showAlert(AlertType.ERROR, "Registration Error", "Fill in the blanks !");
+            return;
         }
-    }*/
+
+        String[] names = fullName.split(" ", 2);
+        String fName = names.length > 0 ? names[0] : "";
+        String lName = names.length > 1 ? names[1] : "";
+
+        if (registerUserInDatabase(fName, lName, email, pass)) {
+            showAlert(AlertType.INFORMATION, "Registration Successfully", "You have successfully registered.");
+
+            // Switch to user login page
+            try{
+                Parent loginPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Login.fxml")));
+                Scene loginScene = new Scene(loginPage);
+
+                // Get the preferred width and height from the registration page
+                double preferredWidth = 800.0;
+                double preferredHeight = 500.0;
+
+                // Switch to the login page
+                Stage currentStage = (Stage) emailField.getScene().getWindow();
+
+                // Set the new scene to the stage
+                currentStage.setScene(loginScene);
+
+                // Set the preferred width and height for the stage
+                currentStage.setWidth(preferredWidth);
+                currentStage.setHeight(preferredHeight);
+
+                currentStage.show();
+            }
+            catch (IOException e) {
+                System.err.println("Failed to load the login page:" + e.getMessage());
+            }
+        } else {
+            showAlert(AlertType.ERROR, "Registration Failed", "User might already exist.");
+        }
+    }
+
+    private boolean registerUserInDatabase(String fName, String lName, String email, String pass) {
+        String sql = "INSERT INTO UserDetails(fName, lName, email, pass) VALUES(?,?,?,?)";
+
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, fName);
+            pstmt.setString(2, lName);
+            pstmt.setString(3, email);
+            pstmt.setString(4, pass);
+            pstmt.executeUpdate();
+            return true;
+        }
+
+        catch (SQLException e)
+        {
+            System.err.println("Error registering user: " + e.getMessage());
+            return false;
+        }
+    }
+
+    private void showAlert(AlertType alertType, String title, String message){
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null); // No header
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    // FXML initialization method
+    @FXML
+    public void initialize() {
+        // Optional: Any initializations for your controller
+    }
 }

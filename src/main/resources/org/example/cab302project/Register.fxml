@@ -37,7 +37,7 @@
         </VBox>
     </VBox>
 
-    <Button text="Register"/>
+    <Button text="Register" onAction="#registerUser"/>
 
     <Label fx:id="statusLabel" style="-fx-text-fill: red;" />
 
