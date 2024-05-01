@@ -25,7 +25,7 @@ public class RegisterPageController {
     private PasswordField confirmPasswordField;
     @FXML
 
-    private static final String DB_FILE_PATH = "CAB302-Project/src/main/resources/org/example/cab302project/ToDo.db";
+    private static final String DB_FILE_PATH = "src/main/resources/org/example/cab302project/ToDo.db";
 
     private Connection connect() throws SQLException {
         return DriverManager.getConnection("jdbc:sqlite:" + DB_FILE_PATH);
