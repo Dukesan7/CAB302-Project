@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.text.MessageFormat;
@@ -15,10 +16,20 @@ import java.util.ArrayList;
 public class ProfilesPageController {
 
     private String profileName;
-    private ArrayList<String> smName = new ArrayList<String>();
+    private String password;
+    private ArrayList<String> smName = new ArrayList<>();
+    private int smIndex;
 
     public void AddNewProfile(String profileName) {
         this.profileName = profileName;
+    }
+
+    public String ChangePassword(String oldPw, String newPw, String confirmNewPw) {
+        if (oldPw.equals(newPw)) { return "Please enter a different password"; }
+        if (!newPw.equals(confirmNewPw)) {return "Ensure the confirmed password is correct"; }
+
+        //change shit in db();
+        return "Password has successfully been changed!";
     }
 
     public String AppendStudyMode(String nameofMode) {
@@ -26,16 +37,29 @@ public class ProfilesPageController {
 
         //checks for duplicates
         for (String s : smName) {
-            if (s.equals(nameofMode)) { return "Please try a different name for the study mode."; }
+            if (s.equals(nameofMode)) {
+                return "Please try a different name for the study mode."; }
         }
-
         smName.add(nameofMode);
         // checks to see if string is successfully added
-        if (smName.size() <= count) { return "The Study Mode was unable to be added, please try again."; }
+        if (smName.size() <= count) {
+            return "The Study Mode was unable to be added, please try again."; }
 
-        return MessageFormat.format("Study Mode {0} Successfully added.", smName);
+        return MessageFormat.format("Study Mode {0} Successfully added.", smName.get(count));
     }
 
+
+
+
+
+
+    @FXML
+    public void returnTextAndAppend(ActionEvent action) {
+        TextField text = (TextField) action.getSource();
+        String studyModeName = text.getText();
+        String returnString = AppendStudyMode(studyModeName);
+        System.out.println(returnString);
+    }
 
     @FXML
     public void handleBackButtonAction() {

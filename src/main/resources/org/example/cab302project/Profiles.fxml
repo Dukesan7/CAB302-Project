@@ -30,4 +30,9 @@
             style="-fx-padding: 10; -fx-font-size: 14px; -fx-background-color: #f5f5f5;"
             alignment="CENTER_LEFT" />
 
+
+
+    <TextField fx:id="addStudyModeInput" onAction="#returnTextAndAppend" />
+
+
 </HBox>
