@@ -20,6 +20,14 @@ public class ProfilesPageController {
     private ArrayList<String> smName = new ArrayList<>();
     private int smIndex;
 
+    public String[] potentialQuestions = {
+            "What is the name of your first pet?",
+            "What school did you first attend?",
+            "What suburb did you first live in?",
+            "What is your favourite ice cream flavour?"
+    };
+
+
     public void AddNewProfile(String profileName) {
         this.profileName = profileName;
     }
@@ -31,6 +39,17 @@ public class ProfilesPageController {
         //change shit in db();
         return "Password has successfully been changed!";
     }
+
+    public String ChangeSecurityQuestion(int selection) {
+        String[] potentialQuestions = {
+                "What is the name of your first pet?",
+                "What school did you first attend?",
+                "What suburb did you first live in?",
+                "What is your favourite ice cream flavour?"
+        };
+        return potentialQuestions[selection];
+    }
+
 
     public String AppendStudyMode(String nameofMode) {
         int count = smName.size();
