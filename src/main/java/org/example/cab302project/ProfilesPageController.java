@@ -25,21 +25,17 @@ public class ProfilesPageController {
         return profileName;
     }
 
-    public void setProfileName(ArrayList<String> profileName) {
-        this.profileName = profileName;
-    }
-
+    public void setProfileName(ArrayList<String> profileName) { this.profileName = profileName; }
     private ArrayList<String> profileName = new ArrayList<>();
 
+    private String password;
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
 
-    private String password;
     private ArrayList<String> smName = new ArrayList<>();
     private int smIndex;
     private String selectedQuestion;
