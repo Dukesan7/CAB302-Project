@@ -3,6 +3,7 @@
 <?import javafx.scene.layout.*?>
 
 
+<?import javafx.scene.text.Text?>
 <HBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.example.cab302project.ProfilesPageController"
@@ -31,11 +32,11 @@
             style="-fx-padding: 10; -fx-font-size: 14px; -fx-background-color: #f5f5f5;"
             alignment="CENTER_LEFT" />
 
-
+    <Label fx:id="profileDisplayName" />
 
     <TextField fx:id="addStudyModeInput" onAction="#returnTextAndAppend" />
 
-    <ComboBox fx:id="changeSecurityQuestion" editable="false" onMouseClicked="#populateSecurityQuestions" />
+    <ComboBox fx:id="changeSecurityQuestion" editable="false" />
 
 
 </HBox>

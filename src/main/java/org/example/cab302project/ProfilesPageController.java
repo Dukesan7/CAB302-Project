@@ -8,10 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.w3c.dom.events.MouseEvent;
 
@@ -20,19 +17,14 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+
 public class ProfilesPageController {
 
+    private LoginPageController loginPage;
     private String profileName;
     private String password;
     private ArrayList<String> smName = new ArrayList<>();
     private int smIndex;
-
-//    public String[] potentialQuestions = {
-//            "What is the name of your first pet?",
-//            "What school did you first attend?",
-//            "What suburb did you first live in?",
-//            "What is your favourite ice cream flavour?"
-//    };
 
     ObservableList<String> potentialQuestions = FXCollections.observableArrayList(
             "What is the name of your first pet?",
@@ -40,14 +32,6 @@ public class ProfilesPageController {
             "What suburb did you first live in?",
             "What is your favourite ice cream flavour?"
     );
-
-    public ObservableList<String> getPotentialQuestions() {
-        return potentialQuestions;
-    }
-
-    public void setPotentialQuestions(ObservableList<String> potentialQuestions) {
-        this.potentialQuestions = potentialQuestions;
-    }
 
     public void AddNewProfile(String profileName) {
         this.profileName = profileName;
@@ -62,7 +46,7 @@ public class ProfilesPageController {
     }
 
 
-    public String AppendStudyMode(String nameofMode) {
+    private String AppendStudyMode(String nameofMode) {
         int count = smName.size();
 
         //checks for duplicates
@@ -70,7 +54,6 @@ public class ProfilesPageController {
             if (s.equals(nameofMode)) {
                 return "Please try a different name for the study mode."; }
         }
-
         smName.add(nameofMode);
         // checks to see if string is successfully added
         if (smName.size() <= count) {
@@ -81,7 +64,7 @@ public class ProfilesPageController {
 
 
     @FXML
-    public void returnTextAndAppend(ActionEvent action) {
+    private void returnTextAndAppend(ActionEvent action) {
         TextField text = (TextField) action.getSource();
         String studyModeName = text.getText();
         String returnString = AppendStudyMode(studyModeName);
@@ -91,10 +74,17 @@ public class ProfilesPageController {
     @FXML
     ComboBox<String> changeSecurityQuestion;
     @FXML
-    public void populateSecurityQuestions() {
+    private void populateSecurityQuestions() {
         changeSecurityQuestion.getItems().addAll(potentialQuestions);
     }
 
+    @FXML
+    Label profileDisplayName;
+    @FXML
+    private void populateProfileDisplayName() {
+        profileDisplayName.setText(loginPage.nameOfUser);
+
+    }
 
     @FXML
     public void handleBackButtonAction() {
@@ -114,5 +104,12 @@ public class ProfilesPageController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    public void initialize() {
+        // Optional: Any initializations for your controller
+        populateSecurityQuestions();
+        populateProfileDisplayName();
     }
 }

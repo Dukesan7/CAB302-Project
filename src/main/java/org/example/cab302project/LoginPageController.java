@@ -15,6 +15,12 @@ import java.util.Objects;
 
 public class LoginPageController {
 
+    // DOM HAS MADE CHANGES TO SET THE USER ID AFTER LOGIN VERIFIED
+    // I will comment everywhere I make a change
+    //Dom edit \/
+    public static int userID;
+    public static String nameOfUser;
+
     @FXML
     private TextField emailField;
     @FXML
@@ -107,6 +113,10 @@ public class LoginPageController {
             pstmt.setString(2, password);
 
             ResultSet rs = pstmt.executeQuery();
+
+            //Dom edit \/
+            userID = rs.getInt("UserID");
+            nameOfUser = rs.getString("fName");
 
             // If a record is found, the credentials are valid
             return rs.next();
