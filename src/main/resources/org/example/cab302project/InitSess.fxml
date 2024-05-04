@@ -32,7 +32,7 @@
            <font>
                <Font name="System Bold" size="24.0" />
            </font></Label>
-       <ChoiceBox prefHeight="25.0" prefWidth="67.0">
+       <ChoiceBox fx:id="minutes" prefHeight="25.0" prefWidth="67.0">
            <StackPane.margin>
                <Insets left="70.0" top="220.0" />
            </StackPane.margin>
@@ -101,7 +101,7 @@
                </FXCollections>
            </items>
        </ChoiceBox>
-       <ChoiceBox prefHeight="25.0" prefWidth="67.0">
+       <ChoiceBox fx:id="hours" prefHeight="25.0" prefWidth="67.0">
            <StackPane.margin>
                <Insets right="70.0" top="220.0" />
            </StackPane.margin>
@@ -151,7 +151,7 @@
                <Insets left="70.0" top="175.0" />
            </StackPane.margin>
        </Label>
-       <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="83.0" text="Start ▶" textFill="#3caa0d" StackPane.alignment="BOTTOM_CENTER">
+       <Button fx:id="startsess" mnemonicParsing="false" onAction="#handlestartsess" prefHeight="25.0" prefWidth="83.0" text="Start ▶" textFill="#3caa0d" StackPane.alignment="BOTTOM_CENTER">
            <StackPane.margin>
                <Insets bottom="40.0" />
            </StackPane.margin>
@@ -159,12 +159,12 @@
                <Font name="System Bold" size="12.0" />
            </font>
        </Button>
-       <ChoiceBox prefHeight="25.0" prefWidth="197.0" StackPane.alignment="TOP_CENTER">
+       <ChoiceBox fx:id="Group" prefHeight="25.0" prefWidth="197.0" StackPane.alignment="TOP_CENTER">
            <StackPane.margin>
                <Insets top="150.0" />
            </StackPane.margin>
        </ChoiceBox>
-       <ChoiceBox prefHeight="25.0" prefWidth="197.0" StackPane.alignment="TOP_CENTER">
+       <ChoiceBox fx:id="SubGroup" prefHeight="25.0" prefWidth="197.0" StackPane.alignment="TOP_CENTER">
            <StackPane.margin>
                <Insets top="220.0" />
            </StackPane.margin>
