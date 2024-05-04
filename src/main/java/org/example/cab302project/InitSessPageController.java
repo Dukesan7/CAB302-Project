@@ -14,6 +14,7 @@ import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class InitSessPageController {
@@ -70,7 +71,7 @@ public class InitSessPageController {
         }
     }
 
-    private List<String> initsessList = new ArrayList<>();
+    private static String[] initsessList = new String[4];
     @FXML
     private void handlestartsess() {
 
@@ -80,16 +81,15 @@ public class InitSessPageController {
         String SelectedMinutes = minutes.getValue();
 
 
-        initsessList.clear();
-        initsessList.add(SelectedGroup);
-        initsessList.add(SelectedSubGroup);
-        initsessList.add(SelectedHours);
-        initsessList.add(SelectedMinutes);
+        initsessList[0] = SelectedGroup;
+        initsessList[1] = SelectedSubGroup;
+        initsessList[2] = SelectedHours;
+        initsessList[3] = SelectedMinutes;
 
-        System.out.println(initsessList);
+        System.out.println(Arrays.toString(initsessList));
 
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("FocusSess.fxml"));
             Stage stage = new Stage();
             stage.setScene(new Scene(root, 600, 400));
             stage.show();
@@ -99,7 +99,7 @@ public class InitSessPageController {
     }
 
 
-    public List<String> getInitSessList() {
+    public String[] getInitSessList() {
         return initsessList;
     }
     @FXML
