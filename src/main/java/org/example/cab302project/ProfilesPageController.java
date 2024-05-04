@@ -19,9 +19,26 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 
 public class ProfilesPageController {
-
     private LoginPageController loginPage;
-    private String profileName;
+
+    public ArrayList<String> getProfileName() {
+        return profileName;
+    }
+
+    public void setProfileName(ArrayList<String> profileName) {
+        this.profileName = profileName;
+    }
+
+    private ArrayList<String> profileName = new ArrayList<>();
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     private String password;
     private ArrayList<String> smName = new ArrayList<>();
     private int smIndex;
@@ -33,8 +50,15 @@ public class ProfilesPageController {
             "What is your favourite ice cream flavour?"
     );
 
-    public void AddNewProfile(String profileName) {
-        this.profileName = profileName;
+    public ProfilesPageController(String profileName, String password, String smName, String selectedQuestion ) {
+        this.profileName.add(profileName);
+        this.password = password;
+        this.smName.add(smName);
+        this.selectedQuestion = selectedQuestion;
+    }
+
+    public void AddNewProfile(String newProfileName) {
+        this.profileName.add(newProfileName);
     }
 
     public String ChangePassword(String oldPw, String newPw, String confirmNewPw) {
@@ -46,7 +70,7 @@ public class ProfilesPageController {
     }
 
 
-    private String AppendStudyMode(String nameofMode) {
+    public String AppendStudyMode(String nameofMode) {
         int count = smName.size();
 
         //checks for duplicates
