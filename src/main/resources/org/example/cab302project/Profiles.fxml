@@ -3,7 +3,6 @@
 <?import javafx.scene.layout.*?>
 
 
-
 <HBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.example.cab302project.ProfilesPageController"
@@ -36,7 +35,7 @@
 
     <TextField fx:id="addStudyModeInput" onAction="#returnTextAndAppend" />
 
-    <ComboBox fx:id="changeSecurityQuestion" onAction="#test" items=potentialQuestions  />
+    <ComboBox fx:id="changeSecurityQuestion" editable="false" onMouseClicked="#populateSecurityQuestions" />
 
 
 </HBox>
