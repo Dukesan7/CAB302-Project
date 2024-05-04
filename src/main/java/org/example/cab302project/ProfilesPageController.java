@@ -25,7 +25,7 @@ public class ProfilesPageController {
     private String password;
     private ArrayList<String> smName = new ArrayList<>();
     private int smIndex;
-
+    private String selectedQuestion;
     ObservableList<String> potentialQuestions = FXCollections.observableArrayList(
             "What is the name of your first pet?",
             "What school did you first attend?",
@@ -64,26 +64,27 @@ public class ProfilesPageController {
 
 
     @FXML
-    private void returnTextAndAppend(ActionEvent action) {
-        TextField text = (TextField) action.getSource();
-        String studyModeName = text.getText();
-        String returnString = AppendStudyMode(studyModeName);
-        System.out.println(returnString);
-    }
-
+    TextField addStudyModeInput;
     @FXML
     ComboBox<String> changeSecurityQuestion;
+    @FXML
+    Label profileDisplayName;
+
+    @FXML
+    private void returnTextAndAppend() {
+        String addedStudyModeName = addStudyModeInput.getText();
+        String returnString = AppendStudyMode(addedStudyModeName);
+        System.out.println(returnString);
+    }
     @FXML
     private void populateSecurityQuestions() {
         changeSecurityQuestion.getItems().addAll(potentialQuestions);
     }
-
     @FXML
-    Label profileDisplayName;
+    private void getSelectedQuestion() { selectedQuestion = changeSecurityQuestion.getValue(); }
     @FXML
     private void populateProfileDisplayName() {
-        profileDisplayName.setText(loginPage.nameOfUser);
-
+        profileDisplayName.setText("Current Profile: " + loginPage.nameOfUser);
     }
 
     @FXML
