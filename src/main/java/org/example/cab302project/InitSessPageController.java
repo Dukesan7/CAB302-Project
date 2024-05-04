@@ -24,11 +24,11 @@ public class InitSessPageController {
         return;
     }
 
-    ObservableList<String> Groups = FXCollections.observableArrayList(
+    public ObservableList<String> Groups = FXCollections.observableArrayList(
             "School"
     );
 
-    ObservableList<String> SubGroupSchool = FXCollections.observableArrayList(
+    public ObservableList<String> SubGroupSchool = FXCollections.observableArrayList(
             "Chemistry",
             "English",
             "Math"
