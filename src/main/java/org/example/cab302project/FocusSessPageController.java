@@ -5,6 +5,7 @@ import javafx.scene.text.Text;
 
 import java.util.concurrent.TimeUnit;
 
+import org.example.cab302project.AppBlocking;
 public class FocusSessPageController extends java.lang.Thread {
 
     long studyLength;
@@ -22,8 +23,8 @@ public class FocusSessPageController extends java.lang.Thread {
         studyLength = CalculateTime(data);
         start();
 
-        AppBlocking appBlocking = new AppBlocking();
-        appBlocking.start();
+        AppBlockingRun appBlockingRun = new AppBlockingRun();
+        appBlockingRun.start();
     }
 
     @Override
@@ -32,6 +33,8 @@ public class FocusSessPageController extends java.lang.Thread {
         long endTime = studyLength + startTime;
 
         while (System.currentTimeMillis() < endTime){
+            AppBlocking.appBlocker(new String[]{});
+
             long currentTime = System.currentTimeMillis();
             int timeLeft = (int)(endTime - currentTime);
 
@@ -63,7 +66,7 @@ public class FocusSessPageController extends java.lang.Thread {
     }
 
     // Inner class for a second thread
-    private class AppBlocking extends Thread {
+    private class AppBlockingRun extends Thread {
         @Override
         public void run() {
             //Alex, put your app blocking here instead of the other run because it sleeps constantly
