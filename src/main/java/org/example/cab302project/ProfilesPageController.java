@@ -46,12 +46,12 @@ public class ProfilesPageController {
             "What is your favourite ice cream flavour?"
     );
 
-    public ProfilesPageController(String profileName, String password, String smName, String selectedQuestion ) {
-        this.profileName.add(profileName);
-        this.password = password;
-        this.smName.add(smName);
-        this.selectedQuestion = selectedQuestion;
-    }
+//    public ProfilesPageController(String profileName, String password, String smName, String selectedQuestion ) {
+//        this.profileName.add(profileName);
+//        this.password = password;
+//        this.smName.add(smName);
+//        this.selectedQuestion = selectedQuestion;
+//    }
 
     public void AddNewProfile(String newProfileName) {
         this.profileName.add(newProfileName);
