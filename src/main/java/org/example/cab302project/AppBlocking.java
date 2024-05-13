@@ -41,6 +41,8 @@ class ProcessManager {
                         if (process.isAlive()) {
                             try {
                                 process.destroy();
+                                String blockNotify = "Blocked the use of: " + path.toString() + "... Stay on Task!";
+                                Notification.notification(blockNotify);
                                 runningProcesses.add(path.toString());
                                 //System.out.println("Shut down process: " + path.toString());
                             } catch (Exception e) {

@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa8951fd-875e-4d98-8f33-3fbc54a210fc" name="Changes" comment="Added values to drop downs to choose group, subgroup, and time. added function to call array of focus session values. added function to create new window when session is started">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/AppBlocking.java" afterDir="false" />
+    <list default="true" id="aa8951fd-875e-4d98-8f33-3fbc54a210fc" name="Changes" comment="added base app blocking functionality, searches task list for all exe's, checks the list for blacklisted paths, if blacklisted it will immediately destroy the processes instance. ends when timer ends">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Notification.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/FocusSessPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/FocusSessPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/StartSessPageController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/AppBlocking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/AppBlocking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/InitSess.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/InitSess.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +27,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="app-blocking-base-functionality" />
+        <entry key="$PROJECT_DIR$" value="Notifications" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -60,14 +61,15 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main.executor": "Run",
+    "Application.Notification.executor": "Run",
     "Application.org.example.cab302project.Main.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Allan Li/QUT/Year 2/Semester 1/CAB302 Software Development/Updated Assignment 1",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+    "last_opened_file_path": "C:/Users/acste/OneDrive/University/2024/Semester 1/cab302/Assignment",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -221,7 +223,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714806538799</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="added base app blocking functionality, searches task list for all exe's, checks the list for blacklisted paths, if blacklisted it will immediately destroy the processes instance. ends when timer ends">
+      <option name="closed" value="true" />
+      <created>1714892924630</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1714892924630</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -247,6 +257,7 @@
     <MESSAGE value="Completed ComboBox population" />
     <MESSAGE value="Completed profilename display and added variables to LoginPageController.java" />
     <MESSAGE value="Added values to drop downs to choose group, subgroup, and time. added function to call array of focus session values. added function to create new window when session is started" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added values to drop downs to choose group, subgroup, and time. added function to call array of focus session values. added function to create new window when session is started" />
+    <MESSAGE value="added base app blocking functionality, searches task list for all exe's, checks the list for blacklisted paths, if blacklisted it will immediately destroy the processes instance. ends when timer ends" />
+    <option name="LAST_COMMIT_MESSAGE" value="added base app blocking functionality, searches task list for all exe's, checks the list for blacklisted paths, if blacklisted it will immediately destroy the processes instance. ends when timer ends" />
   </component>
 </project>
