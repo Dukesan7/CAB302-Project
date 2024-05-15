@@ -64,7 +64,7 @@ public class InitSessPageController {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(pageName + ".fxml"));
             Stage stage = (Stage) button.getScene().getWindow();
-            stage.setScene(new Scene(root, 600, 400));
+            stage.setScene(new Scene(root, 1280, 690));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -91,7 +91,7 @@ public class InitSessPageController {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("FocusSess.fxml"));
             Stage stage = new Stage();
-            stage.setScene(new Scene(root, 600, 400));
+            stage.setScene(new Scene(root, 1280, 690));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -120,7 +120,7 @@ public class ProfilesPageController {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(pageName + ".fxml"));
             Stage stage = (Stage) button.getScene().getWindow();
-            stage.setScene(new Scene(root, 600, 400));
+            stage.setScene(new Scene(root, 1280, 690));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
