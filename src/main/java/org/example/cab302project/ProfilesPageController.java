@@ -13,10 +13,12 @@ import javafx.stage.Stage;
 import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
+import java.sql.*;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ProfilesPageController {
     private LoginPageController loginPage;
@@ -52,6 +54,16 @@ public class ProfilesPageController {
 //        this.smName.add(smName);
 //        this.selectedQuestion = selectedQuestion;
 //    }
+
+
+    // ~*~*~*~*~*~*~*~ DATABASE STUFF ~*~*~*~*~*~*~*~
+    private static final String DB_FILE_PATH = "src/main/resources/org/example/cab302project/ToDo.db";
+    private Connection connect() throws SQLException {
+        return DriverManager.getConnection("jdbc:sqlite:" + DB_FILE_PATH);
+    }
+
+
+
 
     public void AddNewProfile(String newProfileName) {
         this.profileName.add(newProfileName);
@@ -89,6 +101,8 @@ public class ProfilesPageController {
     ComboBox<String> changeSecurityQuestion;
     @FXML
     Label profileDisplayName;
+    @FXML
+    TextArea applicationList;
 
     @FXML
     private void returnTextAndAppend() {
@@ -98,14 +112,44 @@ public class ProfilesPageController {
     }
     @FXML
     private void populateSecurityQuestions() {
-        changeSecurityQuestion.getItems().addAll(potentialQuestions);
+        try {changeSecurityQuestion.getItems().addAll(potentialQuestions); }
+        catch (NullPointerException e) {System.err.println(e.getMessage());}
     }
     @FXML
     private void getSelectedQuestion() { selectedQuestion = changeSecurityQuestion.getValue(); }
     @FXML
     private void populateProfileDisplayName() {
-        profileDisplayName.setText("Current Profile: " + loginPage.nameOfUser);
+        try {profileDisplayName.setText("Current Profile: " + loginPage.nameOfUser); }
+        catch (NullPointerException e) {System.err.println(e.getMessage());}
     }
+
+    @FXML
+    public void changeButtonLabel(ActionEvent event) {
+        ToggleButton tButton = (ToggleButton) event.getSource();
+        if (tButton.getText().equals("OFF")) {
+            tButton.setText("ON");
+        }
+        else { tButton.setText("OFF");}
+    }
+
+
+    public void populateApplicationList() {
+        String sql = "SELECT * FROM BlackLists WHERE userID = ?";
+
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, loginPage.userID );
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                System.out.println(rs);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error verifying user credentials: " + e.getMessage());
+        }
+    }
+
+
+
 
     @FXML
     public void handleBackButtonAction() {
@@ -132,5 +176,7 @@ public class ProfilesPageController {
         // Optional: Any initializations for your controller
         populateSecurityQuestions();
         populateProfileDisplayName();
+        populateApplicationList();
+
     }
 }

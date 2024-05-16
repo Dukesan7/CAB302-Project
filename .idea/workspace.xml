@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa8951fd-875e-4d98-8f33-3fbc54a210fc" name="Changes" comment="Added values to drop downs to choose group, subgroup, and time. added function to call array of focus session values. added function to create new window when session is started">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/AppBlocking.java" afterDir="false" />
+    <list default="true" id="aa8951fd-875e-4d98-8f33-3fbc54a210fc" name="Changes" comment="Completed profilename display and added variables to LoginPageController.java">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/ManageApplications.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/FocusSessPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/FocusSessPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/StartSessPageController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/InitSessPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/InitSessPageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/ProfilesPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/ProfilesPageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/FocusSess.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/FocusSess.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/Profiles.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/Profiles.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,15 +21,15 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="app-blocking-base-functionality" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -64,7 +67,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "Profiles",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Allan Li/QUT/Year 2/Semester 1/CAB302 Software Development/Updated Assignment 1",
     "settings.editor.selected.configurable": "preferences.pluginManager"
@@ -72,6 +75,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Dominic\IdeaProjects\CAB302-Project\src\main\resources\org\example\cab302project" />
+      <recent name="C:\Users\Dominic\IdeaProjects\CAB302-Project\src\main\resources\org\example\cab302project\Profiles" />
       <recent name="C:\Users\jaric\Desktop\thneeds\qut\CAB302SD\CAB302-Project\src\main\resources\org\example\cab302project" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -213,15 +218,7 @@
       <option name="project" value="LOCAL" />
       <updated>1714799939140</updated>
     </task>
-    <task id="LOCAL-00012" summary="Added values to drop downs to choose group, subgroup, and time. added function to call array of focus session values. added function to create new window when session is started">
-      <option name="closed" value="true" />
-      <created>1714806538799</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1714806538799</updated>
-    </task>
-    <option name="localTasksCounter" value="13" />
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -246,7 +243,16 @@
     <MESSAGE value="Added create database function into main" />
     <MESSAGE value="Completed ComboBox population" />
     <MESSAGE value="Completed profilename display and added variables to LoginPageController.java" />
-    <MESSAGE value="Added values to drop downs to choose group, subgroup, and time. added function to call array of focus session values. added function to create new window when session is started" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added values to drop downs to choose group, subgroup, and time. added function to call array of focus session values. added function to create new window when session is started" />
+    <option name="LAST_COMMIT_MESSAGE" value="Completed profilename display and added variables to LoginPageController.java" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

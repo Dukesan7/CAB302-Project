@@ -88,14 +88,7 @@ public class InitSessPageController {
 
         System.out.println(Arrays.toString(initsessList));
 
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("FocusSess.fxml"));
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root, 600, 400));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 
 

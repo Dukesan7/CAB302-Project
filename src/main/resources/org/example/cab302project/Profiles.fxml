@@ -5,17 +5,14 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox prefHeight="500.0" prefWidth="800.0" spacing="10"
-      style="-fx-background-color: #f0f0f0;"
-      xmlns="http://javafx.com/javafx/21"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="org.example.cab302project.ProfilesPageController">
+<HBox prefHeight="500.0" prefWidth="800.0" spacing="10" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cab302project.ProfilesPageController">
 
     <!-- Sidebar with buttons on the left -->
     <VBox maxWidth="200" minWidth="200" spacing="10" style="-fx-background-color: #d3d3d3; -fx-padding: 10;">
@@ -77,6 +74,73 @@
             <Insets bottom="10.0" top="10.0" />
          </padding>
         </HBox>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="2.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
+      <HBox prefHeight="50.0" prefWidth="600.0">
+         <children>
+            <ToggleButton mnemonicParsing="false" text="OFF" onAction="#changeButtonLabel">
+               <HBox.margin>
+                  <Insets right="10.0" top="10.0" />
+               </HBox.margin>
+            </ToggleButton>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Block Notifications">
+               <HBox.margin>
+                  <Insets right="10.0" top="10.0" />
+               </HBox.margin>
+            </Text>
+            <Button mnemonicParsing="false" text="Manage">
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox prefHeight="50.0" prefWidth="600.0">
+         <children>
+            <ToggleButton mnemonicParsing="false" text="OFF" onAction="#changeButtonLabel">
+               <HBox.margin>
+                  <Insets right="10.0" top="10.0" />
+               </HBox.margin>
+            </ToggleButton>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Block Applications">
+               <HBox.margin>
+                  <Insets right="10.0" top="10.0" />
+               </HBox.margin>
+            </Text>
+            <Button mnemonicParsing="false" text="Manage" fx:id="ManageApplications" onAction="#goToPage">
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox prefHeight="50.0" prefWidth="600.0">
+         <children>
+            <ToggleButton mnemonicParsing="false" text="OFF" onAction="#changeButtonLabel">
+               <HBox.margin>
+                  <Insets right="10.0" top="10.0" />
+               </HBox.margin>
+            </ToggleButton>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Distraction-free Wallpaper">
+               <HBox.margin>
+                  <Insets right="10.0" top="10.0" />
+               </HBox.margin>
+            </Text>
+            <Button mnemonicParsing="false" text="Manage">
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </HBox>
 
     </VBox>
 

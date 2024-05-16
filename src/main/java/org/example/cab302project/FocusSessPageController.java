@@ -23,8 +23,8 @@ public class FocusSessPageController extends java.lang.Thread {
         studyLength = CalculateTime(data);
         start();
 
-        AppBlockingRun appBlockingRun = new AppBlockingRun();
-        appBlockingRun.start();
+        AppBlocking appBlocking = new AppBlocking();
+        appBlocking.start();
     }
 
     @Override
@@ -33,8 +33,6 @@ public class FocusSessPageController extends java.lang.Thread {
         long endTime = studyLength + startTime;
 
         while (System.currentTimeMillis() < endTime){
-            AppBlocking.appBlocker(new String[]{});
-
             long currentTime = System.currentTimeMillis();
             int timeLeft = (int)(endTime - currentTime);
 
@@ -66,7 +64,7 @@ public class FocusSessPageController extends java.lang.Thread {
     }
 
     // Inner class for a second thread
-    private class AppBlockingRun extends Thread {
+    private class AppBlocking extends Thread {
         @Override
         public void run() {
             //Alex, put your app blocking here instead of the other run because it sleeps constantly
