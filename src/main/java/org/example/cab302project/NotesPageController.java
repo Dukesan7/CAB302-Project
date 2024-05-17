@@ -11,13 +11,11 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import org.json.JSONObject;
 
 
@@ -31,7 +29,9 @@ public class NotesPageController {
     @FXML
     private TextField fileNameField;
     @FXML
-    private TextField fileRenameField;
+    private Label editorLabel;
+    @FXML
+    private TextField newFileNameField;
 
     @FXML
     public void initialize() {
@@ -43,9 +43,6 @@ public class NotesPageController {
         }
         refreshFileList();
     }
-
-    @FXML
-    private Label editorLabel;
 
 
     @FXML
@@ -95,8 +92,6 @@ public class NotesPageController {
         }
     }
 
-
-
     @FXML
     public void openFile(ActionEvent event) {
         String fileName = fileList.getSelectionModel().getSelectedItem();
@@ -126,18 +121,17 @@ public class NotesPageController {
     @FXML
     public void renameFile(ActionEvent event) {
         String oldFileName = fileList.getSelectionModel().getSelectedItem();
-        String newFileName = fileRenameField.getText();
+        String newFileName = newFileNameField.getText();
         if (oldFileName != null && newFileName != null && !newFileName.isEmpty()) {
             Path oldPath = notesDirectory.resolve(oldFileName);
             Path newPath = notesDirectory.resolve(newFileName);
             try {
                 Files.move(oldPath, newPath);
                 refreshFileList();
-                fileRenameField.clear();
+                newFileNameField.clear();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else {
         }
     }
 
