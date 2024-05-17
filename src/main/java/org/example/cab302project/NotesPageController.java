@@ -22,7 +22,7 @@ import org.json.JSONObject;
 public class NotesPageController {
 
     private final Path notesDirectory = Paths.get("src/main/resources/org/example/cab302project/notes");
-    private final Path configPath = notesDirectory.resolve("config.json");
+    private final Path configPath = notesDirectory.resolve("../config.json");
     private String preferredEditor;
     @FXML
     private ListView<String> fileList;
