@@ -43,6 +43,14 @@ public class FocusSessPageController extends java.lang.Thread {
             appBlockingRun = new AppBlockingRun();
             appBlockingRun.start();
         }
+
+        Platform.runLater(() -> {
+            Stage stage = (Stage) endSess.getScene().getWindow();
+            stage.setOnCloseRequest(event -> {
+                handleEndSess();
+                event.consume();
+            });
+        });
     }
 
     @Override
@@ -91,15 +99,14 @@ public class FocusSessPageController extends java.lang.Thread {
     @FXML
     private void handleEndSess() {
         System.out.println("End Session");
-        // Stop the timer thread
         interrupt();
 
-        // Stop the AppBlocking thread if it is running
+
         if (appBlockingRun != null && appBlockingRun.isAlive()) {
             appBlockingRun.interrupt();
         }
 
-        // Close the JavaFX window
+
         Platform.runLater(() -> {
             Stage stage = (Stage) endSess.getScene().getWindow();
             stage.close();
@@ -112,18 +119,22 @@ public class FocusSessPageController extends java.lang.Thread {
             controlSess.setText("Resume");
             isPaused = true;
             pauseStartTime = System.currentTimeMillis();
+            if (appBlockingRun != null) {
+                appBlockingRun.pauseBlocking();
+            }
         } else {
             controlSess.setText("Pause");
             isPaused = false;
             long resumeTime = System.currentTimeMillis();
             long pauseDuration = resumeTime - pauseStartTime;
             endTime += pauseDuration;
-
+            if (appBlockingRun != null) {
+                appBlockingRun.resumeBlocking();
+            }
             synchronized (this) {
                 notify();
             }
         }
-        System.out.println("start/stop Session");
     }
 
     private long CalculateTime(String[] data) {
@@ -138,8 +149,32 @@ public class FocusSessPageController extends java.lang.Thread {
     private class AppBlockingRun extends Thread {
         @Override
         public void run() {
-            AppBlocking.appBlocker(new String[]{});
-            // Alex, put your app blocking here instead of the other run because it sleeps constantly
+            while (!isInterrupted()) {
+                synchronized (this) {
+                    while (isPaused) {
+                        try {
+                            wait();
+                        } catch (InterruptedException e) {
+                            interrupt();
+                        }
+                    }
+                }
+                // Put your app blocking code here
+                AppBlocking.appBlocker(new String[]{});
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    interrupt();
+                }
+            }
+        }
+        public synchronized void pauseBlocking() {
+            isPaused = true;
+        }
+
+        public synchronized void resumeBlocking() {
+            isPaused = false;
+            notify();
         }
     }
 }
