@@ -4,6 +4,7 @@
 <?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fillHeight="true" prefHeight="400.0" prefWidth="600.0" spacing="10" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cab302project.InitSessPageController">
+<HBox fillHeight="true" prefHeight="400.0" prefWidth="600.0" spacing="10" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cab302project.InitSessPageController">
 
     <!-- Sidebar with buttons on the left -->
     <VBox maxWidth="200" minWidth="200" spacing="10" style="-fx-background-color: #d3d3d3; -fx-padding: 10;">
@@ -24,6 +25,16 @@
       <children>
          <Button fx:id="backButton" alignment="CENTER_LEFT" onAction="#handleBackButtonAction" prefHeight="40.0" prefWidth="51.0" style="-fx-padding: 10; -fx-font-size: 14px; -fx-background-color: #f5f5f5;" text="Back" StackPane.alignment="TOP_LEFT" />
       </children>
+      <CheckBox fx:id="wallPaper" mnemonicParsing="false" text="Block Wall Paper" StackPane.alignment="BOTTOM_CENTER">
+         <StackPane.margin>
+            <Insets bottom="50.0" left="120.0" />
+         </StackPane.margin>
+      </CheckBox>
+      <CheckBox fx:id="appBlock" mnemonicParsing="false" text="Block Apps" StackPane.alignment="BOTTOM_CENTER">
+         <StackPane.margin>
+            <Insets bottom="50.0" right="120.0" />
+         </StackPane.margin>
+      </CheckBox>
 
        <Label text="Start Focus Session" underline="true" StackPane.alignment="TOP_CENTER">
            <StackPane.margin>
@@ -153,7 +164,7 @@
        </Label>
        <Button fx:id="startsess" mnemonicParsing="false" onAction="#handlestartsess" prefHeight="25.0" prefWidth="83.0" text="Start ▶" textFill="#3caa0d" StackPane.alignment="BOTTOM_CENTER">
            <StackPane.margin>
-               <Insets bottom="40.0" />
+               <Insets bottom="10.0" />
            </StackPane.margin>
            <font>
                <Font name="System Bold" size="12.0" />

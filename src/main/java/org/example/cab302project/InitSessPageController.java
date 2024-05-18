@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -45,7 +46,10 @@ public class InitSessPageController {
     ChoiceBox<String> hours;
     @FXML
     ChoiceBox<String> minutes;
-
+    @FXML
+    CheckBox appBlock;
+    @FXML
+    CheckBox wallPaper;
     @FXML
     public void populateGroups() {
         Group.getItems().addAll(Groups);
@@ -71,20 +75,35 @@ public class InitSessPageController {
         }
     }
 
-    private static String[] initsessList = new String[4];
+    private static String[] initsessList = new String[6];
     @FXML
     private void handlestartsess() {
 
         String SelectedGroup = Group.getValue();
-        String SelectedSubGroup = SubGroup.getValue();
+        String  SelectedSubGroup = SubGroup.getValue();
         String SelectedHours = hours.getValue();
         String SelectedMinutes = minutes.getValue();
+        CheckBox SelectedAppBlock = appBlock;
+        CheckBox SelectedwallPaper = wallPaper;
 
-
+        String wallPaper;
+        String appBlock;
+        if (SelectedwallPaper.isSelected()) {
+            wallPaper = "True";
+        } else {
+            wallPaper = "False";
+        }
+        if (SelectedAppBlock.isSelected()) {
+            appBlock = "True";
+        } else {
+            appBlock = "False";
+        }
         initsessList[0] = SelectedGroup;
         initsessList[1] = SelectedSubGroup;
         initsessList[2] = SelectedHours;
         initsessList[3] = SelectedMinutes;
+        initsessList[4] = appBlock;
+        initsessList[5] = wallPaper;
 
         System.out.println(Arrays.toString(initsessList));
 
