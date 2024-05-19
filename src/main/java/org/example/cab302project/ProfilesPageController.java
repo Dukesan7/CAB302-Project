@@ -97,8 +97,8 @@ public class ProfilesPageController {
     ComboBox<String> changeSecurityQuestion;
     @FXML
     Label profileDisplayName;
-    @FXML
-    TableView applicationTable;
+    //@FXML
+    //TableView applicationTable;
     @FXML
     TableColumn<DisplayObject, String> fileNameColumn;
     @FXML
@@ -194,7 +194,7 @@ public class ProfilesPageController {
 
                     DisplayObject displayObject  = new DisplayObject(rs.getString("fileName"), rs.getString("reason"));
                     System.out.println(displayObject.name + displayObject.reason);
-                    applicationTable.getItems().add(new DisplayObject(rs.getString("fileName"), rs.getString("reason")));
+                    //applicationTable.getItems().add(new DisplayObject(rs.getString("fileName"), rs.getString("reason")));
                 }
 
             } catch (SQLException e) {
