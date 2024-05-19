@@ -9,7 +9,6 @@
       spacing="10" style="-fx-background-color: #f0f0f0;"
       fillHeight="true">
 
-    <!-- Sidebar with buttons on the left -->
     <VBox spacing="10" minWidth="200" maxWidth="200"
           style="-fx-background-color: #d3d3d3; -fx-padding: 10;">
         <Button text="Dashboard" fx:id="Dashboard" onAction="#goToPage"
@@ -26,9 +25,32 @@
                 maxWidth="180" minWidth="180" alignment="CENTER" />
     </VBox>
 
-    <!-- New note button example -->
-    <Button text="New note" fx:id="newNoteButton" onAction="#handleBackButtonAction"
-            style="-fx-padding: 10; -fx-font-size: 14px; -fx-background-color: #f5f5f5;"
-            alignment="CENTER_LEFT" />
+
+    <VBox spacing="10" minWidth="200" maxWidth="200"
+          style="-fx-background-color: #d3d3d3; -fx-padding: 10;">
+        <ListView fx:id="fileList" />
+    </VBox>
+
+
+    <VBox spacing="10" style="-fx-padding: 10;">
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Button text="Create File" onAction="#createFile" />
+            <TextField fx:id="fileNameField" promptText="Enter file name"/>
+        </HBox>
+
+        <Button text="Open File" onAction="#openFile" />
+
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Button text="Rename File" onAction="#renameFile" />
+            <TextField fx:id="newFileNameField" promptText="New file name" maxWidth="200"/>
+        </HBox>
+
+        <Button text="Delete File" onAction="#deleteFile" />
+
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Button text="Select Editor" onAction="#chooseEditor" />
+            <Label fx:id="editorLabel" text="No editor selected" minWidth="180"/>
+        </HBox>
+    </VBox>
 
 </HBox>

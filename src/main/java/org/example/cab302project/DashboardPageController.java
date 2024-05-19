@@ -21,7 +21,7 @@ public class DashboardPageController {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(pageName + ".fxml")));
             Stage stage = (Stage) button.getScene().getWindow();
-            stage.setScene(new Scene(root, 800, 500));
+            stage.setScene(new Scene(root, 1280, 690));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

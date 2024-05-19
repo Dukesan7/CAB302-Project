@@ -1,33 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 
-<HBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.example.cab302project.TasksPageController"
-      spacing="10" style="-fx-background-color: #f0f0f0;"
-      fillHeight="true">
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox fillHeight="true" prefHeight="549.0" prefWidth="794.0" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cab302project.TasksPageController">
 
     <!-- Sidebar with buttons on the left -->
-    <VBox spacing="10" minWidth="200" maxWidth="200"
-          style="-fx-background-color: #d3d3d3; -fx-padding: 10;">
-        <Button text="Dashboard" fx:id="Dashboard" onAction="#goToPage"
-                style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;"
-                maxWidth="180" minWidth="180" alignment="CENTER" />
-        <Button text="Tasks" fx:id="Tasks" onAction="#goToPage"
-                style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;"
-                maxWidth="180" minWidth="180" alignment="CENTER" />
-        <Button text="Notes" fx:id="Notes" onAction="#goToPage"
-                style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;"
-                maxWidth="180" minWidth="180" alignment="CENTER" />
-        <Button text="Profiles" fx:id="Profiles" onAction="#goToPage"
-                style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;"
-                maxWidth="180" minWidth="180" alignment="CENTER" />
+    <VBox maxWidth="200" minWidth="200" spacing="10" style="-fx-background-color: #d3d3d3; -fx-padding: 10;">
+        <Button fx:id="Dashboard" alignment="CENTER" maxWidth="180" minWidth="180" onAction="#goToPage" style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;" text="Dashboard" />
+        <Button fx:id="Tasks" alignment="CENTER" maxWidth="180" minWidth="180" onAction="#goToPage" style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;" text="Tasks" />
+        <Button fx:id="Notes" alignment="CENTER" maxWidth="180" minWidth="180" onAction="#goToPage" style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;" text="Notes" />
+        <Button fx:id="Profiles" alignment="CENTER" maxWidth="180" minWidth="180" onAction="#goToPage" style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;" text="Profiles" />
     </VBox>
+   <GridPane nodeOrientation="LEFT_TO_RIGHT" HBox.hgrow="ALWAYS">
+     <columnConstraints>
+       <ColumnConstraints hgrow="SOMETIMES" maxWidth="476.0" minWidth="10.0" prefWidth="428.0" />
+       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="292.0" minWidth="10.0" prefWidth="166.0" />
+     </columnConstraints>
+     <rowConstraints>
+       <RowConstraints maxHeight="366.0" minHeight="10.0" prefHeight="57.0" vgrow="NEVER" />
+       <RowConstraints valignment="TOP" vgrow="ALWAYS" />
+     </rowConstraints>
+      <children>
+         <ChoiceBox fx:id="selectedSubgroup" onAction="#displayTaskList" prefWidth="150.0" GridPane.columnIndex="1" />
+         <VBox fx:id="root" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="297.0" spacing="10.0" GridPane.rowIndex="1">
+            <padding>
+               <Insets top="10.0" />
+            </padding>
+         </VBox>
+         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <children>
+               <Button fx:id="addTask" mnemonicParsing="false" onAction="#addNewTask" text="Add Task" />
+               <TextField fx:id="taskName" promptText="Task Name" />
+            </children>
+         </HBox>
+         </children>
+      </GridPane>
 
-    <!-- Home button placed in the top left corner -->
-    <Button text="Back" fx:id="backButton" onAction="#handleBackButtonAction"
-            style="-fx-padding: 10; -fx-font-size: 14px; -fx-background-color: #f5f5f5;"
-            alignment="CENTER_LEFT" />
-
-</HBox>
+   </HBox>

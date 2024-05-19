@@ -1,6 +1,7 @@
 package org.example.cab302project;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -8,7 +9,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.fxml.FXMLLoader;
+
 import java.io.IOException;
 import java.sql.*;
 import java.util.Objects;
@@ -51,8 +52,8 @@ public class LoginPageController {
                 Scene dashboardScene = new Scene(dashboardPage);
 
                 // Get the preferred width and height from the registration page
-                double preferredWidth = 800.0;
-                double preferredHeight = 500.0;
+                double preferredWidth = 1280.0;
+                double preferredHeight = 690.0;
 
                 // Switch to the dashboard page
                 Stage currentStage = (Stage) emailField.getScene().getWindow();
@@ -83,8 +84,8 @@ public class LoginPageController {
             Scene registerScene = new Scene(registerPage);
 
             // Get the preferred width and height from the registration page
-            double preferredWidth = 800.0;
-            double preferredHeight = 500.0;
+            double preferredWidth = 1280.0;
+            double preferredHeight = 690.0;
 
             // Get the current page
             Stage currentPage = (Stage) emailField.getScene().getWindow();
@@ -101,6 +102,37 @@ public class LoginPageController {
         }
         catch (IOException e) {
             System.err.println("Failed to load registration page: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void goToForgetPasswordPage() {
+        try {
+            // Load the register page from fxml file
+            Parent forgetPasswordPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ForgetPassword.fxml")));
+
+            // Create a new scene with the registration page
+            Scene forgetPasswordScene = new Scene(forgetPasswordPage);
+
+            // Get the preferred width and height from the registration page
+            double preferredWidth = 1280.0;
+            double preferredHeight = 690.0;
+
+            // Get the current page
+            Stage currentPage = (Stage) emailField.getScene().getWindow();
+
+            // Set the new scene to the page
+            currentPage.setScene(forgetPasswordScene);
+
+            // Set window size for the page
+            currentPage.setWidth(preferredWidth);
+            currentPage.setHeight(preferredHeight);
+
+            // Show window with new scene
+            currentPage.show();
+        }
+        catch (IOException e) {
+            System.err.println("Failed to load forget password page: " + e.getMessage());
         }
     }
 
