@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aa8951fd-875e-4d98-8f33-3fbc54a210fc" name="Changes" comment="Completed profilename display and added variables to LoginPageController.java">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/ManageApplications.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/FocusSessPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/FocusSessPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/InitSessPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/InitSessPageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/ProfilesPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/ProfilesPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/FocusSess.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/FocusSess.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/Profiles.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/Profiles.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/ManageApplications.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/ManageApplications.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +60,8 @@
   "keyToString": {
     "Application.Main.executor": "Run",
     "Application.org.example.cab302project.Main.executor": "Run",
+    "JUnit.InitSessPC.executor": "Run",
+    "JUnit.ProfilesPC.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -104,11 +102,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="InitSessPC" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CAB302-Project" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="InitSessPC" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProfilesPC" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CAB302-Project" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ProfilesPC" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.org.example.cab302project.Main" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.org.example.cab302project.Main" />
+        <item itemvalue="JUnit.ProfilesPC" />
+        <item itemvalue="JUnit.InitSessPC" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.org.example.cab302project.Main" />
       </list>

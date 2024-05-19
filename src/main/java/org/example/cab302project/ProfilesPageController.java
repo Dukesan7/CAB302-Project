@@ -1,6 +1,5 @@
 package org.example.cab302project;
 
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,16 +8,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
 import java.sql.*;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Objects;
 
 public class ProfilesPageController {
     private LoginPageController loginPage;
@@ -102,7 +98,12 @@ public class ProfilesPageController {
     @FXML
     Label profileDisplayName;
     @FXML
-    TextArea applicationList;
+    TableView applicationTable;
+    @FXML
+    TableColumn<DisplayObject, String> fileNameColumn;
+    @FXML
+    TableColumn<DisplayObject, String> reasonColumn;
+
 
     @FXML
     private void returnTextAndAppend() {
@@ -132,20 +133,74 @@ public class ProfilesPageController {
         else { tButton.setText("OFF");}
     }
 
-
-    public void populateApplicationList() {
-        String sql = "SELECT * FROM BlackLists WHERE userID = ?";
+    public void exampleApps() {
+        String sql = "INSERT INTO BlackLists(blackListID, userID, fileName, reason) VALUES(?, ?, ?, ?)";
+        var fileNames = new String[] {"Steam.exe", "Chrome.exe"};
+        var reasons = new String[] {"Games", "Internet"};
+        var userID = new int[] {2, 1};
 
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, loginPage.userID );
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                System.out.println(rs);
+
+            for(int i = 0; i < 2; i++){
+                pstmt.setInt(1, i);
+                pstmt.setInt(2, userID[i]);
+                pstmt.setString(3, fileNames[i]);
+                pstmt.setString(4, reasons[i]);
+                pstmt.executeUpdate();
             }
+
         } catch (SQLException e) {
-            System.err.println("Error verifying user credentials: " + e.getMessage());
+            System.err.println("Error adding: " + e.getMessage());
         }
+
+    }
+
+
+    static class DisplayObject {
+        private String name = null; private String reason = null;
+        public String getName() {
+            return name;
+        }
+
+        public String getReason() {
+            return reason;
+        }
+
+    public DisplayObject(String name, String reason)  {
+        this.name = name; this.reason = reason;
+    } }
+
+    public void populateApplicationList() {
+        try {
+            System.out.println("popApps Selected");
+            String sql = "SELECT fileName, reason FROM BlackLists WHERE userID = ?";
+
+            try (Connection conn = connect();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, loginPage.userID );
+                ResultSet rs = pstmt.executeQuery();
+
+
+                fileNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+                reasonColumn.setCellValueFactory(new PropertyValueFactory<>("reason"));
+
+
+                while (rs.next()) {
+                    System.out.printf("%-5s%-25s",
+                            rs.getString("fileName"),
+                            rs.getString("reason")
+                    );
+
+                    DisplayObject displayObject  = new DisplayObject(rs.getString("fileName"), rs.getString("reason"));
+                    System.out.println(displayObject.name + displayObject.reason);
+                    applicationTable.getItems().add(new DisplayObject(rs.getString("fileName"), rs.getString("reason")));
+                }
+
+            } catch (SQLException e) {
+                System.err.println("Error adding blocked applications: " + e.getMessage());
+            }
+        } catch (NullPointerException e) {System.err.println(e.getMessage());}
     }
 
 
@@ -176,6 +231,7 @@ public class ProfilesPageController {
         // Optional: Any initializations for your controller
         populateSecurityQuestions();
         populateProfileDisplayName();
+        exampleApps();
         populateApplicationList();
 
     }
