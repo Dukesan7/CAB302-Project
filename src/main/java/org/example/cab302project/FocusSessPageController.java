@@ -51,6 +51,7 @@ public class FocusSessPageController extends java.lang.Thread {
                 event.consume();
             });
         });
+
     }
 
     @Override
@@ -101,7 +102,6 @@ public class FocusSessPageController extends java.lang.Thread {
         System.out.println("End Session");
         interrupt();
 
-
         if (appBlockingRun != null && appBlockingRun.isAlive()) {
             appBlockingRun.interrupt();
         }
@@ -146,7 +146,7 @@ public class FocusSessPageController extends java.lang.Thread {
 
 
     // Inner class for a second thread
-    private class AppBlockingRun extends Thread {
+    private class AppBlocking extends Thread {
         @Override
         public void run() {
             while (!isInterrupted()) {

@@ -18,8 +18,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -77,6 +77,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Dominic\IdeaProjects\CAB302-Project\src\main\resources\org\example\cab302project" />
+      <recent name="C:\Users\Dominic\IdeaProjects\CAB302-Project\src\main\resources\org\example\cab302project\Profiles" />
       <recent name="C:\Users\jaric\Desktop\thneeds\qut\CAB302SD\CAB302-Project\src\main\resources\org\example\cab302project" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -104,11 +106,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="InitSessPC" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CAB302-Project" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="InitSessPC" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProfilesPC" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CAB302-Project" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ProfilesPC" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.org.example.cab302project.Main" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.org.example.cab302project.Main" />
+        <item itemvalue="JUnit.ProfilesPC" />
+        <item itemvalue="JUnit.InitSessPC" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.org.example.cab302project.Main" />
       </list>
@@ -236,6 +256,7 @@
       <updated>1715999962580</updated>
     </task>
     <option name="localTasksCounter" value="15" />
+
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -264,5 +285,6 @@
     <MESSAGE value="added base app blocking functionality, searches task list for all exe's, checks the list for blacklisted paths, if blacklisted it will immediately destroy the processes instance. ends when timer ends" />
     <MESSAGE value="added Play pause buttons to session thats running. stops timer when pressed, changes name of button to signify buttons new functionality when paused. &#10;&#10;added end session button to end thread and shut window." />
     <option name="LAST_COMMIT_MESSAGE" value="added Play pause buttons to session thats running. stops timer when pressed, changes name of button to signify buttons new functionality when paused. &#10;&#10;added end session button to end thread and shut window." />
+
   </component>
 </project>
