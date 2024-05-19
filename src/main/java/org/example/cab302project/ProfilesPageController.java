@@ -1,6 +1,5 @@
 package org.example.cab302project;
 
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,12 +8,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
-import java.text.MessageFormat;
-import java.util.ArrayList;
+import java.sql.*;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 
@@ -53,6 +51,16 @@ public class ProfilesPageController {
 //        this.selectedQuestion = selectedQuestion;
 //    }
 
+
+    // ~*~*~*~*~*~*~*~ DATABASE STUFF ~*~*~*~*~*~*~*~
+    private static final String DB_FILE_PATH = "src/main/resources/org/example/cab302project/ToDo.db";
+    private Connection connect() throws SQLException {
+        return DriverManager.getConnection("jdbc:sqlite:" + DB_FILE_PATH);
+    }
+
+
+
+
     public void AddNewProfile(String newProfileName) {
         this.profileName.add(newProfileName);
     }
@@ -89,6 +97,13 @@ public class ProfilesPageController {
     ComboBox<String> changeSecurityQuestion;
     @FXML
     Label profileDisplayName;
+    @FXML
+    TableView applicationTable;
+    @FXML
+    TableColumn<DisplayObject, String> fileNameColumn;
+    @FXML
+    TableColumn<DisplayObject, String> reasonColumn;
+
 
     @FXML
     private void returnTextAndAppend() {
@@ -98,14 +113,98 @@ public class ProfilesPageController {
     }
     @FXML
     private void populateSecurityQuestions() {
-        changeSecurityQuestion.getItems().addAll(potentialQuestions);
+        try {changeSecurityQuestion.getItems().addAll(potentialQuestions); }
+        catch (NullPointerException e) {System.err.println(e.getMessage());}
     }
     @FXML
     private void getSelectedQuestion() { selectedQuestion = changeSecurityQuestion.getValue(); }
     @FXML
     private void populateProfileDisplayName() {
-        profileDisplayName.setText("Current Profile: " + loginPage.nameOfUser);
+        try {profileDisplayName.setText("Current Profile: " + loginPage.nameOfUser); }
+        catch (NullPointerException e) {System.err.println(e.getMessage());}
     }
+
+    @FXML
+    public void changeButtonLabel(ActionEvent event) {
+        ToggleButton tButton = (ToggleButton) event.getSource();
+        if (tButton.getText().equals("OFF")) {
+            tButton.setText("ON");
+        }
+        else { tButton.setText("OFF");}
+    }
+
+    public void exampleApps() {
+        String sql = "INSERT INTO BlackLists(blackListID, userID, fileName, reason) VALUES(?, ?, ?, ?)";
+        var fileNames = new String[] {"Steam.exe", "Chrome.exe"};
+        var reasons = new String[] {"Games", "Internet"};
+        var userID = new int[] {2, 1};
+
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            for(int i = 0; i < 2; i++){
+                pstmt.setInt(1, i);
+                pstmt.setInt(2, userID[i]);
+                pstmt.setString(3, fileNames[i]);
+                pstmt.setString(4, reasons[i]);
+                pstmt.executeUpdate();
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error adding: " + e.getMessage());
+        }
+
+    }
+
+
+    static class DisplayObject {
+        private String name = null; private String reason = null;
+        public String getName() {
+            return name;
+        }
+
+        public String getReason() {
+            return reason;
+        }
+
+    public DisplayObject(String name, String reason)  {
+        this.name = name; this.reason = reason;
+    } }
+
+    public void populateApplicationList() {
+        try {
+            System.out.println("popApps Selected");
+            String sql = "SELECT fileName, reason FROM BlackLists WHERE userID = ?";
+
+            try (Connection conn = connect();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, loginPage.userID );
+                ResultSet rs = pstmt.executeQuery();
+
+
+                fileNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+                reasonColumn.setCellValueFactory(new PropertyValueFactory<>("reason"));
+
+
+                while (rs.next()) {
+                    System.out.printf("%-5s%-25s",
+                            rs.getString("fileName"),
+                            rs.getString("reason")
+                    );
+
+                    DisplayObject displayObject  = new DisplayObject(rs.getString("fileName"), rs.getString("reason"));
+                    System.out.println(displayObject.name + displayObject.reason);
+                    applicationTable.getItems().add(new DisplayObject(rs.getString("fileName"), rs.getString("reason")));
+                }
+
+            } catch (SQLException e) {
+                System.err.println("Error adding blocked applications: " + e.getMessage());
+            }
+        } catch (NullPointerException e) {System.err.println(e.getMessage());}
+    }
+
+
+
 
     @FXML
     public void handleBackButtonAction() {
@@ -132,5 +231,8 @@ public class ProfilesPageController {
         // Optional: Any initializations for your controller
         populateSecurityQuestions();
         populateProfileDisplayName();
+        exampleApps();
+        populateApplicationList();
+
     }
 }
