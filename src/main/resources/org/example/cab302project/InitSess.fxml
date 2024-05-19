@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fillHeight="true" prefHeight="458.0" prefWidth="922.0" spacing="10" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cab302project.InitSessPageController">
+<HBox fillHeight="true" prefHeight="458.0" prefWidth="922.0" spacing="10" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cab302project.InitSessPageController">
 
     <!-- Sidebar with buttons on the left -->
     <VBox maxWidth="200" minWidth="200" spacing="10" style="-fx-background-color: #d3d3d3; -fx-padding: 10;">

@@ -17,6 +17,10 @@ public class FocusSessPageController extends java.lang.Thread {
     private long endTime;
     private AppBlockingRun appBlockingRun;
 
+    private long breakInterval;
+    private long breakLength;
+    private long nextBreakTime;
+
     @FXML
     ProgressIndicator clock;
 
@@ -31,11 +35,15 @@ public class FocusSessPageController extends java.lang.Thread {
 
     @FXML
     public void initialize() {
-        // Optional: Any initializations for your controller
         String[] data = new InitSessPageController().getInitSessList();
 
         studyLength = CalculateTime(data);
+        breakInterval = TimeUnit.MINUTES.toMillis(Integer.parseInt(data[6]));
+        breakLength = TimeUnit.MINUTES.toMillis(Integer.parseInt(data[7]));
+
+        nextBreakTime = System.currentTimeMillis() + breakInterval;
         start();
+
         String blockApp = data[4];
 
         if (Objects.equals(blockApp, "True")) {
@@ -51,8 +59,8 @@ public class FocusSessPageController extends java.lang.Thread {
                 event.consume();
             });
         });
-
     }
+
 
     @Override
     public void run() {
@@ -61,7 +69,6 @@ public class FocusSessPageController extends java.lang.Thread {
 
         while (System.currentTimeMillis() < endTime) {
             if (!isPaused) {
-
                 long currentTime = System.currentTimeMillis();
                 int timeLeft = (int) (endTime - currentTime);
 
@@ -76,13 +83,16 @@ public class FocusSessPageController extends java.lang.Thread {
                     timeText.setText(timeString);
                 });
 
+                if (currentTime >= nextBreakTime) {
+                    takeBreak();
+                }
+
                 try {
                     Thread.sleep(250);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             } else {
-                // If paused, sleep until resumed
                 synchronized (this) {
                     try {
                         wait();
@@ -97,6 +107,41 @@ public class FocusSessPageController extends java.lang.Thread {
             clock.setProgress(1);
         });
     }
+
+    private void takeBreak() {
+        isPaused = true;
+        Platform.runLater(() -> {
+            controlSess.setText("Resume");
+            long breakEndTime = System.currentTimeMillis() + breakLength;
+
+            new Thread(() -> {
+                while (System.currentTimeMillis() < breakEndTime) {
+                    long breakTimeLeft = breakEndTime - System.currentTimeMillis();
+                    long breakHours = TimeUnit.MILLISECONDS.toHours(breakTimeLeft);
+                    long breakMinutes = TimeUnit.MILLISECONDS.toMinutes(breakTimeLeft) % 60;
+                    long breakSeconds = TimeUnit.MILLISECONDS.toSeconds(breakTimeLeft) % 60;
+                    String breakTimeString = String.format("Break: %02d:%02d:%02d", breakHours, breakMinutes, breakSeconds);
+
+                    Platform.runLater(() -> timeText.setText(breakTimeString));
+
+                    try {
+                        Thread.sleep(250);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                Platform.runLater(() -> {
+                    controlSess.setText("Pause");
+                    isPaused = false;
+                    nextBreakTime = System.currentTimeMillis() + breakInterval;
+                    synchronized (FocusSessPageController.this) {
+                        FocusSessPageController.this.notify();
+                    }
+                });
+            }).start();
+        });
+    }
+
 
     @FXML
     private void handleEndSess() {
