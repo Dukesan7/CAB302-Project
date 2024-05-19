@@ -11,17 +11,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class InitSessPageController {
+    private int totalMinutes;
+    private int minBreaks;
+    private int maxBreaks;
 
-    @FXML
-    public void handleBackButtonAction() {
-        return;
-    }
+    private int breakInterval;
 
     public ObservableList<String> Groups = FXCollections.observableArrayList(
             "School"
@@ -32,9 +33,6 @@ public class InitSessPageController {
             "English",
             "Math"
     );
-
-
-
 
     @FXML
     ChoiceBox<String> Group;
@@ -56,10 +54,31 @@ public class InitSessPageController {
     Label breakDisplay;
 
     @FXML
+    Label minBreak;
+
+    @FXML
+    Label maxBreak;
+
+    @FXML
+    Label breakLengthLabel;
+
+    @FXML
+    Label numBreakLabel;
+
+    @FXML
+    Label breakMinLabel;
+
+    @FXML
+    ChoiceBox<Integer> breakTimes;
+
+    @FXML
+    CheckBox breaksCheck;
+
+    @FXML
     public void populateGroups() {
         Group.getItems().addAll(Groups);
-
     }
+
     @FXML
     public void populateSubGroup() {
         SubGroup.getItems().addAll(SubGroupSchool);
@@ -80,7 +99,7 @@ public class InitSessPageController {
         }
     }
 
-    private static String[] initsessList = new String[6];
+    private static String[] initsessList = new String[8];
 
     @FXML
     private void handleUpdateBreakNo() {
@@ -88,6 +107,7 @@ public class InitSessPageController {
         String selectedMinutes = minutes.getValue();
 
         int totalMinutes = 0;
+        int breakInterval = 0;
 
         if (selectedHours != null && !selectedHours.isEmpty()) {
             totalMinutes += Integer.parseInt(selectedHours) * 60;
@@ -97,16 +117,58 @@ public class InitSessPageController {
         }
 
         if (totalMinutes > 0) {
-            int maxBreaks;
-            if (totalMinutes > 10) {
-                maxBreaks = totalMinutes / 5;
+            breaksCheck.setDisable(false);
+
+
+            int maxBreaks = (totalMinutes / 5) - 2;
+            int minBreaks = 1;
+
+            if (breaksCheck.isSelected() && breakTimes.getValue() != null) {
+
+                breakSlider.setMin(2);
+                breakSlider.setMax(maxBreaks);
+                breakSlider.setValue(maxBreaks / 2.0);
+
+                int finalTotalMinutes = totalMinutes;
+                breakSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+                    breakDisplay.setText(String.format("%d breaks (1 every %d minutes)", (int) breakSlider.getValue() - 1, finalTotalMinutes / ((int) breakSlider.getValue())));
+                });
+
+                maxBreak.setText(String.valueOf(maxBreaks -1));
+                minBreak.setText(String.valueOf(minBreaks));
+                breakSlider.setDisable(false);
             } else {
-                maxBreaks = totalMinutes / 4;
+                breakSlider.setDisable(true);
             }
-            breakSlider.setMax(maxBreaks);
-            breakSlider.setValue(maxBreaks / 2.0);
-            breakDisplay.setText(String.format("%d breaks", (int) breakSlider.getValue()));
-            breakSlider.setDisable(false);
+        } else {
+            breaksCheck.setDisable(true);
+            handleBreaksCheck();
+        }
+    }
+
+
+    @FXML
+    private void handleBreaksCheck() {
+        boolean isSelected = breaksCheck.isSelected();
+        breakLengthLabel.setVisible(isSelected);
+        breakTimes.setVisible(isSelected);
+        numBreakLabel.setVisible(isSelected);
+        breakSlider.setVisible(isSelected);
+        breakDisplay.setVisible(isSelected);
+        minBreak.setVisible(isSelected);
+        maxBreak.setVisible(isSelected);
+        breakMinLabel.setVisible(isSelected);
+        if (!isSelected) {
+            breakSlider.setDisable(true);
+        } else {
+            handleBreakTimesChange();
+        }
+    }
+
+    @FXML
+    private void handleBreakTimesChange() {
+        if (breakTimes.getValue() != null) {
+            handleUpdateBreakNo();
         } else {
             breakSlider.setDisable(true);
         }
@@ -115,13 +177,26 @@ public class InitSessPageController {
 
     @FXML
     private void handlestartsess() {
-
         String SelectedGroup = Group.getValue();
-        String  SelectedSubGroup = SubGroup.getValue();
+        String SelectedSubGroup = SubGroup.getValue();
         String SelectedHours = hours.getValue();
         String SelectedMinutes = minutes.getValue();
         CheckBox SelectedAppBlock = appBlock;
         CheckBox SelectedwallPaper = wallPaper;
+        int sliderValue = (int) breakSlider.getValue();
+        //String SelectedbreakInterval = String.valueOf((sliderValue!= 0 ? totalMinutes / sliderValue : 0)+1);
+        String SelectedBreakLength = String.valueOf(breakTimes.getValue());
+
+        int totalMinutes = 0;
+
+        if (SelectedHours != null && !SelectedHours.isEmpty()) {
+            totalMinutes += Integer.parseInt(SelectedHours) * 60;
+        }
+        if (SelectedMinutes != null && !SelectedMinutes.isEmpty()) {
+            totalMinutes += Integer.parseInt(SelectedMinutes);
+        }
+        String SelectedbreakInterval = String.valueOf(totalMinutes / ((int) breakSlider.getValue()));
+
 
         String wallPaper;
         String appBlock;
@@ -141,9 +216,19 @@ public class InitSessPageController {
         initsessList[3] = SelectedMinutes;
         initsessList[4] = appBlock;
         initsessList[5] = wallPaper;
+        initsessList[6] = SelectedbreakInterval;
+        initsessList[7] = SelectedBreakLength;
 
         System.out.println(Arrays.toString(initsessList));
 
+
+
+        //int breakInterval = sliderValue != 0 ? totalMinutes / sliderValue : 0;
+
+        System.out.println("Min Breaks: " + minBreaks);
+        System.out.println("Max Breaks: " + maxBreaks);
+        System.out.println("Selected Breaks: " + sliderValue);
+        System.out.println("Break Interval: Every " + SelectedbreakInterval + " minutes");
 
         try {
             Parent root = FXMLLoader.load(getClass().getResource("FocusSess.fxml"));
@@ -157,11 +242,25 @@ public class InitSessPageController {
     }
 
 
+    @FXML
+    Button startsess;
+
+    private void updateStartButtonState() {
+        boolean isGroupSelected = Group.getValue() != null && !Group.getValue().isEmpty();
+        boolean isSubGroupSelected = SubGroup.getValue() != null && !SubGroup.getValue().isEmpty();
+        boolean isHoursSelected = hours.getValue() != null && !hours.getValue().isEmpty();
+        boolean isMinutesSelected = minutes.getValue() != null && !minutes.getValue().isEmpty();
+
+        boolean enableStartButton = isGroupSelected && isSubGroupSelected && isHoursSelected && isMinutesSelected;
+        startsess.setDisable(!enableStartButton);
+    }
+
     public String[] getInitSessList() {
         return initsessList;
     }
+
     @FXML
-    public void initialize() {
+    private void initialize() {
         populateGroups();
         populateSubGroup();
         breakSlider.setDisable(true);
@@ -170,15 +269,22 @@ public class InitSessPageController {
         breakSlider.setMinorTickCount(0);
         breakSlider.setSnapToTicks(true);
 
-        hours.setOnAction(event -> handleUpdateBreakNo());
-        minutes.setOnAction(event -> handleUpdateBreakNo());
-
-        breakSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            breakDisplay.setText(String.format("%d breaks", newValue.intValue()));
+        hours.setOnAction(event -> {
+            handleUpdateBreakNo();
+            updateStartButtonState();
         });
+        minutes.setOnAction(event -> {
+            handleUpdateBreakNo();
+            updateStartButtonState();
+        });
+
+        Group.setOnAction(event -> updateStartButtonState());
+        SubGroup.setOnAction(event -> updateStartButtonState());
+
+        breaksCheck.setDisable(true);
+        breaksCheck.setOnAction(event -> handleBreaksCheck());
+        breakTimes.setOnAction(event -> handleBreakTimesChange());
+        updateStartButtonState();
     }
-
-
-
 
 }

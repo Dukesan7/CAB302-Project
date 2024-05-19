@@ -61,6 +61,7 @@ public class FocusSessPageController extends java.lang.Thread {
 
         while (System.currentTimeMillis() < endTime) {
             if (!isPaused) {
+
                 long currentTime = System.currentTimeMillis();
                 int timeLeft = (int) (endTime - currentTime);
 
@@ -146,7 +147,7 @@ public class FocusSessPageController extends java.lang.Thread {
 
 
     // Inner class for a second thread
-    private class AppBlocking extends Thread {
+    private class AppBlockingRun extends Thread {
         @Override
         public void run() {
             while (!isInterrupted()) {
