@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa8951fd-875e-4d98-8f33-3fbc54a210fc" name="Changes" comment="added Play pause buttons to session thats running. stops timer when pressed, changes name of button to signify buttons new functionality when paused. &#10;&#10;added end session button to end thread and shut window.">
+    <list default="true" id="aa8951fd-875e-4d98-8f33-3fbc54a210fc" name="Changes" comment="Added values to drop downs to choose group, subgroup, and time. added function to call array of focus session values. added function to create new window when session is started">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/maven.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/maven.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/FocusSessPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/FocusSessPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/InitSessPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/InitSessPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/InitSess.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/cab302project/InitSess.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,21 +58,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Application.Notification.executor": "Run",
-    "Application.org.example.cab302project.Main.executor": "Run",
-    "Attach to process.pid 26572.executor": "ProcessAttachDebug",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "To-do__List",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/acste/OneDrive/University/2024/Semester 1/cab302/Assignment",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Notification.executor&quot;: &quot;Run&quot;,
+    &quot;Application.org.example.cab302project.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Attach to process.pid 26572.executor&quot;: &quot;ProcessAttachDebug&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/acste/OneDrive/University/2024/Semester 1/cab302/Assignment&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Dominic\IdeaProjects\CAB302-Project\src\main\resources\org\example\cab302project" />
@@ -256,7 +254,6 @@
       <updated>1715999962580</updated>
     </task>
     <option name="localTasksCounter" value="15" />
-
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -285,6 +282,5 @@
     <MESSAGE value="added base app blocking functionality, searches task list for all exe's, checks the list for blacklisted paths, if blacklisted it will immediately destroy the processes instance. ends when timer ends" />
     <MESSAGE value="added Play pause buttons to session thats running. stops timer when pressed, changes name of button to signify buttons new functionality when paused. &#10;&#10;added end session button to end thread and shut window." />
     <option name="LAST_COMMIT_MESSAGE" value="added Play pause buttons to session thats running. stops timer when pressed, changes name of button to signify buttons new functionality when paused. &#10;&#10;added end session button to end thread and shut window." />
-
   </component>
 </project>
