@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -18,6 +19,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class InitSessPageController {
+    @FXML
+    HBox hBox;
+
     private int totalMinutes;
     private int minBreaks;
     private int maxBreaks;
@@ -82,21 +86,6 @@ public class InitSessPageController {
     @FXML
     public void populateSubGroup() {
         SubGroup.getItems().addAll(SubGroupSchool);
-    }
-
-    @FXML
-    public void goToPage(ActionEvent event) {
-        Button button = (Button) event.getSource();
-        String pageName = button.getId();
-
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource(pageName + ".fxml"));
-            Stage stage = (Stage) button.getScene().getWindow();
-            stage.setScene(new Scene(root, 1280, 690));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     private static String[] initsessList = new String[8];
@@ -285,6 +274,8 @@ public class InitSessPageController {
         breaksCheck.setOnAction(event -> handleBreaksCheck());
         breakTimes.setOnAction(event -> handleBreakTimesChange());
         updateStartButtonState();
+        PageFunctions pageFunctions = new PageFunctions();
+        pageFunctions.AddSideBar(hBox);
     }
 
 }

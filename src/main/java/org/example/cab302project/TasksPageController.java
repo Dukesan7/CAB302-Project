@@ -2,17 +2,13 @@ package org.example.cab302project;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
-import javafx.stage.Stage;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +19,7 @@ public class TasksPageController {
     public ChoiceBox<String> selectedSubgroup;
     public Button addTask;
     public VBox root;
+    public HBox hBox;
 
     private List<String> subGroups = new ArrayList<>(List.of("Chemistry", "English", "Math"));
     private Tasks tasks = new Tasks(subGroups);
@@ -83,28 +80,10 @@ public class TasksPageController {
         root.getChildren().add(checkBox);
     }
 
-    @FXML
-    public void handleBackButtonAction() {
-        return;
-    }
-    @FXML
-    public void goToPage(ActionEvent event) {
-        Button button = (Button) event.getSource();
-        String pageName = button.getId();
-
-
-
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource(pageName + ".fxml"));
-            Stage stage = (Stage) button.getScene().getWindow();
-            stage.setScene(new Scene(root, 1280, 690));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
     public void initialize() {
         // Optional: Any initializations for your controller
+        PageFunctions pageFunctions = new PageFunctions();
+        pageFunctions.AddSideBar(hBox);
         selectedSubgroup.getItems().addAll(subGroups);
         selectedSubgroup.setValue(subGroups.get(0));
 
