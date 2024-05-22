@@ -1,46 +1,23 @@
 package org.example.cab302project.Controller;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import org.example.cab302project.SessionManager;
+import org.example.cab302project.focusSess.initialiseSess;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import org.example.cab302project.PageFunctions;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static org.example.cab302project.focusSess.initialiseSess.totalMinutes;
 
 public class InitSessPageController {
     @FXML
     HBox hBox;
 
-    private int totalMinutes;
-    private int minBreaks;
-    private int maxBreaks;
-
-    private int breakInterval;
-
-    public ObservableList<String> Groups = FXCollections.observableArrayList(
-            "School"
-    );
-
-    public ObservableList<String> SubGroupSchool = FXCollections.observableArrayList(
-            "Chemistry",
-            "English",
-            "Math"
-    );
-
-    @FXML
-    ChoiceBox<String> Group;
     @FXML
     ChoiceBox<String> SubGroup;
     @FXML
@@ -51,80 +28,57 @@ public class InitSessPageController {
     CheckBox appBlock;
     @FXML
     CheckBox wallPaper;
-
     @FXML
     Slider breakSlider;
-
     @FXML
     Label breakDisplay;
-
     @FXML
     Label minBreak;
-
     @FXML
     Label maxBreak;
-
     @FXML
     Label breakLengthLabel;
-
     @FXML
     Label numBreakLabel;
-
     @FXML
     Label breakMinLabel;
-
     @FXML
     ChoiceBox<Integer> breakTimes;
-
     @FXML
     CheckBox breaksCheck;
-
     @FXML
-    public void populateGroups() {
-        Group.getItems().addAll(Groups);
-    }
+    Button Dashboard;
+    initialiseSess InitialiseSess = new initialiseSess();
 
     @FXML
     public void populateSubGroup() {
-        SubGroup.getItems().addAll(SubGroupSchool);
-    }
 
-    private static String[] initsessList = new String[8];
+        ArrayList<String> subGroups = InitialiseSess.getSubGroupList();
+        SubGroup.getItems().addAll(subGroups);
+    }
 
     @FXML
     private void handleUpdateBreakNo() {
         String selectedHours = hours.getValue();
         String selectedMinutes = minutes.getValue();
+        InitialiseSess.calculateTotalMin(selectedHours, selectedMinutes);
 
-        int totalMinutes = 0;
-        int breakInterval = 0;
 
-        if (selectedHours != null && !selectedHours.isEmpty()) {
-            totalMinutes += Integer.parseInt(selectedHours) * 60;
-        }
-        if (selectedMinutes != null && !selectedMinutes.isEmpty()) {
-            totalMinutes += Integer.parseInt(selectedMinutes);
-        }
-
-        if (totalMinutes > 0) {
+        if (totalMinutes > 19) {
             breaksCheck.setDisable(false);
 
-
-            int maxBreaks = (totalMinutes / 5) - 2;
+            int maxBreakVal = (totalMinutes / 5) - 2;
+            System.out.println("Max break value: " + maxBreakVal);
             int minBreaks = 1;
 
             if (breaksCheck.isSelected() && breakTimes.getValue() != null) {
-
                 breakSlider.setMin(2);
-                breakSlider.setMax(maxBreaks);
-                breakSlider.setValue(maxBreaks / 2.0);
+                breakSlider.setMax(maxBreakVal);
+                breakSlider.setValue(maxBreakVal / 2.0);
 
-                int finalTotalMinutes = totalMinutes;
-                breakSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-                    breakDisplay.setText(String.format("%d breaks (1 every %d minutes)", (int) breakSlider.getValue() - 1, finalTotalMinutes / ((int) breakSlider.getValue())));
-                });
+                setBreakValues();
 
-                maxBreak.setText(String.valueOf(maxBreaks -1));
+                maxBreak.setText(String.valueOf(maxBreakVal -1));
                 minBreak.setText(String.valueOf(minBreaks));
                 breakSlider.setDisable(false);
             } else {
@@ -136,6 +90,16 @@ public class InitSessPageController {
         }
     }
 
+    @FXML
+    private void setBreakValues(){
+        int sliderValue = (int) breakSlider.getValue();
+        System.out.println("Slider value: " + sliderValue);
+        InitialiseSess.calculateBreakValues(sliderValue);
+
+        breakSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            breakDisplay.setText(String.format("%d breaks (1 every %d minutes)", initialiseSess.sliderVal - 1, initialiseSess.breakInterval));
+        });
+    }
 
     @FXML
     private void handleBreaksCheck() {
@@ -164,88 +128,53 @@ public class InitSessPageController {
         }
     }
 
+    private void updateStartButtonState() {
+        boolean isSubGroupSelected = SubGroup.getValue() != null && !SubGroup.getValue().isEmpty();
+        boolean isHoursSelected = hours.getValue() != null && !hours.getValue().isEmpty();
+        boolean isMinutesSelected = minutes.getValue() != null && !minutes.getValue().isEmpty();
 
+        boolean enableStartButton = isSubGroupSelected && (isHoursSelected || isMinutesSelected);
+        Dashboard.setDisable(!enableStartButton);
+    }
+
+    private static String[] initsessList = new String[8];
     @FXML
-    private void handlestartsess() {
-        String SelectedGroup = Group.getValue();
+    private void handlestartsess(ActionEvent event) {
         String SelectedSubGroup = SubGroup.getValue();
         String SelectedHours = hours.getValue();
         String SelectedMinutes = minutes.getValue();
         CheckBox SelectedAppBlock = appBlock;
         CheckBox SelectedwallPaper = wallPaper;
-        int sliderValue = (int) breakSlider.getValue();
-        //String SelectedbreakInterval = String.valueOf((sliderValue!= 0 ? totalMinutes / sliderValue : 0)+1);
         String SelectedBreakLength = String.valueOf(breakTimes.getValue());
+        int sliderValue = (int) breakSlider.getValue();
 
-        int totalMinutes = 0;
+        InitialiseSess.calculateTotalMin(SelectedHours, SelectedMinutes);
 
-        if (SelectedHours != null && !SelectedHours.isEmpty()) {
-            totalMinutes += Integer.parseInt(SelectedHours) * 60;
-        }
-        if (SelectedMinutes != null && !SelectedMinutes.isEmpty()) {
-            totalMinutes += Integer.parseInt(SelectedMinutes);
-        }
-        String SelectedbreakInterval = String.valueOf(totalMinutes / ((int) breakSlider.getValue()));
+        String SelectedbreakInterval = InitialiseSess.breakInterval(sliderValue);
+        String wallPaper = InitialiseSess.checkValue(SelectedwallPaper);
+        String appBlock = InitialiseSess.checkValue(SelectedAppBlock);
 
-
-        String wallPaper;
-        String appBlock;
-        if (SelectedwallPaper.isSelected()) {
-            wallPaper = "True";
-        } else {
-            wallPaper = "False";
-        }
-        if (SelectedAppBlock.isSelected()) {
-            appBlock = "True";
-        } else {
-            appBlock = "False";
-        }
-        initsessList[0] = SelectedGroup;
-        initsessList[1] = SelectedSubGroup;
-        initsessList[2] = SelectedHours;
-        initsessList[3] = SelectedMinutes;
-        initsessList[4] = appBlock;
-        initsessList[5] = wallPaper;
-        initsessList[6] = SelectedbreakInterval;
-        initsessList[7] = SelectedBreakLength;
-
-        System.out.println(Arrays.toString(initsessList));
+        initsessList[0] = SelectedSubGroup;
+        initsessList[1] = SelectedHours;
+        initsessList[2] = SelectedMinutes;
+        initsessList[3] = appBlock;
+        initsessList[4] = wallPaper;
+        initsessList[5] = SelectedbreakInterval;
+        initsessList[6] = SelectedBreakLength;
 
 
+        SessionManager.sessStatus = false;
 
-        //int breakInterval = sliderValue != 0 ? totalMinutes / sliderValue : 0;
-
-        System.out.println("Min Breaks: " + minBreaks);
-        System.out.println("Max Breaks: " + maxBreaks);
-        System.out.println("Selected Breaks: " + sliderValue);
-        System.out.println("Break Interval: Every " + SelectedbreakInterval + " minutes");
         PageFunctions pageFunctions = new PageFunctions();
+        pageFunctions.goToPage(event);
         pageFunctions.openFocusWin();
-
-
     }
-
-
-    @FXML
-    Button FocusSess;
-
-    private void updateStartButtonState() {
-        boolean isGroupSelected = Group.getValue() != null && !Group.getValue().isEmpty();
-        boolean isSubGroupSelected = SubGroup.getValue() != null && !SubGroup.getValue().isEmpty();
-        boolean isHoursSelected = hours.getValue() != null && !hours.getValue().isEmpty();
-        boolean isMinutesSelected = minutes.getValue() != null && !minutes.getValue().isEmpty();
-
-        boolean enableStartButton = isGroupSelected && isSubGroupSelected && isHoursSelected && isMinutesSelected;
-        FocusSess.setDisable(!enableStartButton);
-    }
-
     public String[] getInitSessList() {
         return initsessList;
     }
 
     @FXML
     private void initialize() {
-        populateGroups();
         populateSubGroup();
         breakSlider.setDisable(true);
         breakSlider.setBlockIncrement(1);
@@ -261,10 +190,8 @@ public class InitSessPageController {
             handleUpdateBreakNo();
             updateStartButtonState();
         });
-
-        Group.setOnAction(event -> updateStartButtonState());
         SubGroup.setOnAction(event -> updateStartButtonState());
-
+        breakSlider.valueProperty().addListener((observable, oldValue, newValue) -> setBreakValues());
         breaksCheck.setDisable(true);
         breaksCheck.setOnAction(event -> handleBreaksCheck());
         breakTimes.setOnAction(event -> handleBreakTimesChange());

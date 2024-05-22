@@ -40,13 +40,13 @@ public class FocusSessPageController extends java.lang.Thread {
         String[] data = new InitSessPageController().getInitSessList();
 
         studyLength = CalculateTime(data);
-        breakInterval = TimeUnit.MINUTES.toMillis(Integer.parseInt(data[6]));
-        breakLength = TimeUnit.MINUTES.toMillis(Integer.parseInt(data[7]));
+        breakInterval = TimeUnit.MINUTES.toMillis(Integer.parseInt(data[5]));
+        breakLength = TimeUnit.MINUTES.toMillis(Integer.parseInt(data[6]));
 
         nextBreakTime = System.currentTimeMillis() + breakInterval;
         start();
 
-        String blockApp = data[4];
+        String blockApp = data[3];
 
         if (Objects.equals(blockApp, "True")) {
             System.out.println("True!!!");
@@ -186,8 +186,8 @@ public class FocusSessPageController extends java.lang.Thread {
     }
 
     private long CalculateTime(String[] data) {
-        int hours = Integer.parseInt(data[2]);
-        int minutes = Integer.parseInt(data[3]);
+        int hours = Integer.parseInt(data[1]);
+        int minutes = Integer.parseInt(data[2]);
         return TimeUnit.HOURS.toMillis(hours) + TimeUnit.MINUTES.toMillis(minutes);
     }
 

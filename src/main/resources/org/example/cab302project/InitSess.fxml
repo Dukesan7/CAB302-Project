@@ -10,17 +10,16 @@
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="hBox" prefHeight="458.0" prefWidth="922.0" spacing="10" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cab302project.Controller.InitSessPageController">
+<HBox fx:id="hBox" prefHeight="458.0" prefWidth="922.0" spacing="10" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cab302project.Controller.InitSessPageController">
 
 
     <StackPane prefHeight="458.0" prefWidth="710.0">
 
         <CheckBox fx:id="wallPaper" mnemonicParsing="false" text="Block Wall Paper" StackPane.alignment="TOP_CENTER">
             <StackPane.margin>
-                <Insets right="180.0" top="275.0" />
+                <Insets right="180.0" top="200.0" />
             </StackPane.margin>
         </CheckBox>
 
@@ -102,38 +101,25 @@
                 <Insets left="370.0" top="160.0" />
             </StackPane.margin>
         </Label>
-        <Button fx:id="FocusSess" mnemonicParsing="false" onAction="#handlestartsess" prefHeight="25.0" prefWidth="83.0" text="Start ▶" textFill="#3caa0d" StackPane.alignment="TOP_CENTER">
+        <Button fx:id="Dashboard" mnemonicParsing="false" onAction="#handlestartsess" prefHeight="25.0" prefWidth="83.0" text="Start ▶" textFill="#3caa0d" StackPane.alignment="TOP_CENTER">
             <StackPane.margin>
-                <Insets right="300.0" top="320.0" />
+                <Insets right="300.0" top="245.0" />
             </StackPane.margin>
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
         </Button>
-        <ChoiceBox fx:id="Group" prefHeight="25.0" prefWidth="197.0" StackPane.alignment="TOP_CENTER">
+        <ChoiceBox fx:id="SubGroup" prefHeight="25.0" prefWidth="197.0" StackPane.alignment="TOP_CENTER">
             <StackPane.margin>
                 <Insets right="300.0" top="150.0" />
             </StackPane.margin>
         </ChoiceBox>
-        <ChoiceBox fx:id="SubGroup" prefHeight="25.0" prefWidth="197.0" StackPane.alignment="TOP_CENTER">
-            <StackPane.margin>
-                <Insets right="300.0" top="220.0" />
-            </StackPane.margin>
-        </ChoiceBox>
-        <Label snapToPixel="false" text="Select Focus Section" textAlignment="CENTER" underline="true" StackPane.alignment="TOP_CENTER">
-            <font>
-                <Font size="14.0" />
-            </font>
-            <StackPane.margin>
-                <Insets right="300.0" top="125.0" />
-            </StackPane.margin>
-        </Label>
         <Label text="Select Focus Sub Group" textAlignment="CENTER" underline="true" StackPane.alignment="TOP_CENTER">
             <font>
                 <Font size="14.0" />
             </font>
             <StackPane.margin>
-                <Insets right="300.0" top="195.0" />
+                <Insets right="300.0" top="125.0" />
             </StackPane.margin>
         </Label>
         <Label text="Set Session length" textAlignment="CENTER" underline="true" StackPane.alignment="TOP_CENTER">
@@ -189,7 +175,7 @@
                 <Insets left="300.0" top="380.0" />
             </StackPane.margin>
         </Label>
-        <ChoiceBox fx:id="breakTimes" onAction="#handleBreakTimesChange"  prefHeight="25.0" prefWidth="67.0" visible="false" StackPane.alignment="TOP_CENTER">
+        <ChoiceBox fx:id="breakTimes" onAction="#handleBreakTimesChange" prefHeight="25.0" prefWidth="67.0" visible="false" StackPane.alignment="TOP_CENTER">
             <StackPane.margin>
                 <Insets left="240.0" top="290.0" />
             </StackPane.margin>
@@ -220,7 +206,7 @@
         </Label>
         <CheckBox fx:id="appBlock" mnemonicParsing="false" text="Block Apps" StackPane.alignment="TOP_CENTER">
             <StackPane.margin>
-                <Insets right="420.0" top="275.0" />
+                <Insets right="420.0" top="200.0" />
             </StackPane.margin>
         </CheckBox>
     </StackPane>
