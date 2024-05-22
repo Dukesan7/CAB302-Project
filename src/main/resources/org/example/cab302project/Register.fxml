@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
+<VBox xmlns="http://javafx.com/javafx/17.0.6"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.example.cab302project.RegisterPageController"
       alignment="CENTER"

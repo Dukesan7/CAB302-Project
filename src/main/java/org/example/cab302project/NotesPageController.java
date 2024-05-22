@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
@@ -24,6 +25,8 @@ public class NotesPageController {
     private final Path notesDirectory = Paths.get("src/main/resources/org/example/cab302project/notes");
     private final Path configPath = notesDirectory.resolve("../config.json");
     private String preferredEditor;
+    @FXML
+    HBox hBox;
     @FXML
     private ListView<String> fileList;
     @FXML
@@ -42,6 +45,8 @@ public class NotesPageController {
             }
         }
         refreshFileList();
+        PageFunctions pageFunctions = new PageFunctions();
+        pageFunctions.AddSideBar(hBox);
     }
 
 
@@ -143,21 +148,6 @@ public class NotesPageController {
         try {
             Files.delete(path);
             refreshFileList();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    public void goToPage(ActionEvent event) {
-        Button button = (Button) event.getSource();
-        String pageName = button.getId();
-
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource(pageName + ".fxml"));
-            Stage stage = (Stage) button.getScene().getWindow();
-            stage.setScene(new Scene(root, 1280, 690));
-            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

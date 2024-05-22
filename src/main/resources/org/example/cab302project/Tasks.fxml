@@ -10,15 +10,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox fillHeight="true" prefHeight="549.0" prefWidth="794.0" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cab302project.TasksPageController">
+<HBox fx:id="hBox" prefHeight="549.0" prefWidth="794.0" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cab302project.TasksPageController">
 
-    <!-- Sidebar with buttons on the left -->
-    <VBox maxWidth="200" minWidth="200" spacing="10" style="-fx-background-color: #d3d3d3; -fx-padding: 10;">
-        <Button fx:id="Dashboard" alignment="CENTER" maxWidth="180" minWidth="180" onAction="#goToPage" style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;" text="Dashboard" />
-        <Button fx:id="Tasks" alignment="CENTER" maxWidth="180" minWidth="180" onAction="#goToPage" style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;" text="Tasks" />
-        <Button fx:id="Notes" alignment="CENTER" maxWidth="180" minWidth="180" onAction="#goToPage" style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;" text="Notes" />
-        <Button fx:id="Profiles" alignment="CENTER" maxWidth="180" minWidth="180" onAction="#goToPage" style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;" text="Profiles" />
-    </VBox>
+
    <GridPane nodeOrientation="LEFT_TO_RIGHT" HBox.hgrow="ALWAYS">
      <columnConstraints>
        <ColumnConstraints hgrow="SOMETIMES" maxWidth="476.0" minWidth="10.0" prefWidth="428.0" />
