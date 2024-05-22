@@ -1,4 +1,4 @@
-package org.example.cab302project;
+package org.example.cab302project.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.example.cab302project.DbConnection;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -18,7 +19,6 @@ import java.sql.SQLException;
 import java.util.Objects;
 
 public class ForgetPasswordPageController {
-    private static String dbFilePath = "src/main/resources/org/example/cab302project/ToDo.db";
 
     @FXML
     private TextField emailField;
@@ -28,7 +28,7 @@ public class ForgetPasswordPageController {
 
     public static boolean resetPassword(String email, String newPassword) {
         try {
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbFilePath);
+            Connection conn = DbConnection.getInstance().getConnection();
             PreparedStatement pstmt = conn.prepareStatement("UPDATE UserDetails SET pass = ? WHERE email = ?");
             pstmt.setString(1, newPassword);
             pstmt.setString(2, email);

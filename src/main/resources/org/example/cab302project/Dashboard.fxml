@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.*?>
 
 
-<HBox fx:id="hBox" prefHeight="549.0" prefWidth="794.0" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cab302project.DashboardPageController">
+<HBox fx:id="hBox" prefHeight="549.0" prefWidth="794.0" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cab302project.Controller.DashboardPageController">
     <!-- Right side container that can resize with the window -->
     <VBox spacing="10" HBox.hgrow="ALWAYS">
         <!-- Top container -->

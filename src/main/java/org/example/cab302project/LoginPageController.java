@@ -26,13 +26,7 @@ public class LoginPageController {
     private TextField emailField;
     @FXML
     private PasswordField passwordField;
-
-    private static final String DB_FILE_PATH = "src/main/resources/org/example/cab302project/ToDo.db";
-
-    private Connection connect() throws SQLException {
-        return DriverManager.getConnection("jdbc:sqlite:" + DB_FILE_PATH);
-    }
-
+    
     @FXML
     private void loginUser() {
         String email = emailField.getText().trim();
@@ -139,7 +133,7 @@ public class LoginPageController {
     private boolean verifyUserCredentials(String email, String password) {
         String sql = "SELECT * FROM UserDetails WHERE email = ? AND pass = ?";
 
-        try (Connection conn = connect();
+        try (Connection conn = DbConnection.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, email);
             pstmt.setString(2, password);
