@@ -13,4 +13,6 @@ module org.example.cab302project {
     opens org.example.cab302project.focusSess to javafx.fxml;
     exports org.example.cab302project.Tasks;
     opens org.example.cab302project.Tasks to javafx.fxml;
+    exports org.example.cab302project.Profiles;
+    opens org.example.cab302project.Profiles to javafx.fxml;
 }
