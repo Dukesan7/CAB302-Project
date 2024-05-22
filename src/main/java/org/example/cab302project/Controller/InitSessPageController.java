@@ -1,4 +1,4 @@
-package org.example.cab302project;
+package org.example.cab302project.Controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.example.cab302project.PageFunctions;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -218,21 +219,15 @@ public class InitSessPageController {
         System.out.println("Max Breaks: " + maxBreaks);
         System.out.println("Selected Breaks: " + sliderValue);
         System.out.println("Break Interval: Every " + SelectedbreakInterval + " minutes");
+        PageFunctions pageFunctions = new PageFunctions();
+        pageFunctions.openFocusWin();
 
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("FocusSess.fxml"));
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root, 1280, 690));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
     }
 
 
     @FXML
-    Button startsess;
+    Button FocusSess;
 
     private void updateStartButtonState() {
         boolean isGroupSelected = Group.getValue() != null && !Group.getValue().isEmpty();
@@ -241,7 +236,7 @@ public class InitSessPageController {
         boolean isMinutesSelected = minutes.getValue() != null && !minutes.getValue().isEmpty();
 
         boolean enableStartButton = isGroupSelected && isSubGroupSelected && isHoursSelected && isMinutesSelected;
-        startsess.setDisable(!enableStartButton);
+        FocusSess.setDisable(!enableStartButton);
     }
 
     public String[] getInitSessList() {

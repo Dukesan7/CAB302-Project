@@ -82,4 +82,16 @@ public class PageFunctions {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    public void openFocusWin(){
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("FocusSess.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root, 1280, 690));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

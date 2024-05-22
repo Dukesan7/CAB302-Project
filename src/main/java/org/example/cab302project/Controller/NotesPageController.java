@@ -1,4 +1,4 @@
-package org.example.cab302project;
+package org.example.cab302project.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import org.example.cab302project.PageFunctions;
 import org.json.JSONObject;
 
 

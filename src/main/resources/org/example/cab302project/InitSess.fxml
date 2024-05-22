@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="hBox" prefHeight="458.0" prefWidth="922.0" spacing="10" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cab302project.InitSessPageController">
+<HBox fx:id="hBox" prefHeight="458.0" prefWidth="922.0" spacing="10" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cab302project.Controller.InitSessPageController">
 
 
     <StackPane prefHeight="458.0" prefWidth="710.0">
@@ -102,7 +102,7 @@
                 <Insets left="370.0" top="160.0" />
             </StackPane.margin>
         </Label>
-        <Button fx:id="startsess" mnemonicParsing="false" onAction="#handlestartsess" prefHeight="25.0" prefWidth="83.0" text="Start ▶" textFill="#3caa0d" StackPane.alignment="TOP_CENTER">
+        <Button fx:id="FocusSess" mnemonicParsing="false" onAction="#handlestartsess" prefHeight="25.0" prefWidth="83.0" text="Start ▶" textFill="#3caa0d" StackPane.alignment="TOP_CENTER">
             <StackPane.margin>
                 <Insets right="300.0" top="320.0" />
             </StackPane.margin>

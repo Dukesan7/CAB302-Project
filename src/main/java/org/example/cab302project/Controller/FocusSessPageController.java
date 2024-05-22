@@ -1,4 +1,4 @@
-package org.example.cab302project;
+package org.example.cab302project.Controller;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.example.cab302project.focusSess.AppBlocking;
+
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 

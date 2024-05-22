@@ -6,7 +6,7 @@
 <HBox fx:id="hBox"
       xmlns="http://javafx.com/javafx/17.0.6"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.example.cab302project.NotesPageController"
+      fx:controller="org.example.cab302project.Controller.NotesPageController"
       spacing="10" style="-fx-background-color: #f0f0f0;">
 
 

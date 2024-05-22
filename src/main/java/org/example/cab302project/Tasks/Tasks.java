@@ -1,4 +1,4 @@
-package org.example.cab302project;
+package org.example.cab302project.Tasks;
 import java.util.*;
 
 public class Tasks {

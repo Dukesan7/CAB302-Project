@@ -1,4 +1,4 @@
-package org.example.cab302project;
+package org.example.cab302project.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
