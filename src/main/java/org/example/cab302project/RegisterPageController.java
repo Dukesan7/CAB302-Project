@@ -23,13 +23,6 @@ public class RegisterPageController {
     private PasswordField passwordField;
     @FXML
     private PasswordField confirmPasswordField;
-    @FXML
-
-    private static final String DB_FILE_PATH = "src/main/resources/org/example/cab302project/ToDo.db";
-
-    private Connection connect() throws SQLException {
-        return DriverManager.getConnection("jdbc:sqlite:" + DB_FILE_PATH);
-    }
 
     @FXML
     private void registerUser() {
@@ -87,7 +80,7 @@ public class RegisterPageController {
     private boolean registerUserInDatabase(String fName, String lName, String email, String pass) {
         String sql = "INSERT INTO UserDetails(fName, lName, email, pass) VALUES(?,?,?,?)";
 
-        try (Connection conn = connect();
+        try (Connection conn = DbConnection.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, fName);
             pstmt.setString(2, lName);
