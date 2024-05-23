@@ -11,6 +11,7 @@ import org.example.cab302project.PageFunctions;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import static org.example.cab302project.focusSess.initialiseSess.totalMinutes;
 
@@ -63,12 +64,10 @@ public class InitSessPageController {
         String selectedMinutes = minutes.getValue();
         InitialiseSess.calculateTotalMin(selectedHours, selectedMinutes);
 
-
         if (totalMinutes > 19) {
             breaksCheck.setDisable(false);
 
             int maxBreakVal = (totalMinutes / 5) - 2;
-            System.out.println("Max break value: " + maxBreakVal);
             int minBreaks = 1;
 
             if (breaksCheck.isSelected() && breakTimes.getValue() != null) {
@@ -93,7 +92,6 @@ public class InitSessPageController {
     @FXML
     private void setBreakValues(){
         int sliderValue = (int) breakSlider.getValue();
-        System.out.println("Slider value: " + sliderValue);
         InitialiseSess.calculateBreakValues(sliderValue);
 
         breakSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -145,22 +143,33 @@ public class InitSessPageController {
         String SelectedMinutes = minutes.getValue();
         CheckBox SelectedAppBlock = appBlock;
         CheckBox SelectedwallPaper = wallPaper;
-        String SelectedBreakLength = String.valueOf(breakTimes.getValue());
-        int sliderValue = (int) breakSlider.getValue();
+        CheckBox SelectedBreaks = breaksCheck;
+        String breakcheck = InitialiseSess.checkValue(SelectedBreaks);
+        String SelectedbreakInterval = "";
+        String SelectedBreakLength = "";
+
+        if (Objects.equals(breakcheck, "true")){
+            SelectedBreakLength = String.valueOf(breakTimes.getValue());
+            int sliderValue = (int) breakSlider.getValue();
+            SelectedbreakInterval = InitialiseSess.breakInterval(sliderValue);
+        }
+        String hours = initialiseSess.deNullifyTime(SelectedHours);
+        String minutes = initialiseSess.deNullifyTime(SelectedMinutes);
 
         InitialiseSess.calculateTotalMin(SelectedHours, SelectedMinutes);
 
-        String SelectedbreakInterval = InitialiseSess.breakInterval(sliderValue);
+
         String wallPaper = InitialiseSess.checkValue(SelectedwallPaper);
         String appBlock = InitialiseSess.checkValue(SelectedAppBlock);
 
         initsessList[0] = SelectedSubGroup;
-        initsessList[1] = SelectedHours;
-        initsessList[2] = SelectedMinutes;
+        initsessList[1] = hours;
+        initsessList[2] = minutes;
         initsessList[3] = appBlock;
         initsessList[4] = wallPaper;
-        initsessList[5] = SelectedbreakInterval;
-        initsessList[6] = SelectedBreakLength;
+        initsessList[5] = breakcheck;
+        initsessList[6] = SelectedbreakInterval;
+        initsessList[7] = SelectedBreakLength;
 
 
         SessionManager.sessStatus = false;

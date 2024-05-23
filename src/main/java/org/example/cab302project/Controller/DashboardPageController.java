@@ -1,9 +1,12 @@
 package org.example.cab302project.Controller;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import org.example.cab302project.PageFunctions;
 import org.example.cab302project.SessionManager;
 
@@ -35,5 +38,10 @@ public class DashboardPageController {
         checkSessStatus();
         System.out.println("Sess status: " + SessionManager.sessStatus);
         pageFunctions.AddSideBar(hBox);
+
+        Platform.runLater(() -> {
+            Stage stage = (Stage) hBox.getScene().getWindow();
+            stage.addEventHandler(WindowEvent.WINDOW_SHOWN, event -> checkSessStatus());
+        });
     }
 }

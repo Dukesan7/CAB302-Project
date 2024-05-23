@@ -43,7 +43,12 @@ public class initialiseSess {
         return checkValue;
     }
 
-
+    public static String deNullifyTime(String timeValue){
+        if (timeValue == null){
+            timeValue = "0";
+        }
+        return timeValue;
+    }
     public void calculateBreakValues(int breakSlider){
         sliderVal = breakSlider;
         breakInterval = totalMinutes / sliderVal;

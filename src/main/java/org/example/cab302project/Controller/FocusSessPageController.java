@@ -1,57 +1,55 @@
 package org.example.cab302project.Controller;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.example.cab302project.SessionManager;
 import org.example.cab302project.focusSess.AppBlocking;
+import org.example.cab302project.focusSess.FocusSession;
+import org.example.cab302project.focusSess.initialiseSess;
+import org.example.cab302project.PageFunctions;
+import org.w3c.dom.events.Event;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class FocusSessPageController extends java.lang.Thread {
-
-    private long studyLength;
-    private boolean isPaused = false;
     private long pauseStartTime;
-    private long endTime;
+
     private AppBlockingRun appBlockingRun;
-
-    private long breakInterval;
-    private long breakLength;
-    private long nextBreakTime;
-
     @FXML
     ProgressIndicator clock;
-
     @FXML
     Text timeText;
-
     @FXML
     Button controlSess;
-
     @FXML
     Button endSess;
-
+    @FXML
+    private Button hiddenDashboardButton;
+    FocusSession focusSession = new FocusSession();
     @FXML
     public void initialize() {
         String[] data = new InitSessPageController().getInitSessList();
-
-        studyLength = CalculateTime(data);
-        breakInterval = TimeUnit.MINUTES.toMillis(Integer.parseInt(data[5]));
-        breakLength = TimeUnit.MINUTES.toMillis(Integer.parseInt(data[6]));
-
-        nextBreakTime = System.currentTimeMillis() + breakInterval;
+        focusSession.studyLength = focusSession.CalculateTime(data);
+        focusSession.collectVariables(data);
         start();
+        if (Objects.equals(focusSession.wallPaper, "True")) {
+            System.out.println("WallPaper Selected!");
+            //Jackson put your wallpaper run section here
+        }
 
-        String blockApp = data[3];
-
-        if (Objects.equals(blockApp, "True")) {
-            System.out.println("True!!!");
+        if (Objects.equals(focusSession.blockApp, "True")) {
             appBlockingRun = new AppBlockingRun();
             appBlockingRun.start();
+        }
+
+        if (Objects.equals(focusSession.breaks, "True")) {
+
         }
 
         Platform.runLater(() -> {
@@ -66,28 +64,23 @@ public class FocusSessPageController extends java.lang.Thread {
 
     @Override
     public void run() {
-        long startTime = System.currentTimeMillis();
-        endTime = studyLength + startTime;
+        focusSession.calculateEndtime();
 
-        while (System.currentTimeMillis() < endTime) {
-            if (!isPaused) {
-                long currentTime = System.currentTimeMillis();
-                int timeLeft = (int) (endTime - currentTime);
+        while (System.currentTimeMillis() < focusSession.endTime) {
+            if (!focusSession.isPaused) {
+                double progress = focusSession.calculateProgress();
 
-                double progress = 1 - (double) timeLeft / studyLength;
                 Platform.runLater(() -> {
                     clock.setProgress(progress);
-
-                    long hours = TimeUnit.MILLISECONDS.toHours(timeLeft);
-                    long minutes = TimeUnit.MILLISECONDS.toMinutes(timeLeft) % 60;
-                    long seconds = TimeUnit.MILLISECONDS.toSeconds(timeLeft) % 60;
-                    String timeString = String.format("%02d:%02d:%02d", hours, minutes, seconds);
-                    timeText.setText(timeString);
+                    timeText.setText(focusSession.displayTime(focusSession.timeLeft));
                 });
+                if (Objects.equals(focusSession.breaks, "True")) {
 
-                if (currentTime >= nextBreakTime) {
-                    takeBreak();
+                    if (focusSession.currentTime >= focusSession.nextBreakTime) {
+                        takeBreak();
+                    }
                 }
+
 
                 try {
                     Thread.sleep(250);
@@ -110,22 +103,14 @@ public class FocusSessPageController extends java.lang.Thread {
         });
     }
 
-    private void takeBreak() {
-        isPaused = true;
+    public void takeBreak() {
+        focusSession.isPaused = true;
         Platform.runLater(() -> {
-            controlSess.setText("Resume");
-            long breakEndTime = System.currentTimeMillis() + breakLength;
-
             new Thread(() -> {
-                while (System.currentTimeMillis() < breakEndTime) {
-                    long breakTimeLeft = breakEndTime - System.currentTimeMillis();
-                    long breakHours = TimeUnit.MILLISECONDS.toHours(breakTimeLeft);
-                    long breakMinutes = TimeUnit.MILLISECONDS.toMinutes(breakTimeLeft) % 60;
-                    long breakSeconds = TimeUnit.MILLISECONDS.toSeconds(breakTimeLeft) % 60;
-                    String breakTimeString = String.format("Break: %02d:%02d:%02d", breakHours, breakMinutes, breakSeconds);
+                while (System.currentTimeMillis() < focusSession.breakEndTime) {
 
-                    Platform.runLater(() -> timeText.setText(breakTimeString));
-
+                    focusSession.calculateBreakTimes();
+                    Platform.runLater(() -> timeText.setText("Break: " + focusSession.displayTime(focusSession.breakTimeLeft)));
                     try {
                         Thread.sleep(250);
                     } catch (InterruptedException e) {
@@ -134,8 +119,8 @@ public class FocusSessPageController extends java.lang.Thread {
                 }
                 Platform.runLater(() -> {
                     controlSess.setText("Pause");
-                    isPaused = false;
-                    nextBreakTime = System.currentTimeMillis() + breakInterval;
+                    focusSession.isPaused = false;
+                    focusSession.nextBreakTime = System.currentTimeMillis() + focusSession.breakInterval;
                     synchronized (FocusSessPageController.this) {
                         FocusSessPageController.this.notify();
                     }
@@ -147,16 +132,17 @@ public class FocusSessPageController extends java.lang.Thread {
 
     @FXML
     private void handleEndSess() {
-        System.out.println("End Session");
         interrupt();
-
         if (appBlockingRun != null && appBlockingRun.isAlive()) {
             appBlockingRun.interrupt();
         }
-
-
         Platform.runLater(() -> {
             Stage stage = (Stage) endSess.getScene().getWindow();
+            SessionManager.sessStatus = true;
+
+            hiddenDashboardButton.setId("Dashboard");
+            hiddenDashboardButton.fireEvent(new ActionEvent(hiddenDashboardButton, null));
+
             stage.close();
         });
     }
@@ -165,17 +151,17 @@ public class FocusSessPageController extends java.lang.Thread {
     private void handleControlSess() {
         if ("Pause".equals(controlSess.getText())) {
             controlSess.setText("Resume");
-            isPaused = true;
+            focusSession.isPaused = true;
             pauseStartTime = System.currentTimeMillis();
             if (appBlockingRun != null) {
                 appBlockingRun.pauseBlocking();
             }
         } else {
             controlSess.setText("Pause");
-            isPaused = false;
+            focusSession.isPaused = false;
             long resumeTime = System.currentTimeMillis();
             long pauseDuration = resumeTime - pauseStartTime;
-            endTime += pauseDuration;
+            focusSession.endTime += pauseDuration;
             if (appBlockingRun != null) {
                 appBlockingRun.resumeBlocking();
             }
@@ -185,21 +171,13 @@ public class FocusSessPageController extends java.lang.Thread {
         }
     }
 
-    private long CalculateTime(String[] data) {
-        int hours = Integer.parseInt(data[1]);
-        int minutes = Integer.parseInt(data[2]);
-        return TimeUnit.HOURS.toMillis(hours) + TimeUnit.MINUTES.toMillis(minutes);
-    }
 
-
-
-    // Inner class for a second thread
     private class AppBlockingRun extends Thread {
         @Override
         public void run() {
             while (!isInterrupted()) {
                 synchronized (this) {
-                    while (isPaused) {
+                    while (focusSession.isPaused) {
                         try {
                             wait();
                         } catch (InterruptedException e) {
@@ -207,7 +185,7 @@ public class FocusSessPageController extends java.lang.Thread {
                         }
                     }
                 }
-                // Put your app blocking code here
+
                 AppBlocking.appBlocker(new String[]{});
                 try {
                     Thread.sleep(1000);
@@ -217,11 +195,11 @@ public class FocusSessPageController extends java.lang.Thread {
             }
         }
         public synchronized void pauseBlocking() {
-            isPaused = true;
+            focusSession.isPaused = true;
         }
 
         public synchronized void resumeBlocking() {
-            isPaused = false;
+            focusSession.isPaused = false;
             notify();
         }
     }

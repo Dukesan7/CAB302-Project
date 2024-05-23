@@ -15,6 +15,7 @@
             <Font size="50.0" />
          </font>
       </Text>
+      <Button fx:id="hiddenDashboardButton" visible="false"/>
       <Button fx:id="controlSess" alignment="BOTTOM_CENTER" layoutX="177.0" layoutY="339.0" mnemonicParsing="false" onAction="#handleControlSess" prefHeight="37.0" prefWidth="98.0" text="Pause">
          <font>
             <Font size="14.0" />
