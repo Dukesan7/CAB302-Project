@@ -29,7 +29,8 @@ public class CreateDB {
 
             String sqlGroup = "CREATE TABLE IF NOT EXISTS Groups (" +
                     "GroupID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "Groupname TEXT NOT NULL)";
+                    "Groupname TEXT NOT NULL," +
+                    "userID INT)";
             stmt.executeUpdate(sqlGroup);
 
 

@@ -97,6 +97,10 @@ public class ProfilesPageController {
     ComboBox<String> changeSecurityQuestion;
     @FXML
     Label profileDisplayName;
+    @FXML
+    TextField studyModeTextField;
+    @FXML
+    Button studyModeSaveButton;
 
 
     @FXML
@@ -127,7 +131,28 @@ public class ProfilesPageController {
         else { tButton.setText("OFF");}
     }
 
+    @FXML
+    public void AddStudyModeTextBox() {
+        studyModeTextField.setVisible(true);
+        studyModeSaveButton.setVisible(true);
+    }
 
+    @FXML
+    private void AddStudyMode() {
+        String userInput = studyModeTextField.getText();
+        System.out.println(userInput);
+
+        String sql = "INSERT INTO Groups(GroupID, Groupname, userID) VALUES(?, ?, ?)";
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(2, userInput);
+            pstmt.setInt(3, loginPage.userID);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error adding: " + e.getMessage());
+        }
+    }
 
     public void exampleApps() {
         String sql = "INSERT INTO BlackLists(blackListID, userID, fileName, reason) VALUES(?, ?, ?, ?)";

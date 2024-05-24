@@ -72,23 +72,16 @@ public class ManageApplicationController {
     public void populateApplicationList() {
         try {
             applicationTable.getItems().clear();
-            System.out.println("popApps Selected");
             String sql = "SELECT fileName, reason FROM BlackLists WHERE userID = ?";
 
             try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
                 pstmt.setInt(1, loginPage.userID );
-                System.out.println(pstmt);
                 ResultSet rs = pstmt.executeQuery();
 
                 fileNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
                 reasonColumn.setCellValueFactory(new PropertyValueFactory<>("reason"));
 
                 while (rs.next()) {
-                    System.out.printf("%-5s%-25s",
-                            rs.getString("fileName"),
-                            rs.getString("reason")
-                    );
-
                     DisplayObject displayObject  = new DisplayObject(rs.getString("fileName"), rs.getString("reason"));
                     applicationTable.getItems().add(displayObject);
                 }
@@ -108,18 +101,12 @@ public class ManageApplicationController {
 
             try ( PreparedStatement pstmt = connection.prepareStatement(query)) {
                 pstmt.setString(1, result.name );
-                System.out.println(result.name);
-                System.out.println(pstmt);
                 pstmt.execute();
                 populateApplicationList();
             } catch (SQLException e) {
                 System.err.println("Error deleting blocked applications: " + e.getMessage());
             }
         } catch (NullPointerException e) {System.err.println(e.getMessage());}
-    }
-
-    public void addApplications() {
-
     }
 
 
