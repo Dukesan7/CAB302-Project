@@ -1,6 +1,7 @@
 package org.example.cab302project.focusSess;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -21,7 +22,10 @@ public class FocusSession {
     public long breakTimeLeft;
     public double progress;
     public long startTime;
-
+    public long nextRandomMsgTime;
+    public int breakCount = 0;
+    public long sessionStartTime;
+    public long totalSessionTime;
     public long CalculateTime(String[] data) {
         int hours = Integer.parseInt(data[1]);
         int minutes = Integer.parseInt(data[2]);
@@ -39,6 +43,7 @@ public class FocusSession {
         System.out.println(data[6]);
         if (breaks.equals("True")) {
             breakInterval = TimeUnit.MINUTES.toMillis(Integer.parseInt(data[6]));
+            //breakInterval = TimeUnit.MINUTES.toMillis(Integer.parseInt("1"));
             System.out.println("interval: " + breakInterval);
             breakLength = TimeUnit.MINUTES.toMillis(Integer.parseInt(data[7]));
             calcBreakTime();
@@ -73,7 +78,12 @@ public class FocusSession {
         breakEndTime = System.currentTimeMillis() + breakLength;
         breakTimeLeft = breakEndTime - System.currentTimeMillis();
     }
-
+    public void setRandomMsgTime() {
+        long minTime = TimeUnit.MINUTES.toMillis(1);
+        long maxTime = breakInterval - minTime;
+        nextRandomMsgTime = System.currentTimeMillis() + (minTime + (long) (Math.random() * (maxTime - minTime)));
+        System.out.println("Next random message time set for: " + nextRandomMsgTime + " (current time: " + System.currentTimeMillis() + ")");
+    }
     public void getRandMsg() throws AWTException {
         String[] msgs = {
                 "Don't forget to drink plenty of Water!",
@@ -95,4 +105,25 @@ public class FocusSession {
     public void notification(String msg) throws AWTException {
         Notification.notification(msg);
     }
+
+    public void startSession() {
+        sessionStartTime = System.currentTimeMillis();
+    }
+
+    public void endSession() {
+        totalSessionTime = System.currentTimeMillis() - sessionStartTime;
+    }
+
+    public void getSessionData(String subgroup, String breakLength, String date) {
+        List sessionData = new List();
+        sessionData.add("Total Time: " + totalSessionTime / 1000 + " seconds");
+        sessionData.add("Subgroup: " + subgroup);
+        sessionData.add("Number of Breaks: " + breakCount);
+        sessionData.add("Length of Breaks: " + breakLength);
+        sessionData.add("Date: " + date);
+        System.out.println("Session Data:");
+        System.out.println(sessionData);
+
+    }
+
 }

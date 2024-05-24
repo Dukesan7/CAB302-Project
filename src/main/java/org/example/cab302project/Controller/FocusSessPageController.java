@@ -28,7 +28,7 @@ public class FocusSessPageController extends java.lang.Thread {
     @FXML
     Button endSess;
     @FXML
-    private Button hiddenDashboardButton; // Ensure this button is defined in the FXML file
+    private Button hiddenDashboardButton;
     FocusSession focusSession = new FocusSession();
 
     @FXML
@@ -36,6 +36,7 @@ public class FocusSessPageController extends java.lang.Thread {
         String[] data = new InitSessPageController().getInitSessList();
         focusSession.studyLength = focusSession.CalculateTime(data);
         focusSession.collectVariables(data);
+        focusSession.setRandomMsgTime();
         System.out.println("breakInterval: " + focusSession.breakInterval);
         start();
 
@@ -90,6 +91,15 @@ public class FocusSessPageController extends java.lang.Thread {
                     }
                 }
 
+                if (System.currentTimeMillis() >= focusSession.nextRandomMsgTime) {
+                    try {
+                        focusSession.getRandMsg();
+                    } catch (AWTException e) {
+                        e.printStackTrace();
+                    }
+                    focusSession.setRandomMsgTime();
+                }
+
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
@@ -135,6 +145,12 @@ public class FocusSessPageController extends java.lang.Thread {
                 focusSession.isPaused = false;
                 focusSession.calcBreakTime();
                 System.out.println("Next break scheduled for: " + focusSession.nextBreakTime);
+                String msg = "Your break has ended, time to work hard now, We believe in you!";
+                try {
+                    focusSession.getBreakMsg(msg);
+                } catch (AWTException e) {
+                    throw new RuntimeException(e);
+                }
                 synchronized (FocusSessPageController.this) {
                     FocusSessPageController.this.notify();
                 }
@@ -148,16 +164,25 @@ public class FocusSessPageController extends java.lang.Thread {
         if (appBlockingRun != null && appBlockingRun.isAlive()) {
             appBlockingRun.interrupt();
         }
+        focusSession.endSession();
+
         Platform.runLater(() -> {
             Stage stage = (Stage) endSess.getScene().getWindow();
             SessionManager.sessStatus = true;
 
+
+            String subgroup = new InitSessPageController().getInitSessList()[0];
+            String breakLength = String.valueOf(focusSession.breakLength / 60000) + " minutes";
+            String date = java.time.LocalDate.now().toString();
+
+            focusSession.getSessionData(subgroup, breakLength, date);
             hiddenDashboardButton.setId("Dashboard");
             hiddenDashboardButton.fireEvent(event);
 
             stage.close();
         });
     }
+
 
     @FXML
     private void handleControlSess() {
