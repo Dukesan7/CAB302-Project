@@ -147,11 +147,13 @@ public class InitSessPageController {
         String breakcheck = InitialiseSess.checkValue(SelectedBreaks);
         String SelectedbreakInterval = "";
         String SelectedBreakLength = "";
-
-        if (Objects.equals(breakcheck, "true")){
+        System.out.println("Starting Sess:");
+        System.out.println(breakcheck);
+        if (breakcheck.equals("True")) {
             SelectedBreakLength = String.valueOf(breakTimes.getValue());
             int sliderValue = (int) breakSlider.getValue();
             SelectedbreakInterval = InitialiseSess.breakInterval(sliderValue);
+            System.out.println("interval: " + SelectedbreakInterval);
         }
         String hours = initialiseSess.deNullifyTime(SelectedHours);
         String minutes = initialiseSess.deNullifyTime(SelectedMinutes);

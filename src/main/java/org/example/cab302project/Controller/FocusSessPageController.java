@@ -10,12 +10,10 @@ import javafx.stage.Stage;
 import org.example.cab302project.SessionManager;
 import org.example.cab302project.focusSess.AppBlocking;
 import org.example.cab302project.focusSess.FocusSession;
-import org.example.cab302project.focusSess.initialiseSess;
 import org.example.cab302project.PageFunctions;
-import org.w3c.dom.events.Event;
 
+import java.awt.*;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 public class FocusSessPageController extends java.lang.Thread {
     private long pauseStartTime;
@@ -30,17 +28,19 @@ public class FocusSessPageController extends java.lang.Thread {
     @FXML
     Button endSess;
     @FXML
-    private Button hiddenDashboardButton;
+    private Button hiddenDashboardButton; // Ensure this button is defined in the FXML file
     FocusSession focusSession = new FocusSession();
+
     @FXML
     public void initialize() {
         String[] data = new InitSessPageController().getInitSessList();
         focusSession.studyLength = focusSession.CalculateTime(data);
         focusSession.collectVariables(data);
+        System.out.println("breakInterval: " + focusSession.breakInterval);
         start();
+
         if (Objects.equals(focusSession.wallPaper, "True")) {
             System.out.println("WallPaper Selected!");
-            //Jackson put your wallpaper run section here
         }
 
         if (Objects.equals(focusSession.blockApp, "True")) {
@@ -49,18 +49,17 @@ public class FocusSessPageController extends java.lang.Thread {
         }
 
         if (Objects.equals(focusSession.breaks, "True")) {
-
+            focusSession.calcBreakTime();
         }
 
         Platform.runLater(() -> {
             Stage stage = (Stage) endSess.getScene().getWindow();
             stage.setOnCloseRequest(event -> {
-                handleEndSess();
+                handleEndSess(new ActionEvent(hiddenDashboardButton, null));
                 event.consume();
             });
         });
     }
-
 
     @Override
     public void run() {
@@ -68,22 +67,31 @@ public class FocusSessPageController extends java.lang.Thread {
 
         while (System.currentTimeMillis() < focusSession.endTime) {
             if (!focusSession.isPaused) {
-                double progress = focusSession.calculateProgress();
+                focusSession.calculateProgress();
 
                 Platform.runLater(() -> {
-                    clock.setProgress(progress);
+                    clock.setProgress(focusSession.progress);
                     timeText.setText(focusSession.displayTime(focusSession.timeLeft));
                 });
-                if (Objects.equals(focusSession.breaks, "True")) {
 
-                    if (focusSession.currentTime >= focusSession.nextBreakTime) {
+                if (focusSession.breaks.equals("True")) {
+                    long timeUntilNextBreak = focusSession.nextBreakTime - System.currentTimeMillis();
+                    if (timeUntilNextBreak <= 0) {
+                        System.out.println("Break time reached at: " + System.currentTimeMillis());
+                        try {
+                            String msg = "Your " + (focusSession.breakLength / 60000) + " minute break starts now. Make sure to get up and stretch, relax and enjoy the break, you've earned this!";
+                            focusSession.getBreakMsg(msg);
+                        } catch (AWTException e) {
+                            throw new RuntimeException(e);
+                        }
                         takeBreak();
+                    } else {
+                        System.out.println("Time left for next break: " + timeUntilNextBreak / 1000 + " seconds");
                     }
                 }
 
-
                 try {
-                    Thread.sleep(250);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -97,6 +105,7 @@ public class FocusSessPageController extends java.lang.Thread {
                 }
             }
         }
+
         Platform.runLater(() -> {
             timeText.setText("00:00:00");
             clock.setProgress(1);
@@ -104,34 +113,37 @@ public class FocusSessPageController extends java.lang.Thread {
     }
 
     public void takeBreak() {
+        System.out.println("Taking a break at: " + System.currentTimeMillis());
         focusSession.isPaused = true;
-        Platform.runLater(() -> {
-            new Thread(() -> {
-                while (System.currentTimeMillis() < focusSession.breakEndTime) {
+        focusSession.breakEndTime = System.currentTimeMillis() + focusSession.breakLength;
 
-                    focusSession.calculateBreakTimes();
-                    Platform.runLater(() -> timeText.setText("Break: " + focusSession.displayTime(focusSession.breakTimeLeft)));
-                    try {
-                        Thread.sleep(250);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+        new Thread(() -> {
+            while (System.currentTimeMillis() < focusSession.breakEndTime) {
+                focusSession.breakTimeLeft = focusSession.breakEndTime - System.currentTimeMillis();
+                Platform.runLater(() -> timeText.setText("Break: " + focusSession.displayTime(focusSession.breakTimeLeft)));
+                System.out.println("Break time left: " + (focusSession.breakTimeLeft / 1000) + " seconds");
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-                Platform.runLater(() -> {
-                    controlSess.setText("Pause");
-                    focusSession.isPaused = false;
-                    focusSession.nextBreakTime = System.currentTimeMillis() + focusSession.breakInterval;
-                    synchronized (FocusSessPageController.this) {
-                        FocusSessPageController.this.notify();
-                    }
-                });
-            }).start();
-        });
+            }
+            Platform.runLater(() -> {
+                System.out.println("Break ended at: " + System.currentTimeMillis());
+                controlSess.setText("Pause");
+                focusSession.isPaused = false;
+                focusSession.calcBreakTime();
+                System.out.println("Next break scheduled for: " + focusSession.nextBreakTime);
+                synchronized (FocusSessPageController.this) {
+                    FocusSessPageController.this.notify();
+                }
+            });
+        }).start();
     }
 
-
     @FXML
-    private void handleEndSess() {
+    private void handleEndSess(ActionEvent event) {
         interrupt();
         if (appBlockingRun != null && appBlockingRun.isAlive()) {
             appBlockingRun.interrupt();
@@ -141,7 +153,7 @@ public class FocusSessPageController extends java.lang.Thread {
             SessionManager.sessStatus = true;
 
             hiddenDashboardButton.setId("Dashboard");
-            hiddenDashboardButton.fireEvent(new ActionEvent(hiddenDashboardButton, null));
+            hiddenDashboardButton.fireEvent(event);
 
             stage.close();
         });
@@ -171,7 +183,6 @@ public class FocusSessPageController extends java.lang.Thread {
         }
     }
 
-
     private class AppBlockingRun extends Thread {
         @Override
         public void run() {
@@ -194,6 +205,7 @@ public class FocusSessPageController extends java.lang.Thread {
                 }
             }
         }
+
         public synchronized void pauseBlocking() {
             focusSession.isPaused = true;
         }
