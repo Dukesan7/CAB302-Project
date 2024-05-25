@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.*;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegisterPageController {
 
@@ -38,6 +40,11 @@ public class RegisterPageController {
 
         if (fullName.isEmpty() || email.isEmpty() || pass.isEmpty()) {
             showAlert(AlertType.ERROR, "Registration Error", "Fill in the blanks !");
+            return;
+        }
+
+        if (!isValidEmail(email)) {
+            showAlert(AlertType.ERROR, "Registration Error", "Invalid email format!");
             return;
         }
 
@@ -75,6 +82,13 @@ public class RegisterPageController {
         } else {
             showAlert(AlertType.ERROR, "Registration Failed", "User might already exist.");
         }
+    }
+
+    private boolean isValidEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
     }
 
     private boolean registerUserInDatabase(String fName, String lName, String email, String pass) {
