@@ -72,7 +72,7 @@ public class PageFunctions {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(pageName + ".fxml"));
             Stage stage = (Stage) button.getScene().getWindow();
-            stage.setScene(new Scene(root, 1280, 690));
+            stage.setScene(new Scene(root, 800, 450));
             stage.show();
             System.out.println("gotoPage try");
 
@@ -88,7 +88,7 @@ public class PageFunctions {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("FocusSess.fxml"));
             Stage stage = new Stage();
-            stage.setScene(new Scene(root, 1280, 690));
+            stage.setScene(new Scene(root, 800, 450));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

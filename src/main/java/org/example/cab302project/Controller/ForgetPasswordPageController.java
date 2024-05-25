@@ -80,8 +80,8 @@ public class ForgetPasswordPageController {
                 Scene dashboardScene = new Scene(dashboardPage);
 
                 // Get the preferred width and height from the registration page
-                double preferredWidth = 1280.0;
-                double preferredHeight = 690.0;
+                double preferredWidth = 800;
+                double preferredHeight = 450;
 
                 // Switch to the dashboard page
                 Stage currentStage = (Stage) emailField.getScene().getWindow();

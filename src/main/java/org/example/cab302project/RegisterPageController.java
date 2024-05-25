@@ -63,8 +63,8 @@ public class RegisterPageController {
                 Scene loginScene = new Scene(loginPage);
 
                 // Get the preferred width and height from the registration page
-                double preferredWidth = 1280;
-                double preferredHeight = 690;
+                double preferredWidth = 800;
+                double preferredHeight = 450;
 
                 // Switch to the login page
                 Stage currentStage = (Stage) emailField.getScene().getWindow();
