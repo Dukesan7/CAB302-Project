@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.util.Objects;
 
 public class Main extends Application {
@@ -17,6 +16,11 @@ public class Main extends Application {
         primaryStage.setTitle("JavaFX Multi-page App");
         primaryStage.setScene(new Scene(root, 800, 450));
         primaryStage.show();
+    }
+
+    @Override
+    public void stop() {
+
     }
 
     public static void main(String[] args) {
