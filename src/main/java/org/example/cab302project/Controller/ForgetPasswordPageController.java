@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 import org.example.cab302project.DbConnection;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -27,11 +29,14 @@ public class ForgetPasswordPageController {
     private PasswordField newPasswordField;
 
     public static boolean resetPassword(String email, String newPassword) {
+        String hashedPassword = hashString(newPassword);
+        String hashedEmail = hashString(email);
+
         try {
             Connection conn = DbConnection.getInstance().getConnection();
             PreparedStatement pstmt = conn.prepareStatement("UPDATE UserDetails SET pass = ? WHERE email = ?");
-            pstmt.setString(1, newPassword);
-            pstmt.setString(2, email);
+            pstmt.setString(1, hashedPassword);
+            pstmt.setString(2, hashedEmail);
             int rowsUpdated = pstmt.executeUpdate();
             pstmt.close();
             conn.close();
@@ -71,7 +76,7 @@ public class ForgetPasswordPageController {
 
             // Switch to the dashboard page
             try {
-                Parent dashboardPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Dashboard.fxml")));
+                Parent dashboardPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/org/example/cab302project/Dashboard.fxml")));
                 Scene dashboardScene = new Scene(dashboardPage);
 
                 // Get the preferred width and height from the registration page
@@ -99,6 +104,20 @@ public class ForgetPasswordPageController {
             alert.setHeaderText(null);
             alert.setContentText("Failed to reset password. Please try again.");
             alert.showAndWait();
+        }
+    }
+
+    private static String hashString(String input) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashedBytes = md.digest(input.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashedBytes) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         }
     }
 }

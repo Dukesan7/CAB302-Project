@@ -10,6 +10,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -92,14 +94,17 @@ public class RegisterPageController {
     }
 
     private boolean registerUserInDatabase(String fName, String lName, String email, String pass) {
+        String hashedEmail = hashString(email);
+        String hashedPass = hashString(pass);
+
         String sql = "INSERT INTO UserDetails(fName, lName, email, pass) VALUES(?,?,?,?)";
 
         try (Connection conn = DbConnection.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, fName);
             pstmt.setString(2, lName);
-            pstmt.setString(3, email);
-            pstmt.setString(4, pass);
+            pstmt.setString(3, hashedEmail);
+            pstmt.setString(4, hashedPass);
             pstmt.executeUpdate();
             return true;
         }
@@ -108,6 +113,20 @@ public class RegisterPageController {
         {
             System.err.println("Error registering user: " + e.getMessage());
             return false;
+        }
+    }
+
+    private String hashString(String input) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashedBytes = md.digest(input.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashedBytes) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         }
     }
 

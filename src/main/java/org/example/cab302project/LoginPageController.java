@@ -11,6 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.Objects;
 
@@ -131,24 +133,42 @@ public class LoginPageController {
     }
 
     private boolean verifyUserCredentials(String email, String password) {
+        String hashedEmail = hashString(email);
+        String hashedPassword = hashString(password);
+
         String sql = "SELECT * FROM UserDetails WHERE email = ? AND pass = ?";
 
         try (Connection conn = DbConnection.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, email);
-            pstmt.setString(2, password);
+            pstmt.setString(1, hashedEmail);
+            pstmt.setString(2, hashedPassword);
 
             ResultSet rs = pstmt.executeQuery();
 
-            //Dom edit \/
-            userID = rs.getInt("UserID");
-            nameOfUser = rs.getString("fName");
-
-            // If a record is found, the credentials are valid
-            return rs.next();
+            if (rs.next()) {
+                //Dom edit \/
+                userID = rs.getInt("UserID");
+                nameOfUser = rs.getString("fName");
+                return true;
+            }
+            return false;
         } catch (SQLException e) {
             System.err.println("Error verifying user credentials: " + e.getMessage());
             return false;
+        }
+    }
+
+    private String hashString(String input) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashedBytes = md.digest(input.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashedBytes) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         }
     }
 
