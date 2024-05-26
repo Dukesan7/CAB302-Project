@@ -40,8 +40,7 @@ public class ProfilesPageController {
     private ArrayList<String> smName = new ArrayList<>();
     private int smIndex;
     private String selectedQuestion;
-
-    public String currentGroupName;
+    public int currentGroupID;
     ObservableList<String> potentialQuestions = FXCollections.observableArrayList(
             "What is the name of your first pet?",
             "What school did you first attend?",
@@ -164,7 +163,16 @@ public class ProfilesPageController {
     @FXML
     private void changeCurrentGroup() {
         profileGroupName.setText(inputGroupName.getValue());
-        currentGroupName = profileGroupName.getText();
+
+        String sql = "SELECT GroupID FROM Groups WHERE Groupname = ?";
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, inputGroupName.getValue());
+            ResultSet rs = pstmt.executeQuery();
+            currentGroupID = rs.getInt("GroupID");
+        } catch (SQLException e) {
+            System.err.println("Error adding: " + e.getMessage());
+        }
     }
 
     @FXML
