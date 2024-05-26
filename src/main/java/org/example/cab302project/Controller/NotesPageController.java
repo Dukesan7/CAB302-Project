@@ -142,7 +142,6 @@ public class NotesPageController {
         if (fileName != null) {
             Path filePath = notesDirectory.resolve(fileName);
             try {
-                // Command to open the "Open With" dialog in Windows
                 ProcessBuilder builder = new ProcessBuilder("rundll32", "url.dll,FileProtocolHandler", filePath.toAbsolutePath().toString());
                 builder.start();
             } catch (IOException e) {
