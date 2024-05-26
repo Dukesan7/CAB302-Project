@@ -40,6 +40,8 @@ public class ProfilesPageController {
     private ArrayList<String> smName = new ArrayList<>();
     private int smIndex;
     private String selectedQuestion;
+
+    public String currentGroupName;
     ObservableList<String> potentialQuestions = FXCollections.observableArrayList(
             "What is the name of your first pet?",
             "What school did you first attend?",
@@ -162,6 +164,7 @@ public class ProfilesPageController {
     @FXML
     private void changeCurrentGroup() {
         profileGroupName.setText(inputGroupName.getValue());
+        currentGroupName = profileGroupName.getText();
     }
 
     @FXML
