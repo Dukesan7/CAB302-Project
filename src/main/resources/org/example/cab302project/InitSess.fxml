@@ -17,12 +17,6 @@
 
     <StackPane prefHeight="458.0" prefWidth="710.0">
 
-        <CheckBox fx:id="wallPaper" mnemonicParsing="false" text="Block Wall Paper" StackPane.alignment="TOP_CENTER">
-            <StackPane.margin>
-                <Insets right="180.0" top="200.0" />
-            </StackPane.margin>
-        </CheckBox>
-
         <Label text="Start Focus Session" underline="true" StackPane.alignment="TOP_CENTER">
             <StackPane.margin>
                 <Insets top="60.0" />
@@ -206,7 +200,7 @@
         </Label>
         <CheckBox fx:id="appBlock" mnemonicParsing="false" text="Block Apps" StackPane.alignment="TOP_CENTER">
             <StackPane.margin>
-                <Insets right="420.0" top="200.0" />
+                <Insets right="300.0" top="200.0" />
             </StackPane.margin>
         </CheckBox>
     </StackPane>

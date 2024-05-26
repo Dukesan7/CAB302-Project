@@ -24,8 +24,8 @@ public class InitSessPageController {
     ChoiceBox<String> minutes;
     @FXML
     CheckBox appBlock;
-    @FXML
-    CheckBox wallPaper;
+    //@FXML
+    //CheckBox wallPaper;
     @FXML
     Slider breakSlider;
     @FXML
@@ -152,7 +152,7 @@ public class InitSessPageController {
         String SelectedHours = hours.getValue();
         String SelectedMinutes = minutes.getValue();
         CheckBox SelectedAppBlock = appBlock;
-        CheckBox SelectedwallPaper = wallPaper;
+        //CheckBox SelectedwallPaper = wallPaper;
         CheckBox SelectedBreaks = breaksCheck;
         String breakcheck = InitialiseSess.checkValue(SelectedBreaks);
         String SelectedbreakInterval = "";
@@ -171,14 +171,14 @@ public class InitSessPageController {
         InitialiseSess.calculateTotalMin(SelectedHours, SelectedMinutes);
 
 
-        String wallPaper = InitialiseSess.checkValue(SelectedwallPaper);
+        //String wallPaper = InitialiseSess.checkValue(SelectedwallPaper);
         String appBlock = InitialiseSess.checkValue(SelectedAppBlock);
 
         initsessList[0] = SelectedSubGroup;
         initsessList[1] = hours;
         initsessList[2] = minutes;
         initsessList[3] = appBlock;
-        initsessList[4] = wallPaper;
+        initsessList[4] = "False";
         initsessList[5] = breakcheck;
         initsessList[6] = SelectedbreakInterval;
         initsessList[7] = SelectedBreakLength;
