@@ -109,8 +109,10 @@ public class ProfilesPageController {
     Button studyModeSaveButton;
     @FXML
     Label profileGroupName;
-
-
+    @FXML
+    TextField subGroupTextField;
+    @FXML
+    Button subGroupSaveButton;
 
     @FXML
     private void returnTextAndAppend() {
@@ -186,8 +188,10 @@ public class ProfilesPageController {
         DisplayStudyGroups();
     }
 
-    private void AddSubGroup() {
-
+    @FXML
+    private void AddSubGroupTextBox() {
+        subGroupTextField.setVisible(true);
+        subGroupSaveButton.setVisible(true);
     }
 
     public void exampleApps() {

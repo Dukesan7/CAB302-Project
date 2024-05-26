@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cab302project.Controller.ManageGroupsController">
+   <children>
+      <HBox prefHeight="56.0" prefWidth="600.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Groups" wrappingWidth="345.060546875">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </Text>
+            <Button fx:id="backButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" onAction="#handleBackButtonAction" style="-fx-padding: 10; -fx-font-size: 14px; -fx-background-color: #f5f5f5;" text="Back" />
+         </children>
+      </HBox>
+      <HBox layoutY="40.0" prefHeight="60.0" prefWidth="600.0">
+         <children>
+            <Label prefHeight="27.0" prefWidth="134.0" text="Selected Group:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+            <Label text="None">
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox layoutY="56.0" prefHeight="35.0" prefWidth="600.0" AnchorPane.topAnchor="90.0">
+         <children>
+            <VBox prefHeight="60.0" prefWidth="315.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#deleteApplications" text="DELETE">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Label prefHeight="25.0" prefWidth="165.0" text="Select Item from Table below" />
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="BlockApplications1" mnemonicParsing="false" onAction="#goToPage" text="ADD">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Button>
+                        <TextField promptText="Type Group Name" />
+                     </children>
+                  </HBox>
+               </children>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox prefHeight="60.0" prefWidth="279.0">
+               <children>
+                  <HBox prefHeight="25.0" prefWidth="143.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#deleteApplications" text="DELETE">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Label prefHeight="25.0" prefWidth="169.0" text="Select Item from Table below" />
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="BlockApplications" mnemonicParsing="false" onAction="#goToPage" text="ADD">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Button>
+                        <TextField promptText="Type Sub-Group Name">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <TableView fx:id="applicationTable" layoutY="152.0" prefHeight="223.0" prefWidth="265.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="325.0">
+         <columns>
+            <TableColumn fx:id="fileNameColumn" prefWidth="264.0" text="Group Name" />
+         </columns>
+      </TableView>
+      <TableView fx:id="applicationTable1" layoutX="300.0" layoutY="162.0" prefHeight="223.0" prefWidth="265.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="325.0" AnchorPane.rightAnchor="10.0">
+         <columns>
+            <TableColumn fx:id="fileNameColumn1" prefWidth="264.0" text="Sub-Group Name" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>
