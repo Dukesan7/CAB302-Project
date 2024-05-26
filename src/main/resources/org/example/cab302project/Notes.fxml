@@ -12,27 +12,27 @@
 
     <VBox spacing="10" minWidth="200" maxWidth="200"
           style="-fx-background-color: #d3d3d3; -fx-padding: 10;">
-        <ListView fx:id="fileList" />
+        <ListView fx:id="fileList"/>
     </VBox>
 
 
     <VBox spacing="10" style="-fx-padding: 10;">
         <HBox spacing="10" alignment="CENTER_LEFT">
-            <Button text="Create File" onAction="#createFile" />
+            <Button text="Create File" onAction="#createFile"/>
             <TextField fx:id="fileNameField" promptText="Enter file name"/>
         </HBox>
 
-        <Button text="Open File" onAction="#openFile" />
+        <Button text="Open File" onAction="#openFile"/>
 
         <HBox spacing="10" alignment="CENTER_LEFT">
-            <Button text="Rename File" onAction="#renameFile" />
+            <Button text="Rename File" onAction="#renameFile"/>
             <TextField fx:id="newFileNameField" promptText="New file name" maxWidth="200"/>
         </HBox>
 
-        <Button text="Delete File" onAction="#deleteFile" />
+        <Button text="Delete File" onAction="#deleteFile"/>
 
         <HBox spacing="10" alignment="CENTER_LEFT">
-            <Button text="Select Editor" onAction="#chooseEditor" />
+            <Button text="Select Editor" onAction="#chooseEditor"/>
             <Label fx:id="editorLabel" text="No editor selected" minWidth="180"/>
         </HBox>
     </VBox>

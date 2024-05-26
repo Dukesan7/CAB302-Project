@@ -2,16 +2,12 @@ package org.example.cab302project.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,7 +16,6 @@ import java.nio.file.Paths;
 
 import org.example.cab302project.PageFunctions;
 import org.json.JSONObject;
-
 
 public class NotesPageController {
 
@@ -50,7 +45,6 @@ public class NotesPageController {
         PageFunctions pageFunctions = new PageFunctions();
         pageFunctions.AddSideBar(hBox);
     }
-
 
     @FXML
     private void chooseEditor(ActionEvent event) {
@@ -124,7 +118,6 @@ public class NotesPageController {
         }
     }
 
-
     @FXML
     public void renameFile(ActionEvent event) {
         String oldFileName = fileList.getSelectionModel().getSelectedItem();
@@ -141,7 +134,6 @@ public class NotesPageController {
             }
         }
     }
-
 
     @FXML
     public void deleteFile(ActionEvent event) {
