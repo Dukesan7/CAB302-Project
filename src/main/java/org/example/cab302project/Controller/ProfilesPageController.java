@@ -40,12 +40,15 @@ public class ProfilesPageController {
     private ArrayList<String> smName = new ArrayList<>();
     private int smIndex;
     private String selectedQuestion;
+    public int currentGroupID;
     ObservableList<String> potentialQuestions = FXCollections.observableArrayList(
             "What is the name of your first pet?",
             "What school did you first attend?",
             "What suburb did you first live in?",
             "What is your favourite ice cream flavour?"
     );
+
+    ObservableList<String> studyGroups = FXCollections.observableArrayList();
 
 //    public ProfilesPageController(String profileName, String password, String smName, String selectedQuestion ) {
 //        this.profileName.add(profileName);
@@ -96,8 +99,21 @@ public class ProfilesPageController {
     @FXML
     ComboBox<String> changeSecurityQuestion;
     @FXML
+    ComboBox<String> inputGroupName;
+    @FXML
+    ComboBox<String> inputSubGroupName;
+    @FXML
     Label profileDisplayName;
-
+    @FXML
+    TextField studyModeTextField;
+    @FXML
+    Button studyModeSaveButton;
+    @FXML
+    Label profileGroupName;
+    @FXML
+    TextField subGroupTextField;
+    @FXML
+    Button subGroupSaveButton;
 
     @FXML
     private void returnTextAndAppend() {
@@ -127,7 +143,67 @@ public class ProfilesPageController {
         else { tButton.setText("OFF");}
     }
 
+    private void DisplayStudyGroups() {
+        String sql = "SELECT Groupname FROM Groups";
+        studyGroups.clear();
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            ResultSet rs = pstmt.executeQuery();
 
+            while (rs.next()) {
+                studyGroups.add(rs.getString("Groupname"));
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error adding: " + e.getMessage());
+        }
+        inputGroupName.getItems().setAll(studyGroups);
+    }
+
+    @FXML
+    private void changeCurrentGroup() {
+        profileGroupName.setText(inputGroupName.getValue());
+
+        String sql = "SELECT GroupID FROM Groups WHERE Groupname = ?";
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, inputGroupName.getValue());
+            ResultSet rs = pstmt.executeQuery();
+            currentGroupID = rs.getInt("GroupID");
+        } catch (SQLException e) {
+            System.err.println("Error adding: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    public void AddStudyModeTextBox() {
+        studyModeTextField.setVisible(true);
+        studyModeSaveButton.setVisible(true);
+    }
+
+    @FXML
+    private void AddStudyMode() {
+        String userInput = studyModeTextField.getText();
+        System.out.println(userInput);
+
+        String sql = "INSERT INTO Groups(GroupID, Groupname, userID) VALUES(?, ?, ?)";
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(2, userInput);
+            pstmt.setInt(3, loginPage.userID);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error adding: " + e.getMessage());
+        }
+        DisplayStudyGroups();
+    }
+
+    @FXML
+    private void AddSubGroupTextBox() {
+        subGroupTextField.setVisible(true);
+        subGroupSaveButton.setVisible(true);
+    }
 
     public void exampleApps() {
         String sql = "INSERT INTO BlackLists(blackListID, userID, fileName, reason) VALUES(?, ?, ?, ?)";
@@ -166,8 +242,10 @@ public class ProfilesPageController {
     @FXML
     public void initialize() {
         // Optional: Any initializations for your controller
+        profileGroupName.setText("None Selected");
         populateSecurityQuestions();
         populateProfileDisplayName();
         exampleApps();
+        DisplayStudyGroups();
     }
 }

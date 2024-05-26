@@ -2,11 +2,13 @@ package org.example.cab302project.focusSess;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Random;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.Random;
+
 
 public class FocusSession {
+
     public Boolean isPaused = false;
     public long breakInterval;
     public long breakLength;
@@ -23,6 +25,7 @@ public class FocusSession {
     public double progress;
     public long startTime;
     public long nextRandomMsgTime;
+    public boolean sessionEnded = false;
     public int breakCount = 0;
     public long sessionStartTime;
     public long totalSessionTime;
@@ -108,22 +111,23 @@ public class FocusSession {
 
     public void startSession() {
         sessionStartTime = System.currentTimeMillis();
+        sessionEnded = false;
     }
 
     public void endSession() {
         totalSessionTime = System.currentTimeMillis() - sessionStartTime;
+        sessionEnded = true;
     }
 
-    public void getSessionData(String subgroup, String breakLength, String date) {
-        List sessionData = new List();
+
+    public List<String> getSessionData(String subgroup, String breakLength, String date) {
+        List<String> sessionData = new ArrayList<>();
         sessionData.add("Total Time: " + totalSessionTime / 1000 + " seconds");
         sessionData.add("Subgroup: " + subgroup);
         sessionData.add("Number of Breaks: " + breakCount);
         sessionData.add("Length of Breaks: " + breakLength);
         sessionData.add("Date: " + date);
-        System.out.println("Session Data:");
-        System.out.println(sessionData);
-
+        return sessionData;
     }
 
 }

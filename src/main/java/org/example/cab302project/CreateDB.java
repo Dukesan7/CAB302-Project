@@ -29,7 +29,8 @@ public class CreateDB {
 
             String sqlGroup = "CREATE TABLE IF NOT EXISTS Groups (" +
                     "GroupID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "Groupname TEXT NOT NULL)";
+                    "Groupname TEXT NOT NULL," +
+                    "userID INT)";
             stmt.executeUpdate(sqlGroup);
 
 
@@ -62,8 +63,8 @@ public class CreateDB {
 
             String sqlBlackLists = "CREATE TABLE IF NOT EXISTS BlackLists (" +
                     "blackListID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "userID INTEGER NOT NULL," +
-                    "fileName TEXT NOT NULL," +
+                    "groupID INTEGER NOT NULL," +
+                    "filePath TEXT NOT NULL," +
                     "reason TEXT NOT NULL)";
             stmt.executeUpdate(sqlBlackLists);
 
