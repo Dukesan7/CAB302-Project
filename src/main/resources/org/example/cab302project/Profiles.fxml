@@ -12,120 +12,187 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox prefHeight="500.0" prefWidth="800.0" spacing="10" style="-fx-background-color: #f0f0f0;"
-      xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="org.example.cab302project.Controller.ProfilesPageController">
+<HBox prefHeight="500.0" prefWidth="800.0" spacing="10" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cab302project.Controller.ProfilesPageController">
 
     <!-- Sidebar with buttons on the left -->
     <VBox maxWidth="200" minWidth="200" spacing="10" style="-fx-background-color: #d3d3d3; -fx-padding: 10;">
-        <Button fx:id="Dashboard" alignment="CENTER" maxWidth="180" minWidth="180" onAction="#goToPage"
-                style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;" text="Dashboard"/>
-        <Button fx:id="Tasks" alignment="CENTER" maxWidth="180" minWidth="180" onAction="#goToPage"
-                style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;" text="Tasks"/>
-        <Button fx:id="Notes" alignment="CENTER" maxWidth="180" minWidth="180" onAction="#goToPage"
-                style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;" text="Notes"/>
-        <Button fx:id="Profiles" alignment="CENTER" maxWidth="180" minWidth="180" onAction="#goToPage"
-                style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;" text="Profiles"/>
+        <Button fx:id="Dashboard" alignment="CENTER" maxWidth="180" minWidth="180" onAction="#goToPage" style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;" text="Dashboard" />
+        <Button fx:id="Tasks" alignment="CENTER" maxWidth="180" minWidth="180" onAction="#goToPage" style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;" text="Tasks" />
+        <Button fx:id="Notes" alignment="CENTER" maxWidth="180" minWidth="180" onAction="#goToPage" style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;" text="Notes" />
+        <Button fx:id="Profiles" alignment="CENTER" maxWidth="180" minWidth="180" onAction="#goToPage" style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;" text="Profiles" />
     </VBox>
 
 
     <VBox prefHeight="500.0" prefWidth="591.0">
-        <HBox prefHeight="67.0" prefWidth="576.0">
-            <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Profile Settings">
-                    <font>
-                        <Font size="36.0"/>
-                    </font>
-                    <HBox.margin>
-                        <Insets right="270.0"/>
-                    </HBox.margin>
-                </Text>
-
-                <!-- Home button placed in the top left corner -->
-                <Button fx:id="backButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT"
-                        onAction="#handleBackButtonAction"
-                        style="-fx-padding: 10; -fx-font-size: 14px; -fx-background-color: #f5f5f5;" text="Back"/>
-            </children>
-            <VBox.margin>
-                <Insets/>
-            </VBox.margin>
-            <padding>
-                <Insets bottom="10.0" top="10.0"/>
-            </padding>
-        </HBox>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" height="2.0" stroke="BLACK" strokeType="INSIDE" width="600.0"/>
+      <HBox prefHeight="67.0" prefWidth="576.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Profile Settings">
+               <font>
+                  <Font size="36.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="270.0" />
+               </HBox.margin>
+            </Text>
+         
+             <!-- Home button placed in the top left corner -->
+             <Button fx:id="backButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" onAction="#handleBackButtonAction" style="-fx-padding: 10; -fx-font-size: 14px; -fx-background-color: #f5f5f5;" text="Back" />
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
+      </HBox>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="2.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
         <Label fx:id="profileDisplayName" text="Profile Name">
-            <font>
-                <Font size="24.0"/>
-            </font>
-        </Label>
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <HBox>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
+         <children>
+            <Label text="Current Study Mode: ">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="profileGroupName" text="None" />
+         </children>
+      </HBox>
         <HBox>
-            <Label text="Change Security Questions"/>
+            <Label text="Change Security Questions" />
             <ComboBox fx:id="changeSecurityQuestion" onAction="#getSelectedQuestion">
-                <HBox.margin>
-                    <Insets left="10.0"/>
-                </HBox.margin>
-            </ComboBox>
-            <padding>
-                <Insets bottom="10.0" top="10.0"/>
-            </padding>
+            <HBox.margin>
+               <Insets left="10.0" />
+            </HBox.margin>
+         </ComboBox>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
         </HBox>
-
         <HBox>
-            <Label text="Create New Study Mode: "/>
-            <TextField fx:id="addStudyModeInput" onAction="#returnTextAndAppend">
-                <HBox.margin>
-                    <Insets left="10.0"/>
-                </HBox.margin>
+            <Label text="Select Study Mode:" />
+         <ComboBox fx:id="inputGroupName" onAction="#changeCurrentGroup">
+            <HBox.margin>
+               <Insets left="10.0" right="10.0" />
+            </HBox.margin>
+         </ComboBox>
+         <Button mnemonicParsing="false" onAction="#AddStudyModeTextBox" text="Add">
+            <HBox.margin>
+               <Insets right="10.0" />
+            </HBox.margin></Button>
+         <Button mnemonicParsing="false" text="Manage" onAction="#goToPage" fx:id="ManageGroups"/>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
+        </HBox>
+      <HBox>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
+         <children>
+            <TextField fx:id="studyModeTextField" onAction="#returnTextAndAppend" prefHeight="25.0" prefWidth="200.0" promptText="Input Name of Study Mode" visible="false">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
             </TextField>
-            <padding>
-                <Insets bottom="10.0" top="10.0"/>
-            </padding>
-        </HBox>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" height="2.0" stroke="BLACK" strokeType="INSIDE" width="600.0"/>
-        <HBox prefHeight="50.0" prefWidth="600.0">
-            <children>
-                <ToggleButton mnemonicParsing="false" text="OFF" onAction="#changeButtonLabel">
-                    <HBox.margin>
-                        <Insets right="10.0" top="10.0"/>
-                    </HBox.margin>
-                </ToggleButton>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Block Notifications">
-                    <HBox.margin>
-                        <Insets right="10.0" top="10.0"/>
-                    </HBox.margin>
-                </Text>
-                <Button mnemonicParsing="false" text="Manage">
-                    <HBox.margin>
-                        <Insets top="10.0"/>
-                    </HBox.margin>
-                </Button>
-            </children>
-            <VBox.margin>
-                <Insets top="10.0"/>
-            </VBox.margin>
-        </HBox>
-        <HBox prefHeight="50.0" prefWidth="600.0">
-            <children>
-                <ToggleButton mnemonicParsing="false" text="OFF" onAction="#changeButtonLabel">
-                    <HBox.margin>
-                        <Insets right="10.0" top="10.0"/>
-                    </HBox.margin>
-                </ToggleButton>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Block Applications">
-                    <HBox.margin>
-                        <Insets right="10.0" top="10.0"/>
-                    </HBox.margin>
-                </Text>
-                <Button mnemonicParsing="false" text="Manage" fx:id="ManageApplications" onAction="#goToPage">
-                    <HBox.margin>
-                        <Insets top="10.0"/>
-                    </HBox.margin>
-                </Button>
-            </children>
-            <VBox.margin>
-                <Insets top="10.0"/>
-            </VBox.margin>
-        </HBox>
+            <Button fx:id="studyModeSaveButton" mnemonicParsing="false" onAction="#AddStudyMode" text="Save" visible="false">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <HBox>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
+         <children>
+            <Label text="Select Study Sub-Group:" />
+            <ComboBox fx:id="inputSubGroupName" onAction="#getSelectedQuestion">
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </ComboBox>
+            <Button mnemonicParsing="false" onAction="#AddSubGroupTextBox" text="Add">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <HBox>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
+         <children>
+            <TextField fx:id="subGroupTextField" onAction="#returnTextAndAppend" prefHeight="25.0" prefWidth="200.0" promptText="Input Name of Study Mode" visible="false">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </TextField>
+            <Button fx:id="subGroupSaveButton" mnemonicParsing="false" onAction="#AddStudyMode" text="Save" visible="false">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="2.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
+      <HBox prefHeight="50.0" prefWidth="600.0">
+         <children>
+            <ToggleButton mnemonicParsing="false" onAction="#changeButtonLabel" text="OFF">
+               <HBox.margin>
+                  <Insets right="10.0" top="10.0" />
+               </HBox.margin>
+            </ToggleButton>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Block Applications">
+               <HBox.margin>
+                  <Insets right="10.0" top="10.0" />
+               </HBox.margin>
+            </Text>
+            <Button fx:id="ManageApplications" mnemonicParsing="false" onAction="#goToPage" text="Manage">
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox prefHeight="50.0" prefWidth="600.0">
+         <children>
+            <ToggleButton mnemonicParsing="false" onAction="#changeButtonLabel" text="OFF">
+               <HBox.margin>
+                  <Insets right="10.0" top="10.0" />
+               </HBox.margin>
+            </ToggleButton>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Distraction-free Wallpaper">
+               <HBox.margin>
+                  <Insets right="10.0" top="10.0" />
+               </HBox.margin>
+            </Text>
+            <Button mnemonicParsing="false" text="Manage">
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </HBox>
+
     </VBox>
+
+
+
+
+
 </HBox>
