@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -15,8 +16,8 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
@@ -28,20 +29,56 @@ public class ForgetPasswordPageController {
     @FXML
     private PasswordField newPasswordField;
 
-    public static boolean resetPassword(String email, String newPassword) {
+    @FXML
+    private ComboBox<String> securityQuestionComboBox;
+
+    @FXML
+    private TextField securityAnswerField;
+
+    @FXML
+    public void initialize() {
+        // Populate the security question combo box
+        securityQuestionComboBox.getItems().addAll(
+                "What is the name of your first pet?",
+                "What school did you first attend?",
+                "What suburb did you first live in?",
+                "What is your favourite ice cream flavour?"
+        );
+    }
+
+    public static boolean resetPassword(String email, String newPassword, String securityQuestion, String securityAnswer) {
         String hashedPassword = hashString(newPassword);
         String hashedEmail = hashString(email);
 
         try {
             Connection conn = DbConnection.getInstance().getConnection();
-            PreparedStatement pstmt = conn.prepareStatement("UPDATE UserDetails SET pass = ? WHERE email = ?");
-            pstmt.setString(1, hashedPassword);
-            pstmt.setString(2, hashedEmail);
-            int rowsUpdated = pstmt.executeUpdate();
-            pstmt.close();
-            conn.close();
-            return rowsUpdated > 0;
+            // Verify security question and answer
+            PreparedStatement verifyStmt = conn.prepareStatement(
+                    "SELECT * FROM UserDetails WHERE email = ? AND securityQuestion = ? AND securityAnswer = ?"
+            );
+            verifyStmt.setString(1, hashedEmail);
+            verifyStmt.setString(2, securityQuestion);
+            verifyStmt.setString(3, securityAnswer);
+            ResultSet rs = verifyStmt.executeQuery();
 
+            if (rs.next()) {
+                // If the security question and answer match, update the password
+                PreparedStatement updateStmt = conn.prepareStatement(
+                        "UPDATE UserDetails SET pass = ? WHERE email = ?"
+                );
+                updateStmt.setString(1, hashedPassword);
+                updateStmt.setString(2, hashedEmail);
+                int rowsUpdated = updateStmt.executeUpdate();
+                updateStmt.close();
+                verifyStmt.close();
+                conn.close();
+                return rowsUpdated > 0;
+            } else {
+                // Security question and answer do not match
+                verifyStmt.close();
+                conn.close();
+                return false;
+            }
         } catch (SQLException e) {
             System.err.println("Error resetting password: " + e.getMessage());
             return false;
@@ -52,19 +89,21 @@ public class ForgetPasswordPageController {
     void resetPassword(ActionEvent event) {
         String email = emailField.getText();
         String newPassword = newPasswordField.getText();
+        String securityQuestion = securityQuestionComboBox.getValue();
+        String securityAnswer = securityAnswerField.getText();
 
-        // Check if email and newPassword are not empty
-        if (email.isEmpty() || newPassword.isEmpty()) {
+        // Check if email, newPassword, securityQuestion, and securityAnswer are not empty
+        if (email.isEmpty() || newPassword.isEmpty() || securityQuestion == null || securityQuestion.isEmpty() || securityAnswer.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
             alert.setHeaderText(null);
-            alert.setContentText("Please enter both email and new password !");
+            alert.setContentText("Please fill in all fields!");
             alert.showAndWait();
             return;
         }
 
         // Attempt to reset the password
-        boolean success = resetPassword(email, newPassword);
+        boolean success = resetPassword(email, newPassword, securityQuestion, securityAnswer);
 
         // Show result
         if (success) {
@@ -102,7 +141,7 @@ public class ForgetPasswordPageController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
-            alert.setContentText("Failed to reset password. Please try again.");
+            alert.setContentText("Failed to reset password. Please ensure your details are correct and try again.");
             alert.showAndWait();
         }
     }
