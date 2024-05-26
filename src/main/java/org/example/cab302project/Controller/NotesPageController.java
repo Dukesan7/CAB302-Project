@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -15,12 +16,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.example.cab302project.PageFunctions;
-import org.json.JSONObject;
 
 public class NotesPageController {
 
-    private final Path notesDirectory = Paths.get("src/main/resources/org/example/cab302project/notes");
-    private final Path configPath = notesDirectory.resolve("../config.json");
+    private Path notesDirectory = Paths.get("src/main/resources/org/example/cab302project/notes");
     private String preferredEditor;
     @FXML
     HBox hBox;
@@ -33,6 +32,20 @@ public class NotesPageController {
     @FXML
     private TextField newFileNameField;
 
+    @FXML
+    private Label notesDirLabel;
+
+    @FXML
+    public void chooseNotesDirectory(ActionEvent event) {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle("Select Notes Directory");
+        File selectedDirectory = directoryChooser.showDialog(null);
+        if (selectedDirectory != null) {
+            notesDirectory = Paths.get(selectedDirectory.getAbsolutePath());
+            notesDirLabel.setText("Directory: " + selectedDirectory.getPath());
+            refreshFileList(); // Refresh the file list according to the new directory
+        }
+    }
     @FXML
     public void initialize() {
         if (!Files.exists(notesDirectory)) {
@@ -53,7 +66,6 @@ public class NotesPageController {
         File file = fileChooser.showOpenDialog(null);
         if (file != null) {
             preferredEditor = file.getAbsolutePath();
-            saveEditorPreference();
             editorLabel.setText("Editor: " + file.getName());
         }
     }
@@ -68,28 +80,6 @@ public class NotesPageController {
                     fileList.getItems().add(file.getName());
                 }
             }
-        }
-    }
-
-    private void loadEditorPreference() {
-        if (Files.exists(configPath)) {
-            try {
-                String content = new String(Files.readAllBytes(configPath));
-                JSONObject json = new JSONObject(content);
-                preferredEditor = json.optString("editor", null);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private void saveEditorPreference() {
-        JSONObject json = new JSONObject();
-        json.put("editor", preferredEditor);
-        try {
-            Files.write(configPath, json.toString().getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -144,6 +134,19 @@ public class NotesPageController {
             refreshFileList();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    @FXML
+    public void openWith(ActionEvent event) {
+        String fileName = fileList.getSelectionModel().getSelectedItem();
+        if (fileName != null) {
+            Path filePath = notesDirectory.resolve(fileName);
+            try {
+                ProcessBuilder builder = new ProcessBuilder("rundll32", "url.dll,FileProtocolHandler", filePath.toAbsolutePath().toString());
+                builder.start();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
