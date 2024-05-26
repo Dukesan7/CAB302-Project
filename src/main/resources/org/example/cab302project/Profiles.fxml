@@ -86,7 +86,7 @@
             <HBox.margin>
                <Insets right="10.0" />
             </HBox.margin></Button>
-         <Button mnemonicParsing="false" text="Manage" onAction="#goToPage" fx:id="ManageGroups"/>
+         <Button fx:id="ManageGroups" mnemonicParsing="false" onAction="#goToPage" text="Manage" />
          <padding>
             <Insets bottom="10.0" top="10.0" />
          </padding>
@@ -157,28 +157,6 @@
                </HBox.margin>
             </Text>
             <Button fx:id="ManageApplications" mnemonicParsing="false" onAction="#goToPage" text="Manage">
-               <HBox.margin>
-                  <Insets top="10.0" />
-               </HBox.margin>
-            </Button>
-         </children>
-         <VBox.margin>
-            <Insets top="10.0" />
-         </VBox.margin>
-      </HBox>
-      <HBox prefHeight="50.0" prefWidth="600.0">
-         <children>
-            <ToggleButton mnemonicParsing="false" onAction="#changeButtonLabel" text="OFF">
-               <HBox.margin>
-                  <Insets right="10.0" top="10.0" />
-               </HBox.margin>
-            </ToggleButton>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Distraction-free Wallpaper">
-               <HBox.margin>
-                  <Insets right="10.0" top="10.0" />
-               </HBox.margin>
-            </Text>
-            <Button mnemonicParsing="false" text="Manage">
                <HBox.margin>
                   <Insets top="10.0" />
                </HBox.margin>
