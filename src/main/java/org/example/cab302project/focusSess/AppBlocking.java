@@ -18,9 +18,9 @@ import org.example.cab302project.SessionManager;
 public class AppBlocking {
 
     static Integer GroupID = SessionManager.currentGroupID;
-//    private static final List<String> FILE_PATHS = Arrays.asList(
-//            "C:\\Program Files\\Notepad++\\notepad++.exe",
-//            "C:\\Program Files (x86)\\Steam\\steam.exe");
+    private static final List<String> FILE_PATHS = Arrays.asList(
+            "C:\\Program Files\\Notepad++\\notepad++.exe",
+            "C:\\Program Files (x86)\\Steam\\steam.exe");
     private static List<String> getFilePaths(int groupID) {
         List<String> paths = new ArrayList<>();
         String sqlGetFileNames = "SELECT filePath FROM BlackLists WHERE groupID = ?";
@@ -46,7 +46,7 @@ public class AppBlocking {
     public static void appBlocker(String[] args) {
         FilePathsRunningCheck();
 
-        ProcessManager.killProcess(getFilePaths(GroupID));
+        ProcessManager.killProcess(FILE_PATHS);
     }
 
 

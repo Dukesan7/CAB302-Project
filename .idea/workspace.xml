@@ -4,16 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa8951fd-875e-4d98-8f33-3fbc54a210fc" name="Changes" comment="fixed error regarding focus session not incuring its breaks as designed. now runs through breaks as expected. added base methods for inspirational notifications">
+    <list default="true" id="aa8951fd-875e-4d98-8f33-3fbc54a210fc" name="Changes" comment="added db functionality to report section, added db call to appblock to use blacklisted items from the db. started to pop sub groups through db">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Controller/FocusSessPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Controller/FocusSessPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Controller/InitSessPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Controller/InitSessPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Controller/ProfilesPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Controller/ProfilesPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/CreateDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/CreateDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/SessionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/SessionManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/focusSess/AppBlocking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/focusSess/AppBlocking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/focusSess/FocusSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/focusSess/FocusSession.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/focusSess/initialiseSess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/focusSess/initialiseSess.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -297,7 +290,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716560258987</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="added db functionality to report section, added db call to appblock to use blacklisted items from the db. started to pop sub groups through db">
+      <option name="closed" value="true" />
+      <created>1716722787580</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1716722787581</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -329,6 +330,7 @@
     <MESSAGE value="refactored init session section and updated functionality to be smoother." />
     <MESSAGE value="refactored init session section further and also refactored focussess except for threads." />
     <MESSAGE value="fixed error regarding focus session not incuring its breaks as designed. now runs through breaks as expected. added base methods for inspirational notifications" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed error regarding focus session not incuring its breaks as designed. now runs through breaks as expected. added base methods for inspirational notifications" />
+    <MESSAGE value="added db functionality to report section, added db call to appblock to use blacklisted items from the db. started to pop sub groups through db" />
+    <option name="LAST_COMMIT_MESSAGE" value="added db functionality to report section, added db call to appblock to use blacklisted items from the db. started to pop sub groups through db" />
   </component>
 </project>
