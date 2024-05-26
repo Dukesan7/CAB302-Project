@@ -1,11 +1,20 @@
 package org.example.cab302project.focusSess;
 
+import org.example.cab302project.Controller.ProfilesPageController;
+import org.example.cab302project.DbConnection;
+import org.example.cab302project.SessionManager;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.Random;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
+import static org.example.cab302project.LoginPageController.userID;
 
 public class FocusSession {
 
@@ -46,7 +55,6 @@ public class FocusSession {
         System.out.println(data[6]);
         if (breaks.equals("True")) {
             breakInterval = TimeUnit.MINUTES.toMillis(Integer.parseInt(data[6]));
-            //breakInterval = TimeUnit.MINUTES.toMillis(Integer.parseInt("1"));
             System.out.println("interval: " + breakInterval);
             breakLength = TimeUnit.MINUTES.toMillis(Integer.parseInt(data[7]));
             calcBreakTime();
@@ -100,6 +108,9 @@ public class FocusSession {
         String msg = msgs[randomMsg];
         notification(msg);
     }
+    //ProfilesPageController profiles;
+    //Integer GroupID = profiles.currentGroupID;
+    static Integer GroupID = SessionManager.currentGroupID;
 
     public void getBreakMsg(String msg) throws AWTException {
         notification(msg);
@@ -120,14 +131,37 @@ public class FocusSession {
     }
 
 
-    public List<String> getSessionData(String subgroup, String breakLength, String date) {
-        List<String> sessionData = new ArrayList<>();
-        sessionData.add("Total Time: " + totalSessionTime / 1000 + " seconds");
-        sessionData.add("Subgroup: " + subgroup);
-        sessionData.add("Number of Breaks: " + breakCount);
-        sessionData.add("Length of Breaks: " + breakLength);
-        sessionData.add("Date: " + date);
-        return sessionData;
+    public void getSessionData(String date) {
+
+        Integer totalSessionTimeMins = (int) totalSessionTime / 1000;
+
+        insertSessionData(totalSessionTimeMins, date);
     }
+
+    public void insertSessionData(int totalSessionTime, String date) {
+        String sqlInsertReport = "INSERT INTO Reports (totalTime, numberOfBreaks, lengthOfBreaks, date, userID, groupID, subGroupID) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        try {
+            Connection connection = DbConnection.getInstance().getConnection();
+            try (PreparedStatement pstmt = connection.prepareStatement(sqlInsertReport)) {
+                pstmt.setInt(1, totalSessionTime);
+                pstmt.setInt(2, breakCount);
+                pstmt.setLong(3, breakLength / 60000);
+                pstmt.setString(4, date);
+                pstmt.setInt(5, userID);
+                pstmt.setInt(6, GroupID); // Group ID
+                pstmt.setInt(7, 2); // SubGroup ID
+
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
 
 }

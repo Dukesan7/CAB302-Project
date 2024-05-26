@@ -179,8 +179,8 @@ public class FocusSessPageController extends java.lang.Thread {
             String breakLength = String.valueOf(focusSession.breakLength / 60000) + " minutes";
             String date = java.time.LocalDate.now().toString();
 
-            List<String> sessionData = focusSession.getSessionData(subgroup, breakLength, date);
-            System.out.println("Report Stats: " + sessionData);
+            focusSession.getSessionData(date);
+
             hiddenDashboardButton.setId("Dashboard");
             hiddenDashboardButton.fireEvent(event);
 

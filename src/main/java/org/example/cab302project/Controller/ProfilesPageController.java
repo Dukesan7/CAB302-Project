@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.example.cab302project.LoginPageController;
 import org.example.cab302project.PageFunctions;
+import org.example.cab302project.SessionManager;
 
 import java.io.IOException;
 import java.sql.*;
@@ -169,7 +170,10 @@ public class ProfilesPageController {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, inputGroupName.getValue());
             ResultSet rs = pstmt.executeQuery();
+
             currentGroupID = rs.getInt("GroupID");
+            SessionManager.currentGroupID = currentGroupID;
+            System.out.println("Curent GroupID: " + SessionManager.currentGroupID);
         } catch (SQLException e) {
             System.err.println("Error adding: " + e.getMessage());
         }

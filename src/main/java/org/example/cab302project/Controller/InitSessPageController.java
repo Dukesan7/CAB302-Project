@@ -8,10 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import org.example.cab302project.PageFunctions;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static org.example.cab302project.focusSess.initialiseSess.totalMinutes;
 
@@ -50,13 +47,26 @@ public class InitSessPageController {
     @FXML
     Button Dashboard;
     initialiseSess InitialiseSess = new initialiseSess();
-
     @FXML
     public void populateSubGroup() {
 
         ArrayList<String> subGroups = InitialiseSess.getSubGroupList();
         SubGroup.getItems().addAll(subGroups);
     }
+//    @FXML
+//    public void populateSubGroup() {
+//        int currentGroupID = SessionManager.currentGroupID;
+//        System.out.println("Current Group ID: " + currentGroupID);
+//
+//        Map<Integer, String> subGroups = InitialiseSess.getSubGroupsByGroupID(currentGroupID);
+//        System.out.println("Populating SubGroup ChoiceBox with " + subGroups.size() + " items.");
+//
+//        for (String subGroupName : subGroups.values()) {
+//            SubGroup.getItems().add(subGroupName);
+//            System.out.println("Added SubGroup to ChoiceBox: " + subGroupName);
+//        }
+//    }
+
 
     @FXML
     private void handleUpdateBreakNo() {
@@ -186,6 +196,8 @@ public class InitSessPageController {
 
     @FXML
     private void initialize() {
+        initialiseSess.GroupID = SessionManager.currentGroupID;
+        System.out.println("Current GroupID in init sesspage: " + SessionManager.currentGroupID);
         populateSubGroup();
         breakSlider.setDisable(true);
         breakSlider.setBlockIncrement(1);
