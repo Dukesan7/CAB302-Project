@@ -7,16 +7,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import org.example.cab302project.LoginPageController;
 import org.example.cab302project.PageFunctions;
-
-import java.io.IOException;
 import java.sql.*;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -24,14 +17,11 @@ import java.util.ArrayList;
 public class ProfilesPageController {
     private LoginPageController loginPage;
     private PageFunctions pageFunctions = new PageFunctions();
-
     public ArrayList<String> getProfileName() {
         return profileName;
     }
-
     public void setProfileName(ArrayList<String> profileName) { this.profileName = profileName; }
     private ArrayList<String> profileName = new ArrayList<>();
-
     private String password;
     public String getPassword() {
         return password;
@@ -76,7 +66,6 @@ public class ProfilesPageController {
         return "Password has successfully been changed!";
     }
 
-
     public String AppendStudyMode(String nameofMode) {
         int count = smName.size();
 
@@ -92,7 +81,6 @@ public class ProfilesPageController {
 
         return MessageFormat.format("Study Mode {0} Successfully added.", smName.get(count));
     }
-
 
     @FXML
     TextField addStudyModeInput;
@@ -132,8 +120,6 @@ public class ProfilesPageController {
         else { tButton.setText("OFF");}
     }
 
-
-
     public void exampleApps() {
         String sql = "INSERT INTO BlackLists(blackListID, userID, fileName, reason) VALUES(?, ?, ?, ?)";
         var fileNames = new String[] {"Steam.exe", "Chrome.exe", "Amazon.com", "EpicGames.exe", "LeagueofLegends.exe", "SchoolWork.exe"};
@@ -154,9 +140,7 @@ public class ProfilesPageController {
         } catch (SQLException e) {
             System.err.println("Error adding: " + e.getMessage());
         }
-
     }
-
 
     @FXML
     public void handleBackButtonAction() {

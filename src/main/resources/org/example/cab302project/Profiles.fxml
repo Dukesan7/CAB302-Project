@@ -22,7 +22,6 @@
         <Button fx:id="Profiles" alignment="CENTER" maxWidth="180" minWidth="180" onAction="#goToPage" style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;" text="Profiles" />
     </VBox>
 
-
     <VBox prefHeight="500.0" prefWidth="591.0">
         <HBox prefHeight="67.0" prefWidth="576.0">
             <children>
@@ -51,6 +50,7 @@
                 <Font size="24.0" />
             </font>
         </Label>
+
         <HBox>
             <Label text="Change Security Questions" />
             <ComboBox fx:id="changeSecurityQuestion" onAction="#getSelectedQuestion">
@@ -63,7 +63,6 @@
             </padding>
         </HBox>
 
-        <!-- New HBox for the security question answer -->
         <HBox>
             <Label text="Answer:" />
             <TextField fx:id="securityQuestionAnswer">
@@ -159,6 +158,5 @@
                 <Insets top="10.0" />
             </VBox.margin>
         </HBox>
-
     </VBox>
 </HBox>

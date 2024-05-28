@@ -21,9 +21,6 @@ public class DashboardPageController {
     HBox hBox;
     @FXML
     Button InitSess;
-
-
-
     @FXML
     public void checkSessStatus() {
         if (!SessionManager.sessStatus) {
@@ -34,7 +31,6 @@ public class DashboardPageController {
     }
 
     public void initialize() {
-        // Optional: Any initializations for your controller
         checkSessStatus();
         System.out.println("Sess status: " + SessionManager.sessStatus);
         pageFunctions.AddSideBar(hBox);

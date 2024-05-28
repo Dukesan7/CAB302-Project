@@ -11,7 +11,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.example.cab302project.DbConnection;
-
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -37,7 +36,6 @@ public class ForgetPasswordPageController {
 
     @FXML
     public void initialize() {
-        // Populate the security question combo box
         securityQuestionComboBox.getItems().addAll(
                 "What is the name of your first pet?",
                 "What school did you first attend?",
@@ -52,7 +50,7 @@ public class ForgetPasswordPageController {
 
         try {
             Connection conn = DbConnection.getInstance().getConnection();
-            // Verify security question and answer
+
             PreparedStatement verifyStmt = conn.prepareStatement(
                     "SELECT * FROM UserDetails WHERE email = ? AND securityQuestion = ? AND securityAnswer = ?"
             );
@@ -62,7 +60,6 @@ public class ForgetPasswordPageController {
             ResultSet rs = verifyStmt.executeQuery();
 
             if (rs.next()) {
-                // If the security question and answer match, update the password
                 PreparedStatement updateStmt = conn.prepareStatement(
                         "UPDATE UserDetails SET pass = ? WHERE email = ?"
                 );
@@ -74,7 +71,6 @@ public class ForgetPasswordPageController {
                 conn.close();
                 return rowsUpdated > 0;
             } else {
-                // Security question and answer do not match
                 verifyStmt.close();
                 conn.close();
                 return false;
@@ -92,7 +88,6 @@ public class ForgetPasswordPageController {
         String securityQuestion = securityQuestionComboBox.getValue();
         String securityAnswer = securityAnswerField.getText();
 
-        // Check if email, newPassword, securityQuestion, and securityAnswer are not empty
         if (email.isEmpty() || newPassword.isEmpty() || securityQuestion == null || securityQuestion.isEmpty() || securityAnswer.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
@@ -102,10 +97,8 @@ public class ForgetPasswordPageController {
             return;
         }
 
-        // Attempt to reset the password
         boolean success = resetPassword(email, newPassword, securityQuestion, securityAnswer);
 
-        // Show result
         if (success) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
@@ -113,22 +106,17 @@ public class ForgetPasswordPageController {
             alert.setContentText("Password reset successfully.");
             alert.showAndWait();
 
-            // Switch to the dashboard page
             try {
                 Parent dashboardPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/org/example/cab302project/Dashboard.fxml")));
                 Scene dashboardScene = new Scene(dashboardPage);
 
-                // Get the preferred width and height from the registration page
                 double preferredWidth = 800;
                 double preferredHeight = 450;
 
-                // Switch to the dashboard page
                 Stage currentStage = (Stage) emailField.getScene().getWindow();
 
-                // Set the new scene to the stage
                 currentStage.setScene(dashboardScene);
 
-                // Set preferred width and height if desired
                 currentStage.setWidth(preferredWidth);
                 currentStage.setHeight(preferredHeight);
 

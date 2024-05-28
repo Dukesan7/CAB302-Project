@@ -36,12 +36,12 @@ public class RegisterPageController {
         String confirmPass = confirmPasswordField.getText();
 
         if (!pass.equals(confirmPass)) {
-            showAlert(AlertType.ERROR, "Registration Error", "Password does not match !");
+            showAlert(AlertType.ERROR, "Registration Error", "Password does not match!");
             return;
         }
 
         if (fullName.isEmpty() || email.isEmpty() || pass.isEmpty()) {
-            showAlert(AlertType.ERROR, "Registration Error", "Fill in the blanks !");
+            showAlert(AlertType.ERROR, "Registration Error", "Fill in the blanks!");
             return;
         }
 
@@ -57,22 +57,17 @@ public class RegisterPageController {
         if (registerUserInDatabase(fName, lName, email, pass)) {
             showAlert(AlertType.INFORMATION, "Registration Successfully", "You have successfully registered.");
 
-            // Switch to user login page
             try{
                 Parent loginPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Login.fxml")));
                 Scene loginScene = new Scene(loginPage);
 
-                // Get the preferred width and height from the registration page
                 double preferredWidth = 800;
                 double preferredHeight = 450;
 
-                // Switch to the login page
                 Stage currentStage = (Stage) emailField.getScene().getWindow();
 
-                // Set the new scene to the stage
                 currentStage.setScene(loginScene);
 
-                // Set the preferred width and height for the stage
                 currentStage.setWidth(preferredWidth);
                 currentStage.setHeight(preferredHeight);
 
@@ -133,14 +128,12 @@ public class RegisterPageController {
     private void showAlert(AlertType alertType, String title, String message){
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
-        alert.setHeaderText(null); // No header
+        alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }
 
-    // FXML initialization method
     @FXML
     public void initialize() {
-        // Optional: Any initializations for your controller
     }
 }

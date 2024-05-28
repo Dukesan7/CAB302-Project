@@ -1,6 +1,5 @@
 package org.example.cab302project;
 
-import java.io.File;
 import java.sql.*;
 
 public class CreateDB {
@@ -10,12 +9,9 @@ public class CreateDB {
         String dbFilePath = "src/main/resources/org/example/cab302project/ToDo.db";
 
         try {
-
             Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbFilePath);
 
-
             Statement stmt = conn.createStatement();
-
 
             String sqlUserDetails = "CREATE TABLE IF NOT EXISTS UserDetails (" +
                     "UserID INTEGER PRIMARY KEY AUTOINCREMENT," +

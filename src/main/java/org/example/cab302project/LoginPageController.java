@@ -9,7 +9,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -35,29 +34,24 @@ public class LoginPageController {
         String password = passwordField.getText();
 
         if (email.isEmpty() || password.isEmpty()) {
-            showAlert(AlertType.ERROR, "Login Error", "Please fill in the blanks !");
+            showAlert(AlertType.ERROR, "Login Error", "Please fill in the blanks!");
             return;
         }
 
         if (verifyUserCredentials(email, password)) {
             showAlert(AlertType.INFORMATION, "Login Successful", "You have successfully logged in.");
 
-            // Switch to the dashboard page
             try {
                 Parent dashboardPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Dashboard.fxml")));
                 Scene dashboardScene = new Scene(dashboardPage);
 
-                // Get the preferred width and height from the registration page
                 double preferredWidth = 800;
                 double preferredHeight = 450;
 
-                // Switch to the dashboard page
                 Stage currentStage = (Stage) emailField.getScene().getWindow();
 
-                // Set the new scene to the stage
                 currentStage.setScene(dashboardScene);
 
-                // Set preferred width and height if desired
                 currentStage.setWidth(preferredWidth);
                 currentStage.setHeight(preferredHeight);
 
@@ -73,27 +67,20 @@ public class LoginPageController {
     @FXML
     private void goToRegisterPage() {
         try {
-            // Load the register page from fxml file
             Parent registerPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Register.fxml")));
 
-            // Create a new scene with the registration page
             Scene registerScene = new Scene(registerPage);
 
-            // Get the preferred width and height from the registration page
             double preferredWidth = 800;
             double preferredHeight = 450;
 
-            // Get the current page
             Stage currentPage = (Stage) emailField.getScene().getWindow();
 
-            // Set the new scene to the page
             currentPage.setScene(registerScene);
 
-            // Set window size for the page
             currentPage.setWidth(preferredWidth);
             currentPage.setHeight(preferredHeight);
 
-            // Show window with new scene
             currentPage.show();
         }
         catch (IOException e) {
@@ -104,27 +91,20 @@ public class LoginPageController {
     @FXML
     private void goToForgetPasswordPage() {
         try {
-            // Load the register page from fxml file
             Parent forgetPasswordPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ForgetPassword.fxml")));
 
-            // Create a new scene with the registration page
             Scene forgetPasswordScene = new Scene(forgetPasswordPage);
 
-            // Get the preferred width and height from the registration page
             double preferredWidth = 800;
             double preferredHeight = 450;
 
-            // Get the current page
             Stage currentPage = (Stage) emailField.getScene().getWindow();
 
-            // Set the new scene to the page
             currentPage.setScene(forgetPasswordScene);
 
-            // Set window size for the page
             currentPage.setWidth(preferredWidth);
             currentPage.setHeight(preferredHeight);
 
-            // Show window with new scene
             currentPage.show();
         }
         catch (IOException e) {
@@ -175,15 +155,13 @@ public class LoginPageController {
     private void showAlert(AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
-        alert.setHeaderText(null); // No header
+        alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }
 
-    // FXML initialization method
     @FXML
     public void initialize() {
-        // Optional: Any initializations for your controller
     }
 }
 
