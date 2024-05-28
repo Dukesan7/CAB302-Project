@@ -18,7 +18,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegisterPageController {
-
     @FXML
     private TextField nameField;
     @FXML

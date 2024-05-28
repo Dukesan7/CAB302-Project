@@ -10,7 +10,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import org.example.cab302project.LoginPageController;
 import org.example.cab302project.PageFunctions;
+
 import java.sql.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 
@@ -170,6 +173,8 @@ public class ProfilesPageController {
             return;
         }
 
+        String hashAnswer = hashString(answer);
+
         String sql = "UPDATE UserDetails SET securityQuestion = ?, securityAnswer = ? WHERE UserID = ?";
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -177,13 +182,27 @@ public class ProfilesPageController {
             int userID = LoginPageController.userID;
 
             pstmt.setString(1, question);
-            pstmt.setString(2, answer);
+            pstmt.setString(2, hashAnswer);
             pstmt.setInt(3, userID);
             pstmt.executeUpdate();
             System.out.println("Security question and answer saved successfully.");
 
         } catch (SQLException e) {
             System.err.println("Error saving security question and answer: " + e.getMessage());
+        }
+    }
+
+    private static String hashString(String input) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashedBytes = md.digest(input.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashedBytes) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         }
     }
 }

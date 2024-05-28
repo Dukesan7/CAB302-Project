@@ -64,7 +64,7 @@
         </HBox>
 
         <HBox>
-            <Label text="Answer:" />
+            <Label text="Change Security Answer" />
             <TextField fx:id="securityQuestionAnswer">
                 <HBox.margin>
                     <Insets left="10.0" />
@@ -81,7 +81,7 @@
         </HBox>
 
         <HBox>
-            <Label text="Create New Study Mode: " />
+            <Label text="Create New Study Mode" />
             <TextField fx:id="addStudyModeInput" onAction="#returnTextAndAppend">
                 <HBox.margin>
                     <Insets left="10.0" />

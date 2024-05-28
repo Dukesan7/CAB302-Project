@@ -3,7 +3,6 @@ package org.example.cab302project;
 import java.sql.*;
 
 public class CreateDB {
-
     public static void createDatabase() {
 
         String dbFilePath = "src/main/resources/org/example/cab302project/ToDo.db";
@@ -65,7 +64,6 @@ public class CreateDB {
             stmt.executeUpdate(sqlBlackLists);
 
             System.out.println("Database created successfully at: " + dbFilePath);
-
 
             stmt.close();
             conn.close();

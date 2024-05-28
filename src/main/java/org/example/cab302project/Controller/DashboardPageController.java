@@ -12,7 +12,6 @@ import org.example.cab302project.SessionManager;
 
 public class DashboardPageController {
     PageFunctions pageFunctions = new PageFunctions();
-
     @FXML
     public void goToPage(ActionEvent event) {
         pageFunctions.goToPage(event);

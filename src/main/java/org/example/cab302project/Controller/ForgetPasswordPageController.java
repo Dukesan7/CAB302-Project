@@ -11,6 +11,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.example.cab302project.DbConnection;
+
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -47,6 +48,7 @@ public class ForgetPasswordPageController {
     public static boolean resetPassword(String email, String newPassword, String securityQuestion, String securityAnswer) {
         String hashedPassword = hashString(newPassword);
         String hashedEmail = hashString(email);
+        String hashedSecurityAnswer = hashString(securityAnswer);
 
         try {
             Connection conn = DbConnection.getInstance().getConnection();
@@ -56,7 +58,7 @@ public class ForgetPasswordPageController {
             );
             verifyStmt.setString(1, hashedEmail);
             verifyStmt.setString(2, securityQuestion);
-            verifyStmt.setString(3, securityAnswer);
+            verifyStmt.setString(3, hashedSecurityAnswer);
             ResultSet rs = verifyStmt.executeQuery();
 
             if (rs.next()) {
