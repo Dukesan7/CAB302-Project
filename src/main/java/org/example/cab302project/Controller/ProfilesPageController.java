@@ -169,7 +169,7 @@ public class ProfilesPageController {
         String answer = securityQuestionAnswer.getText();
 
         if (question == null || question.isEmpty() || answer == null || answer.isEmpty()) {
-            System.out.println("Security question or answer is empty.");
+            showAlert(Alert.AlertType.WARNING, "Warning", "Security question or answer is empty!");
             return;
         }
 
@@ -185,10 +185,10 @@ public class ProfilesPageController {
             pstmt.setString(2, hashAnswer);
             pstmt.setInt(3, userID);
             pstmt.executeUpdate();
-            System.out.println("Security question and answer saved successfully.");
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Security question and answer saved successfully!");
 
         } catch (SQLException e) {
-            System.err.println("Error saving security question and answer: " + e.getMessage());
+            showAlert(Alert.AlertType.ERROR,"Error", "Error saving security question and answer: " + e.getMessage());
         }
     }
 
@@ -204,5 +204,13 @@ public class ProfilesPageController {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

@@ -91,22 +91,14 @@ public class ForgetPasswordPageController {
         String securityAnswer = securityAnswerField.getText();
 
         if (email.isEmpty() || newPassword.isEmpty() || securityQuestion == null || securityQuestion.isEmpty() || securityAnswer.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning");
-            alert.setHeaderText(null);
-            alert.setContentText("Please fill in all fields!");
-            alert.showAndWait();
+            showAlert(Alert.AlertType.WARNING, "Warning", "Please fill in all the fields!");
             return;
         }
 
         boolean success = resetPassword(email, newPassword, securityQuestion, securityAnswer);
 
         if (success) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setHeaderText(null);
-            alert.setContentText("Password reset successfully.");
-            alert.showAndWait();
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Password reset successfully!");
 
             try {
                 Parent dashboardPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/org/example/cab302project/Dashboard.fxml")));
@@ -128,11 +120,7 @@ public class ForgetPasswordPageController {
             }
 
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Failed to reset password. Please ensure your details are correct and try again.");
-            alert.showAndWait();
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to reset password. Please ensure your details are correct and try again.");
         }
     }
 
@@ -148,5 +136,13 @@ public class ForgetPasswordPageController {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
