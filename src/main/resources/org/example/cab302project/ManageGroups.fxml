@@ -37,7 +37,7 @@
                   <Insets left="10.0" top="10.0" />
                </HBox.margin>
             </Label>
-            <Label text="None">
+            <Label fx:id="groupName" text="None">
                <HBox.margin>
                   <Insets top="10.0" />
                </HBox.margin>
@@ -66,12 +66,12 @@
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="BlockApplications1" mnemonicParsing="false" onAction="#goToPage" text="ADD">
+                        <Button mnemonicParsing="false" onAction="#AddGrouptoDB" text="ADD">
                            <HBox.margin>
                               <Insets right="10.0" />
                            </HBox.margin>
                         </Button>
-                        <TextField promptText="Type Group Name" />
+                        <TextField fx:id="studyModeTextField" promptText="Type Group Name" />
                      </children>
                   </HBox>
                </children>
@@ -112,9 +112,9 @@
             </VBox>
          </children>
       </HBox>
-      <TableView fx:id="applicationTable" layoutY="152.0" prefHeight="223.0" prefWidth="265.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="325.0">
+      <TableView fx:id="groupTable" layoutY="152.0" prefHeight="223.0" prefWidth="265.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="325.0" onMouseClicked="#GetSelectedItem">
          <columns>
-            <TableColumn fx:id="fileNameColumn" prefWidth="264.0" text="Group Name" />
+            <TableColumn fx:id="groupNameColumn" prefWidth="264.0" text="Group Name"/>
          </columns>
       </TableView>
       <TableView fx:id="applicationTable1" layoutX="300.0" layoutY="162.0" prefHeight="223.0" prefWidth="265.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="325.0" AnchorPane.rightAnchor="10.0">

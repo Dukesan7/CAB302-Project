@@ -25,13 +25,15 @@ public class CreateDB {
 
             String sqlGroup = "CREATE TABLE IF NOT EXISTS Groups (" +
                     "GroupID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "Groupname TEXT NOT NULL)";
+                    "Groupname TEXT NOT NULL," +
+                    "userID INT NOT NULL)";
             stmt.executeUpdate(sqlGroup);
 
 
             String sqlSubGroup = "CREATE TABLE IF NOT EXISTS SubGroup (" +
                     "subGroupID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "name TEXT NOT NULL)";
+                    "name TEXT NOT NULL," +
+                    "groupID INT NOT NULL)";
             stmt.executeUpdate(sqlSubGroup);
 
 
