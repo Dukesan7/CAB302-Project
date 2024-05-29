@@ -27,6 +27,7 @@ public class ManageGroupsController {
     LoginPageController loginPage;
     private String currentGroup;
     Dictionary<String, Integer> groupPairing = new Hashtable<>();
+    //update test
 
     public class DisplayObject {
         private String groupName = null;
