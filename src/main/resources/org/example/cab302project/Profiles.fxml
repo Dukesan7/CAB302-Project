@@ -90,6 +90,7 @@
             <padding>
                 <Insets bottom="10.0" top="10.0" />
             </padding>
+            <Button fx:id="ManageGroups" onAction="#goToPage" text="Manage"> </Button>
         </HBox>
         <Rectangle arcHeight="5.0" arcWidth="5.0" height="2.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
         <HBox prefHeight="50.0" prefWidth="600.0">
