@@ -53,6 +53,10 @@ public class ManageGroupsController {
     TableColumn<DisplayObject, String> groupNameColumn;
     @FXML
     Label groupName;
+    @FXML
+    TableView<DisplayObject> subGroupTable;
+    @FXML
+    TableColumn<DisplayObject, String> subGroupColumn;
 
     @FXML
     public void populateGroupTable() {
@@ -91,18 +95,40 @@ public class ManageGroupsController {
             System.err.println("Error adding: " + e.getMessage());
         }
         populateGroupTable();
+        populateSubGroupTable();
+    }
+
+
+    public void populateSubGroupTable() {
+        try {
+            subGroupTable.getItems().clear();
+            String sql = "SELECT * FROM SubGroup WHERE groupID = ?";
+            try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                pstmt.setInt(1, groupPairing.get(currentGroup) );
+                ResultSet rs = pstmt.executeQuery();
+                subGroupColumn.setCellValueFactory(new PropertyValueFactory<>("groupName"));
+
+                while (rs.next()) {
+                    DisplayObject displayObject  = new DisplayObject(rs.getString("name"));
+                    subGroupTable.getItems().add(displayObject);
+                    groupPairing.put(rs.getString("name"), rs.getInt("GroupID"));
+                }
+            } catch (SQLException e) {
+                System.err.println("Error adding blocked applications: " + e.getMessage());
+            }
+        } catch (NullPointerException e) {System.err.println(e.getMessage());}
+        System.out.println(groupPairing.size());
     }
 
     @FXML
     private void AddSubGrouptoDB() {
-        if (currentGroup == null) { System.out.println("Select a group!"); }
-        String userInput = studyModeTextField.getText();
+        if (currentGroup == null) { System.out.println("Select a group!"); return; }
+        String userInput = subGroupTextField.getText();
         Integer groupID = groupPairing.get(currentGroup);
         System.out.println(userInput);
 
-        String sql = "INSERT INTO SubGroups(subGroupID, name, groupID) VALUES(?, ?, ?)";
+        String sql = "INSERT INTO SubGroup(subGroupID, name, groupID) VALUES(?, ?, ?)";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-
             pstmt.setString(2, userInput);
             pstmt.setInt(3, groupID);
             pstmt.executeUpdate();
@@ -110,6 +136,7 @@ public class ManageGroupsController {
             System.err.println("Error adding: " + e.getMessage());
         }
         populateGroupTable();
+        populateSubGroupTable();
     }
 
 
@@ -117,6 +144,7 @@ public class ManageGroupsController {
     public void GetSelectedItem(Event mouseEvent) {
         TableView<DisplayObject> selectedTable = (TableView) mouseEvent.getSource();
         DisplayObject selectedItem = selectedTable.getSelectionModel().getSelectedItem();
+        populateSubGroupTable();
         if (selectedTable.getId().equals("groupTable")) {
             currentGroup = selectedItem.groupName;
             groupName.setText(currentGroup);
@@ -144,5 +172,6 @@ public class ManageGroupsController {
             throw new RuntimeException(e);
         }
         populateGroupTable();
+        populateSubGroupTable();
     }
 }

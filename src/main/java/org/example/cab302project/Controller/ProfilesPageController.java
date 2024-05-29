@@ -8,6 +8,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import org.example.cab302project.DbConnection;
 import org.example.cab302project.LoginPageController;
 import org.example.cab302project.PageFunctions;
 
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 public class ProfilesPageController {
     private LoginPageController loginPage;
     private PageFunctions pageFunctions = new PageFunctions();
+    private Connection connection;
     public ArrayList<String> getProfileName() {
         return profileName;
     }
@@ -103,11 +106,24 @@ public class ProfilesPageController {
     }
     @FXML
     private void populateSecurityQuestions() {
-        try {changeSecurityQuestion.getItems().addAll(potentialQuestions); }
-        catch (NullPointerException e) {System.err.println(e.getMessage());}
+        String questionPreview;
+        try {
+            String sql = "SELECT (securityQuestion) FROM UserDetails WHERE userID = ?";
+            try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                pstmt.setInt(1, loginPage.userID);
+                ResultSet rs = pstmt.executeQuery();
+                questionPreview = rs.getString("securityQuestion");
+                changeSecurityQuestion.setValue(questionPreview);
+            } catch (NullPointerException e) {
+                System.err.println(e.getMessage());
+            }
+            changeSecurityQuestion.getItems().addAll(potentialQuestions);
+        } catch (SQLException e) {
+            System.err.println("Error adding: " + e.getMessage());
+        }
     }
     @FXML
-    private void getSelectedQuestion() { selectedQuestion = changeSecurityQuestion.getValue(); }
+    private String getSelectedQuestion() { selectedQuestion = changeSecurityQuestion.getValue(); return selectedQuestion; }
     @FXML
     private void populateProfileDisplayName() {
         try {profileDisplayName.setText("Current Profile: " + LoginPageController.nameOfUser); }
@@ -158,6 +174,12 @@ public class ProfilesPageController {
     @FXML
     public void initialize() {
         // Optional: Any initializations for your controller
+        try {
+            connection = DbConnection.getInstance().getConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         populateSecurityQuestions();
         populateProfileDisplayName();
         exampleApps();
@@ -165,7 +187,7 @@ public class ProfilesPageController {
 
     @FXML
     public void saveSecurityQuestion() {
-        String question = selectedQuestion;
+        String question = getSelectedQuestion();
         String answer = securityQuestionAnswer.getText();
 
         if (question == null || question.isEmpty() || answer == null || answer.isEmpty()) {
@@ -179,7 +201,7 @@ public class ProfilesPageController {
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            int userID = LoginPageController.userID;
+            int userID = loginPage.userID;
 
             pstmt.setString(1, question);
             pstmt.setString(2, hashAnswer);

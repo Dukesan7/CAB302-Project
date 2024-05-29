@@ -53,7 +53,6 @@ public class ManageApplicationController {
 
     }
 
-
     public class DisplayObject {
         private String name = null; private String reason = null;
 
@@ -108,6 +107,7 @@ public class ManageApplicationController {
             }
         } catch (NullPointerException e) {System.err.println(e.getMessage());}
     }
+
 
 
     @FXML

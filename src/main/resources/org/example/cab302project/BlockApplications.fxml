@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cab302project.Controller.BlockApplicationController">
    <children>
@@ -19,7 +20,7 @@
             <Insets bottom="40.0" />
          </VBox.margin>
       </Label>
-      <TextArea prefHeight="72.0" prefWidth="477.0" promptText="Reason for Blocking" fx:id="blockReason">
+      <TextArea fx:id="blockReason" prefHeight="72.0" prefWidth="477.0" promptText="Reason for Blocking">
          <VBox.margin>
             <Insets bottom="15.0" left="125.0" right="125.0" />
          </VBox.margin>
@@ -31,18 +32,20 @@
                   <Insets right="15.0" />
                </padding>
             </Label>
-            <ChoiceBox prefHeight="16.0" prefWidth="174.0" fx:id="groupSelection" />
+            <ChoiceBox fx:id="groupSelection" prefHeight="16.0" prefWidth="174.0" />
          </children>
       </HBox>
-      <Button mnemonicParsing="false" text="Select Application Path" fx:id="appPathButton" onAction="#FindApplicationPath">
+      <Button fx:id="appPathButton" mnemonicParsing="false" onAction="#FindApplicationPath" text="Select Application Path">
          <VBox.margin>
-            <Insets bottom="15.0" top="15.0" />
+            <Insets bottom="10.0" top="15.0" />
          </VBox.margin>
       </Button>
-      <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="90.0" text="Confirm">
+      <Label fx:id="filePathLabel" text="File Name: Not Selected" />
+      <Button  mnemonicParsing="false" onAction="#AddApplications" prefHeight="38.0" prefWidth="90.0" text="Confirm">
          <VBox.margin>
-            <Insets top="15.0" />
+            <Insets bottom="10.0" top="15.0" />
          </VBox.margin>
       </Button>
+      <Button text="Return" fx:id="ManageApplications" onAction="#goToPage" />
    </children>
 </VBox>

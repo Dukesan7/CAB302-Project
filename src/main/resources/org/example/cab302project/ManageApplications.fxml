@@ -21,7 +21,7 @@
                   <Insets left="10.0" top="10.0" />
                </HBox.margin>
             </Text>
-            <Button fx:id="backButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" onAction="#handleBackButtonAction" style="-fx-padding: 10; -fx-font-size: 14px; -fx-background-color: #f5f5f5;" text="Back" />
+            <Button fx:id="Profiles" alignment="CENTER_RIGHT" contentDisplay="RIGHT" onAction="#goToPage" style="-fx-padding: 10; -fx-font-size: 14px; -fx-background-color: #f5f5f5;" text="Back" />
          </children>
       </HBox>
       <HBox layoutY="56.0" prefHeight="35.0" prefWidth="600.0">

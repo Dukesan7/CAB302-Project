@@ -5,14 +5,13 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox prefHeight="500.0" prefWidth="800.0" spacing="10" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cab302project.Controller.ProfilesPageController">
+<HBox prefHeight="500.0" prefWidth="800.0" spacing="10" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cab302project.Controller.ProfilesPageController">
 
     <!-- Sidebar with buttons on the left -->
     <VBox maxWidth="200" minWidth="200" spacing="10" style="-fx-background-color: #d3d3d3; -fx-padding: 10;">
@@ -53,7 +52,7 @@
 
         <HBox>
             <Label text="Change Security Questions" />
-            <ComboBox fx:id="changeSecurityQuestion" onAction="#getSelectedQuestion">
+            <ComboBox fx:id="changeSecurityQuestion" onAction="#getSelectedQuestion" promptText="Click to Show Questions">
                 <HBox.margin>
                     <Insets left="10.0" />
                 </HBox.margin>
@@ -70,7 +69,7 @@
                     <Insets left="10.0" />
                 </HBox.margin>
             </TextField>
-            <Button text="Save" onAction="#saveSecurityQuestion">
+            <Button onAction="#saveSecurityQuestion" text="Save">
                 <HBox.margin>
                     <Insets left="10.0" />
                 </HBox.margin>
@@ -79,77 +78,26 @@
                 <Insets bottom="10.0" top="10.0" />
             </padding>
         </HBox>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="2.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
 
         <HBox>
-            <Label text="Create New Study Mode" />
-            <TextField fx:id="addStudyModeInput" onAction="#returnTextAndAppend">
-                <HBox.margin>
-                    <Insets left="10.0" />
-                </HBox.margin>
-            </TextField>
-            <padding>
-                <Insets bottom="10.0" top="10.0" />
-            </padding>
+            <Label text="Manage Study Groups">
+            <HBox.margin>
+               <Insets right="10.0" />
+            </HBox.margin></Label>
             <Button fx:id="ManageGroups" onAction="#goToPage" text="Manage"> </Button>
-        </HBox>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" height="2.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
-        <HBox prefHeight="50.0" prefWidth="600.0">
-            <children>
-                <ToggleButton mnemonicParsing="false" text="OFF" onAction="#changeButtonLabel">
-                    <HBox.margin>
-                        <Insets right="10.0" top="10.0" />
-                    </HBox.margin>
-                </ToggleButton>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Block Notifications">
-                    <HBox.margin>
-                        <Insets right="10.0" top="10.0" />
-                    </HBox.margin>
-                </Text>
-                <Button mnemonicParsing="false" text="Manage">
-                    <HBox.margin>
-                        <Insets top="10.0" />
-                    </HBox.margin>
-                </Button>
-            </children>
-            <VBox.margin>
-                <Insets top="10.0" />
-            </VBox.margin>
+            <padding>
+                <Insets top="20.0" />
+            </padding>
         </HBox>
         <HBox prefHeight="50.0" prefWidth="600.0">
             <children>
-                <ToggleButton mnemonicParsing="false" text="OFF" onAction="#changeButtonLabel">
-                    <HBox.margin>
-                        <Insets right="10.0" top="10.0" />
-                    </HBox.margin>
-                </ToggleButton>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Block Applications">
                     <HBox.margin>
                         <Insets right="10.0" top="10.0" />
                     </HBox.margin>
                 </Text>
-                <Button mnemonicParsing="false" text="Manage" fx:id="ManageApplications" onAction="#goToPage">
-                    <HBox.margin>
-                        <Insets top="10.0" />
-                    </HBox.margin>
-                </Button>
-            </children>
-            <VBox.margin>
-                <Insets top="10.0" />
-            </VBox.margin>
-        </HBox>
-        <HBox prefHeight="50.0" prefWidth="600.0">
-            <children>
-                <ToggleButton mnemonicParsing="false" text="OFF" onAction="#changeButtonLabel">
-                    <HBox.margin>
-                        <Insets right="10.0" top="10.0" />
-                    </HBox.margin>
-                </ToggleButton>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Distraction-free Wallpaper">
-                    <HBox.margin>
-                        <Insets right="10.0" top="10.0" />
-                    </HBox.margin>
-                </Text>
-                <Button mnemonicParsing="false" text="Manage">
+                <Button fx:id="ManageApplications" mnemonicParsing="false" onAction="#goToPage" text="Manage">
                     <HBox.margin>
                         <Insets top="10.0" />
                     </HBox.margin>
