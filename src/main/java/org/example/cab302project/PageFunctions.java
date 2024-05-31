@@ -66,8 +66,6 @@ public class PageFunctions {
         System.out.println(button);
 
         String pageName = button.getId();
-        System.out.println("gotoPage");
-        System.out.println(pageName);
 
         try {
             Parent root = FXMLLoader.load(getClass().getResource(pageName + ".fxml"));
@@ -75,11 +73,7 @@ public class PageFunctions {
             Scene scene = (new Scene(root, 800, 450));
             stage.setScene(scene);
             stage.show();
-            System.out.println("gotoPage try");
-
         } catch (IOException e) {
-            System.out.println("gotoPage catch");
-
             e.printStackTrace();
         }
     }

@@ -45,9 +45,10 @@ public class CreateDB {
 
 
             String sqlToDo = "CREATE TABLE IF NOT EXISTS ToDo (" +
-                    "ToDoID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "task TEXT NOT NULL," +
-                    "completed INTEGER)";
+                    "ToDoID INTEGER PRIMARY KEY," +
+                    "Task TEXT NOT NULL," +
+                    "Completed INTEGER," +
+                    "SubGroupID INTEGER)";
             stmt.executeUpdate(sqlToDo);
 
 

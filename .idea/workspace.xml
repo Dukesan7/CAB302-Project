@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aa8951fd-875e-4d98-8f33-3fbc54a210fc" name="Changes" comment="removed db functionality from app blocker as bug inhibits functionality">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/focusSess/repair file" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Controller/DashboardPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Controller/DashboardPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Controller/FocusSessPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Controller/FocusSessPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/focusSess/AppBlocking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/focusSess/AppBlocking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/focusSess/FocusSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/focusSess/FocusSession.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Controller/TasksPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Controller/TasksPageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/CreateDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/CreateDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/PageFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/PageFunctions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Tasks/Tasks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Tasks/Tasks.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,16 +91,11 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.org.example.cab302project.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="CAB302-Project" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="org.example.cab302project.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="corretto-17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="org.example.cab302project.Main" />
-      <module name="OnTask" />
+      <module name="CAB302-Project" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="org.example.cab302project.Tasks.*" />
@@ -133,7 +126,6 @@
     </configuration>
     <list>
       <item itemvalue="Application.org.example.cab302project.Main" />
-      <item itemvalue="Application.Main" />
       <item itemvalue="JUnit.InitSessPC" />
       <item itemvalue="JUnit.ProfilesPC" />
     </list>
@@ -142,7 +134,6 @@
         <item itemvalue="Application.org.example.cab302project.Main" />
         <item itemvalue="JUnit.ProfilesPC" />
         <item itemvalue="JUnit.InitSessPC" />
-        <item itemvalue="Application.Main" />
         <item itemvalue="Application.org.example.cab302project.Main" />
       </list>
     </recent_temporary>
