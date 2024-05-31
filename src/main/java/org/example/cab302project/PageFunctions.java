@@ -72,7 +72,8 @@ public class PageFunctions {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(pageName + ".fxml"));
             Stage stage = (Stage) button.getScene().getWindow();
-            stage.setScene(new Scene(root, 800, 450));
+            Scene scene = (new Scene(root, 800, 450));
+            stage.setScene(scene);
             stage.show();
             System.out.println("gotoPage try");
 

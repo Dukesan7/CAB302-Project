@@ -35,7 +35,7 @@
             <ChoiceBox fx:id="groupSelection" prefHeight="16.0" prefWidth="174.0" />
          </children>
       </HBox>
-      <Button fx:id="appPathButton" mnemonicParsing="false" onAction="#FindApplicationPath" text="Select Application Path">
+      <Button fx:id="appPathButton" mnemonicParsing="false" onAction="#FindApplicationPath" text="Select Application Path" >
          <VBox.margin>
             <Insets bottom="10.0" top="15.0" />
          </VBox.margin>
