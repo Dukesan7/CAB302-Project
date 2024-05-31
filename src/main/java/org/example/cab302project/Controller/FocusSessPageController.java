@@ -20,7 +20,6 @@ import java.util.Objects;
 
 public class FocusSessPageController extends java.lang.Thread {
     private long pauseStartTime;
-
     private AppBlockingRun appBlockingRun;
     @FXML
     ProgressIndicator clock;
@@ -84,7 +83,6 @@ public class FocusSessPageController extends java.lang.Thread {
                 if (focusSession.breaks.equals("True")) {
                     long timeUntilNextBreak = focusSession.nextBreakTime - System.currentTimeMillis();
                     if (timeUntilNextBreak <= 0) {
-                        System.out.println("Break time reached at: " + System.currentTimeMillis());
                         try {
                             String msg = "Your " + (focusSession.breakLength / 60000) + " minute break starts now. Make sure to get up and stretch, relax and enjoy the break, you've earned this!";
                             focusSession.getBreakMsg(msg);
@@ -92,8 +90,6 @@ public class FocusSessPageController extends java.lang.Thread {
                             throw new RuntimeException(e);
                         }
                         takeBreak();
-                    } else {
-                        System.out.println("Time left for next break: " + timeUntilNextBreak / 1000 + " seconds");
                     }
                 }
 
@@ -129,8 +125,7 @@ public class FocusSessPageController extends java.lang.Thread {
     }
 
     public void takeBreak() {
-        System.out.println("Taking a break at: " + System.currentTimeMillis());
-        focusSession.breakCount++;  // Increment the break count
+        focusSession.breakCount++;
         focusSession.isPaused = true;
         focusSession.breakEndTime = System.currentTimeMillis() + focusSession.breakLength;
 
@@ -138,7 +133,6 @@ public class FocusSessPageController extends java.lang.Thread {
             while (System.currentTimeMillis() < focusSession.breakEndTime) {
                 focusSession.breakTimeLeft = focusSession.breakEndTime - System.currentTimeMillis();
                 Platform.runLater(() -> timeText.setText("Break: " + focusSession.displayTime(focusSession.breakTimeLeft)));
-                System.out.println("Break time left: " + (focusSession.breakTimeLeft / 1000) + " seconds");
 
                 try {
                     Thread.sleep(1000);
@@ -147,19 +141,16 @@ public class FocusSessPageController extends java.lang.Thread {
                 }
             }
             Platform.runLater(() -> {
-                System.out.println("Break ended at: " + System.currentTimeMillis());
                 controlSess.setText("Pause");
                 focusSession.isPaused = false;
                 focusSession.calcBreakTime();
                 focusSession.setRandomMsgTime();
-                System.out.println("Next break scheduled for: " + focusSession.nextBreakTime);
                 synchronized (FocusSessPageController.this) {
                     FocusSessPageController.this.notify();
                 }
             });
         }).start();
     }
-
 
     @FXML
     private void handleEndSess(ActionEvent event) {
@@ -174,9 +165,6 @@ public class FocusSessPageController extends java.lang.Thread {
             Stage stage = (Stage) endSess.getScene().getWindow();
             SessionManager.sessStatus = true;
 
-
-            String subgroup = new InitSessPageController().getInitSessList()[0];
-            String breakLength = String.valueOf(focusSession.breakLength / 60000) + " minutes";
             String date = java.time.LocalDate.now().toString();
 
             focusSession.getSessionData(date);
@@ -187,7 +175,6 @@ public class FocusSessPageController extends java.lang.Thread {
             stage.close();
         });
     }
-
 
     @FXML
     private void handleControlSess() {
@@ -212,7 +199,6 @@ public class FocusSessPageController extends java.lang.Thread {
             }
         }
     }
-
     private class AppBlockingRun extends Thread {
         @Override
         public void run() {
@@ -226,7 +212,6 @@ public class FocusSessPageController extends java.lang.Thread {
                         }
                     }
                 }
-
                 AppBlocking.appBlocker(new String[]{});
                 try {
                     Thread.sleep(1000);
@@ -235,7 +220,6 @@ public class FocusSessPageController extends java.lang.Thread {
                 }
             }
         }
-
         public synchronized void pauseBlocking() {
             focusSession.isPaused = true;
         }
@@ -246,3 +230,4 @@ public class FocusSessPageController extends java.lang.Thread {
         }
     }
 }
+

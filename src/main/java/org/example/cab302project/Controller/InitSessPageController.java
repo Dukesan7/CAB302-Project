@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import org.example.cab302project.PageFunctions;
 
+import java.sql.SQLException;
 import java.util.*;
 
 import static org.example.cab302project.focusSess.initialiseSess.totalMinutes;
@@ -15,7 +16,6 @@ import static org.example.cab302project.focusSess.initialiseSess.totalMinutes;
 public class InitSessPageController {
     @FXML
     HBox hBox;
-
     @FXML
     ChoiceBox<String> SubGroup;
     @FXML
@@ -24,8 +24,6 @@ public class InitSessPageController {
     ChoiceBox<String> minutes;
     @FXML
     CheckBox appBlock;
-    //@FXML
-    //CheckBox wallPaper;
     @FXML
     Slider breakSlider;
     @FXML
@@ -48,25 +46,10 @@ public class InitSessPageController {
     Button Dashboard;
     initialiseSess InitialiseSess = new initialiseSess();
     @FXML
-    public void populateSubGroup() {
-
-        ArrayList<String> subGroups = InitialiseSess.getSubGroupList();
+    public void populateSubGroup() throws SQLException {
+        ArrayList<String> subGroups = InitialiseSess.getSubGroupDB();
         SubGroup.getItems().addAll(subGroups);
     }
-//    @FXML
-//    public void populateSubGroup() {
-//        int currentGroupID = SessionManager.currentGroupID;
-//        System.out.println("Current Group ID: " + currentGroupID);
-//
-//        Map<Integer, String> subGroups = InitialiseSess.getSubGroupsByGroupID(currentGroupID);
-//        System.out.println("Populating SubGroup ChoiceBox with " + subGroups.size() + " items.");
-//
-//        for (String subGroupName : subGroups.values()) {
-//            SubGroup.getItems().add(subGroupName);
-//            System.out.println("Added SubGroup to ChoiceBox: " + subGroupName);
-//        }
-//    }
-
 
     @FXML
     private void handleUpdateBreakNo() {
@@ -152,7 +135,6 @@ public class InitSessPageController {
         String SelectedHours = hours.getValue();
         String SelectedMinutes = minutes.getValue();
         CheckBox SelectedAppBlock = appBlock;
-        //CheckBox SelectedwallPaper = wallPaper;
         CheckBox SelectedBreaks = breaksCheck;
         String breakcheck = InitialiseSess.checkValue(SelectedBreaks);
         String SelectedbreakInterval = "";
@@ -170,8 +152,6 @@ public class InitSessPageController {
 
         InitialiseSess.calculateTotalMin(SelectedHours, SelectedMinutes);
 
-
-        //String wallPaper = InitialiseSess.checkValue(SelectedwallPaper);
         String appBlock = InitialiseSess.checkValue(SelectedAppBlock);
 
         initsessList[0] = SelectedSubGroup;
@@ -195,7 +175,7 @@ public class InitSessPageController {
     }
 
     @FXML
-    private void initialize() {
+    private void initialize() throws SQLException {
         initialiseSess.GroupID = SessionManager.currentGroupID;
         System.out.println("Current GroupID in init sesspage: " + SessionManager.currentGroupID);
         populateSubGroup();

@@ -2,6 +2,7 @@ package org.example.cab302project.focusSess;
 
 import org.example.cab302project.Controller.ProfilesPageController;
 import org.example.cab302project.DbConnection;
+import org.example.cab302project.LoginPageController;
 import org.example.cab302project.SessionManager;
 
 import java.awt.*;
@@ -108,8 +109,6 @@ public class FocusSession {
         String msg = msgs[randomMsg];
         notification(msg);
     }
-    //ProfilesPageController profiles;
-    //Integer GroupID = profiles.currentGroupID;
     static Integer GroupID = SessionManager.currentGroupID;
 
     public void getBreakMsg(String msg) throws AWTException {

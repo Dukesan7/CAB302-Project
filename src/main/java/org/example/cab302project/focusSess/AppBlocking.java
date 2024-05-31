@@ -15,45 +15,46 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.example.cab302project.SessionManager;
+
+import static org.example.cab302project.LoginPageController.userID;
 public class AppBlocking {
 
     static Integer GroupID = SessionManager.currentGroupID;
-    private static final List<String> FILE_PATHS = Arrays.asList(
-            "C:\\Program Files\\Notepad++\\notepad++.exe",
-            "C:\\Program Files (x86)\\Steam\\steam.exe");
-    private static List<String> getFilePaths(int groupID) {
-        List<String> paths = new ArrayList<>();
-        String sqlGetFileNames = "SELECT filePath FROM BlackLists WHERE groupID = ?";
 
+    static ArrayList<String> paths = new ArrayList<>();
+    public static final ArrayList<String> getpaths() {
+
+
+        String sql = "SELECT fileName FROM BlackLists WHERE userID = ?";
         try {
             Connection connection = DbConnection.getInstance().getConnection();
-            try (PreparedStatement pstmt = connection.prepareStatement(sqlGetFileNames)) {
-                pstmt.setInt(1, groupID);
-                ResultSet rs = pstmt.executeQuery();
+            try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
+                pstmt.setInt(1, userID);
+                ResultSet rs = pstmt.executeQuery();
                 while (rs.next()) {
                     paths.add(rs.getString("fileName"));
                 }
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                System.err.println("Error getting subgroups: " + e.getMessage());
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
+        System.out.println(paths);
         return paths;
     }
+
     public static void appBlocker(String[] args) {
+        getpaths();
         FilePathsRunningCheck();
 
-        ProcessManager.killProcess(FILE_PATHS);
+        ProcessManager.killProcess(paths);
     }
 
-
     private static void FilePathsRunningCheck() {
-        List<String> runningFilePaths = ProcessManager.checkIfFilePathsRunning(getFilePaths(GroupID));
+        List<String> runningFilePaths = ProcessManager.checkIfFilePathsRunning(paths);
         runningFilePaths.forEach(filePath -> {
-            //System.out.println("The application at " + filePath + " is running.");
         });
     }
 }
@@ -63,8 +64,7 @@ class ProcessManager {
     public static void killProcess(List<String> filePaths) {
         filePaths.forEach(filePath -> {
             Path path = FileSystems.getDefault().getPath(filePath);
-            List<String> runningProcesses = new ArrayList<>();
-            List<String> nonRunningProcesses = new ArrayList<>();
+
 
             ProcessHandle.allProcesses()
                     .filter(process -> process.info().command().map(cmd -> cmd.contains(path.toString())).orElse(false))
@@ -72,20 +72,13 @@ class ProcessManager {
                         if (process.isAlive()) {
                             try {
                                 process.destroy();
-                                String blockNotify = "Blocked the use of: " + path.toString() + "... Stay on Task!";
+                                String blockNotify = "Blocked the use of: " + path + "... Stay on Task!";
                                 Notification.notification(blockNotify);
-                                runningProcesses.add(path.toString());
-                                //System.out.println("Shut down process: " + path.toString());
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-                        } else {
-                            nonRunningProcesses.add(path.toString());
-                            //System.out.println("Process already stopped: " + path.toString());
                         }
                     });
-
-
         });
     }
 

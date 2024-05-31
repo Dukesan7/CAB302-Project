@@ -23,7 +23,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Dictionary;
 import java.util.Hashtable;
-
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 public class DashboardPageController {
     PageFunctions pageFunctions = new PageFunctions();
     Connection connection; LoginPageController loginPage; SessionManager sessionManager;
@@ -77,6 +78,29 @@ public class DashboardPageController {
         sessionManager.currentGroupID = groupPairing.get(displayGroups.selectionModelProperty().get().getSelectedItem());
     }
 
+
+
+    @FXML
+    public void handleInitSessButton(ActionEvent event) {
+        if (displayGroups.getSelectionModel().isEmpty()) {
+            System.out.println("No group selected.");
+
+            showAlert(Alert.AlertType.ERROR, "Error", "Select A group First");
+        } else {
+            GetSelectedItem();
+            String selectedGroup = displayGroups.getSelectionModel().getSelectedItem();
+            System.out.println("Selected group: " + selectedGroup);
+            goToPage(event);
+        }
+    }
+
+    private void showAlert(AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
     public void initialize() {
         try {
             connection = DbConnection.getInstance().getConnection();
@@ -94,5 +118,7 @@ public class DashboardPageController {
             Stage stage = (Stage) hBox.getScene().getWindow();
             stage.addEventHandler(WindowEvent.WINDOW_SHOWN, event -> checkSessStatus());
         });
+
+        InitSess.setOnAction(this::handleInitSessButton);
     }
 }
