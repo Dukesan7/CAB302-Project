@@ -5,10 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aa8951fd-875e-4d98-8f33-3fbc54a210fc" name="Changes" comment="removed db functionality from app blocker as bug inhibits functionality">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Controller/TasksPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Controller/TasksPageController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/focusSess/ProcessManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/test/Java.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/test/ProcessManagerModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/CreateDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/CreateDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/PageFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/PageFunctions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Tasks/Tasks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Tasks/Tasks.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/focusSess/AppBlocking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/focusSess/AppBlocking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/AppBlockingModel.Java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/AppBlockingModel.Java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/InitSessPC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/InitSessPC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/NotificationModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/NotificationModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/focusSessModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/focusSessModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/focusSessPC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/focusSessPC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/initSessModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/initSessModel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,22 +68,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Notification.executor&quot;: &quot;Run&quot;,
-    &quot;Application.breakTest.executor&quot;: &quot;Run&quot;,
-    &quot;Application.org.example.cab302project.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Attach to process.pid 26572.executor&quot;: &quot;ProcessAttachDebug&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Allan Li/QUT/Year 2/Semester 1/CAB302 Software Development/Test Project&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.Notification.executor": "Run",
+    "Application.breakTest.executor": "Run",
+    "Application.org.example.cab302project.Main.executor": "Run",
+    "Attach to process.pid 26572.executor": "ProcessAttachDebug",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Allan Li/QUT/Year 2/Semester 1/CAB302 Software Development/Test Project",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\acste\OneDrive\University\2024\Semester 1\cab302\Assignment\src\main\java\org\example\cab302project" />
@@ -84,6 +96,7 @@
       <recent name="C:\Users\jaric\Desktop\thneeds\qut\CAB302SD\CAB302-Project\src\main\resources\org\example\cab302project" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
       <recent name="org.example.cab302project" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">

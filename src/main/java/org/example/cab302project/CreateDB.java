@@ -53,9 +53,17 @@ public class CreateDB {
 
 
             String sqlReports = "CREATE TABLE IF NOT EXISTS Reports (" +
-                    "reportID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "title TEXT NOT NULL," +
-                    "description TEXT NOT NULL)";
+                    "sessReportID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "totalTime INTEGER NOT NULL," +
+                    "numberOfBreaks INTEGER NOT NULL," +
+                    "lengthOfBreaks INTEGER NOT NULL," +
+                    "date TEXT NOT NULL," +
+                    "userID INTEGER," +
+                    "groupID INTEGER," +
+                    "subGroupID INTEGER," +
+                    "FOREIGN KEY(userID) REFERENCES UserDetails(UserID)," +
+                    "FOREIGN KEY(groupID) REFERENCES Groups(GroupID)," +
+                    "FOREIGN KEY(subGroupID) REFERENCES SubGroup(subGroupID))";
             stmt.executeUpdate(sqlReports);
 
 

@@ -2,10 +2,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.example.cab302project.focusSess.Notification;
+import org.example.cab302project.focusSess.ProcessManager;
 
 
-public class NotificationModel {
+public class ProcessManagerModel {
 
 
 }
