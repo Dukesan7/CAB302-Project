@@ -6,23 +6,17 @@ import org.example.cab302project.Controller.InitSessPageController;
 
 
 public class InitSessPC {
-    private InitSessPageController initSess;
+    private InitSessPageController initSessPC;
 
     @BeforeEach
     public void SetUp() {
-        initSess = new InitSessPageController();
+        initSessPC = new InitSessPageController();
     }
 
     @Test
-    public void AddToGroups() {
-        initSess.Groups.add("New Group");
-        int count = initSess.Groups.size();
-        if (initSess.Groups.get(count - 1) == "New Group" );
-    }
-    @Test
     public void AddToSubGroups() {
-        initSess.SubGroupSchool.add("New SubGroup");
-        int count = initSess.SubGroupSchool.size();
+        populateSubGroup.add("New SubGroup");
+        int count = initSessPC.SubGroup.size();
         if (initSess.SubGroupSchool.get(count - 1) == "New SubGroup" );
     }
 

@@ -11,7 +11,6 @@ import org.example.cab302project.PageFunctions;
 import java.sql.SQLException;
 import java.util.*;
 
-import static org.example.cab302project.focusSess.initialiseSess.totalMinutes;
 
 public class InitSessPageController {
     @FXML
@@ -57,10 +56,10 @@ public class InitSessPageController {
         String selectedMinutes = minutes.getValue();
         InitialiseSess.calculateTotalMin(selectedHours, selectedMinutes);
 
-        if (totalMinutes > 19) {
+        if (InitialiseSess.totalMinutes > 19) {
             breaksCheck.setDisable(false);
 
-            int maxBreakVal = (totalMinutes / 5) - 2;
+            int maxBreakVal = (InitialiseSess.totalMinutes / 5) - 2;
             int minBreaks = 1;
 
             if (breaksCheck.isSelected() && breakTimes.getValue() != null) {
@@ -88,7 +87,7 @@ public class InitSessPageController {
         InitialiseSess.calculateBreakValues(sliderValue);
 
         breakSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            breakDisplay.setText(String.format("%d breaks (1 every %d minutes)", initialiseSess.sliderVal - 1, initialiseSess.breakInterval));
+            breakDisplay.setText(String.format("%d breaks (1 every %d minutes)", InitialiseSess.sliderVal - 1, InitialiseSess.breakInterval));
         });
     }
 
@@ -176,7 +175,7 @@ public class InitSessPageController {
 
     @FXML
     private void initialize() throws SQLException {
-        initialiseSess.GroupID = SessionManager.currentGroupID;
+        InitialiseSess.GroupID = SessionManager.currentGroupID;
         System.out.println("Current GroupID in init sesspage: " + SessionManager.currentGroupID);
         populateSubGroup();
         breakSlider.setDisable(true);
