@@ -8,18 +8,29 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+/**
+ * A model class which handles the creation, removal, and updating of tasks.
+ */
 public class Tasks {
     private final Connection connection;
 
     //private HashMap<String, HashMap<String, Boolean>> taskList = new HashMap<>();
-    static private Dictionary<Integer, HashMap<String, Boolean>> taskDict = new Hashtable<>();
+    private Dictionary<Integer, HashMap<String, Boolean>> taskDict = new Hashtable<>();
 //    public List<Pair<String, Integer>> taskIDPairs = new ArrayList<>();
-    public Dictionary<Integer, List<Pair<String, Integer>>> taskIDPairs = new Hashtable<>();
+    private Dictionary<Integer, List<Pair<String, Integer>>> taskIDPairs = new Hashtable<>();
 
     public Dictionary<Integer, HashMap<String, Boolean>> GetTaskList(){
         return taskDict;
     }
 
+    public Dictionary<Integer, List<Pair<String, Integer>>> GetTaskIDPairs(){
+        return taskIDPairs;
+    }
+
+    /**
+     * A constructor for the Tasks class
+     * @param subGroups
+     */
     public Tasks(List<Integer> subGroups){
         for (Integer subGroup : subGroups) {
             taskDict.put(subGroup, new HashMap<>());

@@ -17,6 +17,7 @@ public class Main extends Application {
         Scene scene = new Scene(root, 800, 450);
         String cssPath = this.getClass().getResource("StyleSheets/style.css").toExternalForm();
         scene.getStylesheets().add(cssPath);
+        primaryStage.setTitle("On-Task");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

@@ -11,60 +11,38 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PageFunctions {
 
     public void AddSideBar(HBox hbox){
         VBox sidebar = new VBox();
-//        sidebar.getStylesheets().add(this.getClass().getResource("StyleSheets/style.css").toExternalForm());
-//        sidebar.setId("sidebar-background");
         sidebar.setMaxWidth(200);
         sidebar.setMinWidth(200);
         sidebar.setSpacing(10);
         sidebar.setStyle("-fx-padding: 10;");
+        List<Button> buttons = new ArrayList<>(List.of(
+            new Button("Dashboard"),
+            new Button("Tasks"),
+            new Button("Notes"),
+            new Button("Profiles")
+        ));
 
-        Button dashboardButton = new Button("Dashboard");
-        dashboardButton.setId("Dashboard");
-        dashboardButton.setMaxWidth(180);
-        dashboardButton.setMinWidth(180);
-        dashboardButton.setAlignment(javafx.geometry.Pos.CENTER);
-        dashboardButton.setStyle("-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;");
-        dashboardButton.setOnAction(this::goToPage);
+        for(Button button : buttons){
+            button.setId(button.getText());
+            button.setMaxWidth(180);
+            button.setMinWidth(180);
+            button.setAlignment(javafx.geometry.Pos.CENTER);
+            button.setStyle("-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;");
+            button.setOnAction(this::goToPage);
+        }
 
-        Button tasksButton = new Button("Tasks");
-        tasksButton.setId("Tasks");
-        tasksButton.setMaxWidth(180);
-        tasksButton.setMinWidth(180);
-        tasksButton.setAlignment(javafx.geometry.Pos.CENTER);
-        tasksButton.setStyle("-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;");
-        tasksButton.setOnAction(this::goToPage);
-
-
-        Button notesButton = new Button("Notes");
-        notesButton.setId("Notes");
-        notesButton.setMaxWidth(180);
-        notesButton.setMinWidth(180);
-        notesButton.setAlignment(javafx.geometry.Pos.CENTER);
-        notesButton.setStyle("-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;");
-        notesButton.setOnAction(this::goToPage);
-
-
-        Button profilesButton = new Button("Profiles");
-        profilesButton.setId("Profiles");
-        profilesButton.setMaxWidth(180);
-        profilesButton.setMinWidth(180);
-        profilesButton.setAlignment(javafx.geometry.Pos.CENTER);
-        profilesButton.setStyle("-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-font-size: 14px;");
-        profilesButton.setOnAction(this::goToPage);
-
-
-        sidebar.getChildren().addAll(dashboardButton, tasksButton, notesButton, profilesButton);
+        sidebar.getChildren().addAll(buttons);
         hbox.getChildren().add(0, sidebar);
         sidebar.getStylesheets().add(this.getClass().getResource("StyleSheets/style.css").toExternalForm());
         sidebar.setId("sidebar-background");
         sidebar.getStyleClass().add("sidebar-background");
-        System.out.println("test");
-
     }
 
     @FXML
@@ -88,6 +66,7 @@ public class PageFunctions {
             Parent root = FXMLLoader.load(getClass().getResource("FocusSess.fxml"));
             Stage stage = new Stage();
             stage.setScene(new Scene(root, 800, 450));
+            stage.setTitle("Focus Session");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -55,7 +55,7 @@ public class TasksPageController {
         root.getChildren().clear();
 
         HashMap<String, Boolean> taskList = tasks.GetTaskList().get(subGroupPairing.get(selectedSubgroup.getValue()));
-        List<Pair<String, Integer>> taskIDPairs = tasks.taskIDPairs.get(subGroupPairing.get(selectedSubgroup.getValue()));
+        List<Pair<String, Integer>> taskIDPairs = tasks.GetTaskIDPairs().get(subGroupPairing.get(selectedSubgroup.getValue()));
         for(Pair<String, Integer> pair : taskIDPairs){
             CreateCheckbox(pair.getKey(), taskList.get(pair.getKey()));
         }
@@ -63,7 +63,7 @@ public class TasksPageController {
 
     @FXML
     public void addNewTask(ActionEvent event){
-        if(subGroups.isEmpty()) return;
+        if(subGroups.isEmpty() || Objects.equals(taskName.getText(), "")) return;
         if(!tasks.GetTaskList().get(subGroupPairing.get(selectedSubgroup.getValue())).containsKey(taskName.getText())){
             CreateCheckbox(taskName.getText(), false);
             tasks.AddSubTask(subGroupPairing.get(selectedSubgroup.getValue()), taskName.getText());
@@ -76,8 +76,7 @@ public class TasksPageController {
         checkBox.setContentDisplay(ContentDisplay.RIGHT);
         checkBox.setGraphicTextGap(10.0);
         checkBox.setStyle("-fx-background-color: c6c6c6;");
-        checkBox.setWrapText(true);
-        checkBox.setOnAction(this::changeState); // changeState method needs to be implemented
+        checkBox.setOnAction(this::changeState);
         checkBox.setPadding(new Insets(4.0));
         checkBox.setFont(new Font(16.0));
         checkBox.setSelected(state);
@@ -89,7 +88,6 @@ public class TasksPageController {
         closeButton.setOnAction(this::deleteTask);
         checkBox.setGraphic(closeButton);
 
-        VBox.setMargin(checkBox, new Insets(5.0));
         root.getChildren().add(checkBox);
     }
 
