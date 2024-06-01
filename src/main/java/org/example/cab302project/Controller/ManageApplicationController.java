@@ -16,6 +16,8 @@ import org.example.cab302project.PageFunctions;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ManageApplicationController {
 
@@ -30,28 +32,6 @@ public class ManageApplicationController {
     TableColumn<DisplayObject, String> fileNameColumn;
     @FXML
     TableColumn<DisplayObject, String> reasonColumn;
-
-
-    public void exampleApps() {
-        String sql = "INSERT INTO BlackLists(blackListID, userID, fileName, reason) VALUES(?, ?, ?, ?)";
-        var fileNames = new String[] {"Steam.exe", "Chrome.exe", "Amazon.com", "EpicGames.exe", "LeagueofLegends.exe", "SchoolWork.exe"};
-        var reasons = new String[] {"Games", "Internet", "Shopping", "Gaming", "Too Distracting", "Toobad"};
-        var userID = new int[] {2, 1, 2, 2, 2, 1};
-
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            for(int i = 0; i < 6; i++){
-                pstmt.setInt(1, i);
-                pstmt.setInt(2, userID[i]);
-                pstmt.setString(3, fileNames[i]);
-                pstmt.setString(4, reasons[i]);
-                pstmt.executeUpdate();
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Error adding: " + e.getMessage());
-        }
-
-    }
 
     public class DisplayObject {
         private String name = null; private String reason = null;
@@ -79,9 +59,9 @@ public class ManageApplicationController {
 
                 fileNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
                 reasonColumn.setCellValueFactory(new PropertyValueFactory<>("reason"));
-
                 while (rs.next()) {
-                    DisplayObject displayObject  = new DisplayObject(rs.getString("fileName"), rs.getString("reason"));
+                    String appPath = ReturnFileShortened(rs.getString("fileName"));
+                    DisplayObject displayObject  = new DisplayObject(appPath, rs.getString("reason"));
                     applicationTable.getItems().add(displayObject);
                 }
 
@@ -89,6 +69,14 @@ public class ManageApplicationController {
                 System.err.println("Error adding blocked applications: " + e.getMessage());
             }
         } catch (NullPointerException e) {System.err.println(e.getMessage());}
+    }
+
+    private String ReturnFileShortened(String filePath) {
+        Pattern pattern = Pattern.compile( "[^\\\\]*.exe");
+        Matcher matcher = pattern.matcher(filePath);
+        matcher.find();
+        return matcher.group();
+
     }
 
 
@@ -109,12 +97,6 @@ public class ManageApplicationController {
     }
 
 
-
-    @FXML
-    public void handleBackButtonAction() {
-        return;
-    }
-
     @FXML
     public void goToPage(ActionEvent event) {
         pageFunctions.goToPage(event);
@@ -129,7 +111,6 @@ public class ManageApplicationController {
             throw new RuntimeException(e);
         }
 
-        exampleApps();
         populateApplicationList();
     }
 }

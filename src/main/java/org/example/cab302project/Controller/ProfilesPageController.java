@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import org.example.cab302project.DbConnection;
 import org.example.cab302project.LoginPageController;
 import org.example.cab302project.PageFunctions;
@@ -96,6 +97,8 @@ public class ProfilesPageController {
     TextField securityQuestionAnswer;
     @FXML
     Label profileDisplayName;
+    @FXML
+    HBox hBox;
 
 
     @FXML
@@ -139,28 +142,6 @@ public class ProfilesPageController {
         else { tButton.setText("OFF");}
     }
 
-    public void exampleApps() {
-        String sql = "INSERT INTO BlackLists(blackListID, userID, fileName, reason) VALUES(?, ?, ?, ?)";
-        var fileNames = new String[] {"Steam.exe", "Chrome.exe", "Amazon.com", "EpicGames.exe", "LeagueofLegends.exe", "SchoolWork.exe"};
-        var reasons = new String[] {"Games", "Internet", "Shopping", "Gaming", "Too Distracting", "Toobad"};
-        var userID = new int[] {2, 1, 2, 2, 2, 1};
-
-        try (Connection conn = connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            for(int i = 0; i < 6; i++){
-                pstmt.setInt(1, i);
-                pstmt.setInt(2, userID[i]);
-                pstmt.setString(3, fileNames[i]);
-                pstmt.setString(4, reasons[i]);
-                pstmt.executeUpdate();
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Error adding: " + e.getMessage());
-        }
-    }
-
     @FXML
     public void handleBackButtonAction() {
         return;
@@ -182,7 +163,7 @@ public class ProfilesPageController {
 
         populateSecurityQuestions();
         populateProfileDisplayName();
-        exampleApps();
+        pageFunctions.AddSideBar(hBox);
     }
 
     @FXML

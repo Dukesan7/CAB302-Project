@@ -71,7 +71,6 @@ public class DashboardPageController {
             }
         } catch (NullPointerException e) {System.err.println(e.getMessage());}
     }
-
     @FXML
     public void GetSelectedItem() {
         currentGroup.setText("Current Group: " + displayGroups.selectionModelProperty().get().getSelectedItem());

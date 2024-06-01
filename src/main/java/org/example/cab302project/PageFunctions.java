@@ -16,10 +16,12 @@ public class PageFunctions {
 
     public void AddSideBar(HBox hbox){
         VBox sidebar = new VBox();
+//        sidebar.getStylesheets().add(this.getClass().getResource("StyleSheets/style.css").toExternalForm());
+//        sidebar.setId("sidebar-background");
         sidebar.setMaxWidth(200);
         sidebar.setMinWidth(200);
         sidebar.setSpacing(10);
-        sidebar.setStyle("-fx-background-color: #d3d3d3; -fx-padding: 10;");
+        sidebar.setStyle("-fx-padding: 10;");
 
         Button dashboardButton = new Button("Dashboard");
         dashboardButton.setId("Dashboard");
@@ -58,15 +60,17 @@ public class PageFunctions {
 
         sidebar.getChildren().addAll(dashboardButton, tasksButton, notesButton, profilesButton);
         hbox.getChildren().add(0, sidebar);
+        sidebar.getStylesheets().add(this.getClass().getResource("StyleSheets/style.css").toExternalForm());
+        sidebar.setId("sidebar-background");
+        sidebar.getStyleClass().add("sidebar-background");
+        System.out.println("test");
+
     }
 
     @FXML
     public void goToPage(ActionEvent event) {
         Button button = (Button) event.getSource();
-        System.out.println(button);
-
         String pageName = button.getId();
-
         try {
             Parent root = FXMLLoader.load(getClass().getResource(pageName + ".fxml"));
             Stage stage = (Stage) button.getScene().getWindow();

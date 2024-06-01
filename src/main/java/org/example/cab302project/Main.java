@@ -14,7 +14,10 @@ public class Main extends Application {
         CreateDB.createDatabase();
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Login.fxml")));
         primaryStage.setTitle("JavaFX Multi-page App");
-        primaryStage.setScene(new Scene(root, 800, 450));
+        Scene scene = new Scene(root, 800, 450);
+        String cssPath = this.getClass().getResource("StyleSheets/style.css").toExternalForm();
+        scene.getStylesheets().add(cssPath);
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 

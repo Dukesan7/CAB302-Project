@@ -29,6 +29,7 @@ public class BlockApplicationController {
     private Connection connection;
     private LoginPageController loginPage;
     String returnString;
+    private String appPath = null;
 
     ObservableList<String> groupList;
 
@@ -44,7 +45,6 @@ public class BlockApplicationController {
 
     @FXML
     private void FindApplicationPath() {
-        String appPath = null;
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Application Path");
         File file = fileChooser.showOpenDialog(null);
@@ -52,7 +52,7 @@ public class BlockApplicationController {
             appPath = file.getAbsolutePath();
             Pattern pattern = Pattern.compile( "[^\\\\]*.exe");
             Matcher matcher = pattern.matcher(appPath);
-            boolean matchFound = matcher.find();
+            matcher.find();
             returnString = matcher.group();
             System.out.println("return, " + returnString);
             filePathLabel.setText("File Name: " + returnString);
@@ -89,7 +89,7 @@ public class BlockApplicationController {
         if (returnString == null || blockReason.getText() == null) { return; }
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(2, loginPage.userID);
-            pstmt.setString(3, returnString);
+            pstmt.setString(3, appPath);
             pstmt.setString(4, blockReason.getText());
             pstmt.executeUpdate();
 
