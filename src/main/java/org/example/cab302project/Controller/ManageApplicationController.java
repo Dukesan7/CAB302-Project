@@ -71,23 +71,44 @@ public class ManageApplicationController {
         } catch (NullPointerException e) {System.err.println(e.getMessage());}
     }
 
+    public String ReturnFileExtended(String fileName) {
+        String extendedPath = null;
+
+        try {
+            String sql = "SELECT fileName, reason FROM BlackLists WHERE userID = ?";
+            try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                pstmt.setInt(1, loginPage.userID );
+                ResultSet rs = pstmt.executeQuery();
+
+                while (rs.next()) {
+                    DisplayObject displayObject  = new DisplayObject(rs.getString("fileName"), rs.getString("reason"));
+                    if (Pattern.compile("[^\\\\]*.exe").matcher(displayObject.name).find()) { extendedPath = displayObject.name; }
+                }
+            } catch (SQLException e) {
+                System.err.println("Error adding blocked applications: " + e.getMessage());
+            }
+        } catch (NullPointerException e) {System.err.println(e.getMessage());}
+        System.out.println(extendedPath);
+        return extendedPath;
+    }
+
     private String ReturnFileShortened(String filePath) {
         Pattern pattern = Pattern.compile( "[^\\\\]*.exe");
         Matcher matcher = pattern.matcher(filePath);
         matcher.find();
         return matcher.group();
-
     }
 
 
     public void deleteApplications() {
-        DisplayObject result = applicationTable.getSelectionModel().selectedItemProperty().get();
+        DisplayObject fileShort = applicationTable.getSelectionModel().selectedItemProperty().get();
+        String result = ReturnFileExtended(fileShort.name);
 
         try {
             String query = "DELETE FROM BlackLists WHERE fileName = ?";
 
             try ( PreparedStatement pstmt = connection.prepareStatement(query)) {
-                pstmt.setString(1, result.name );
+                pstmt.setString(1, result );
                 pstmt.execute();
                 populateApplicationList();
             } catch (SQLException e) {

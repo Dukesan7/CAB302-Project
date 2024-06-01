@@ -152,6 +152,35 @@ public class ManageGroupsController {
         if (selectedTable.getId().equals("subGroupTable")) { }
     }
 
+    @FXML
+    public void DeleteGroup() {
+        DisplayObject result = groupTable.getSelectionModel().getSelectedItem();
+        try {
+            String query = "DELETE FROM Groups WHERE Groupname = ?";
+            try ( PreparedStatement pstmt = connection.prepareStatement(query)) {
+                pstmt.setString(1, result.groupName );
+                pstmt.execute();
+                populateGroupTable();
+            } catch (SQLException e) {
+                System.err.println("Error deleting blocked applications: " + e.getMessage());
+            }
+        } catch (NullPointerException e) {System.err.println(e.getMessage());}
+    }
+
+    @FXML
+    public void DeleteSubgroup() {
+        DisplayObject result = subGroupTable.getSelectionModel().getSelectedItem();
+        try {
+            String query = "DELETE FROM SubGroup WHERE name = ?";
+            try ( PreparedStatement pstmt = connection.prepareStatement(query)) {
+                pstmt.setString(1, result.groupName );
+                pstmt.execute();
+                populateSubGroupTable();
+            } catch (SQLException e) {
+                System.err.println("Error deleting blocked applications: " + e.getMessage());
+            }
+        } catch (NullPointerException e) {System.err.println(e.getMessage());}
+    }
 
     @FXML
     public void handleBackButtonAction() {
