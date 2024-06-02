@@ -13,6 +13,7 @@ import javafx.scene.layout.HBox;
 import org.example.cab302project.DbConnection;
 import org.example.cab302project.LoginPageController;
 import org.example.cab302project.PageFunctions;
+import org.example.cab302project.Profiles.Profiles;
 
 import java.sql.*;
 import java.security.MessageDigest;
@@ -24,6 +25,7 @@ public class ProfilesPageController {
     private LoginPageController loginPage;
     private PageFunctions pageFunctions = new PageFunctions();
     private Connection connection;
+    private Profiles profiles;
     private String selectedQuestion;
     ObservableList<String> potentialQuestions = FXCollections.observableArrayList(
             "What is the name of your first pet?",
@@ -41,6 +43,12 @@ public class ProfilesPageController {
     @FXML
     HBox hBox;
 
+    /**
+     * A Method to display the security question on the profiles page
+     * This only applies if a security question is set, otherwise the preview of the ComboBox will be displayed
+     * as the default value
+     * This method also updates the ComboBox to input the securityQuestions
+     */
     @FXML
     private void populateSecurityQuestions() {
         String questionPreview;

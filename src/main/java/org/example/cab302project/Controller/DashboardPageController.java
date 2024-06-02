@@ -192,7 +192,7 @@ public class DashboardPageController {
         }
     }
 
-    private void showAlert(AlertType alertType, String title, String message) {
+    public void showAlert(AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);

@@ -3,11 +3,7 @@ package org.example.cab302project.Controller;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.example.cab302project.DbConnection;
 import org.example.cab302project.LoginPageController;
@@ -25,6 +21,7 @@ public class ManageGroupsController {
     private PageFunctions pageFunctions = new PageFunctions();
     private Connection connection;
     LoginPageController loginPage;
+    DashboardPageController dashboard = new DashboardPageController();
     private String currentGroup;
     Dictionary<String, Integer> groupPairing = new Hashtable<>();
     //update test
@@ -42,11 +39,7 @@ public class ManageGroupsController {
     @FXML
     TextField studyModeTextField;
     @FXML
-    Button studyModeSaveButton;
-    @FXML
     TextField subGroupTextField;
-    @FXML
-    Button subGroupSaveButton;
     @FXML
     TableView<DisplayObject> groupTable;
     @FXML
@@ -77,14 +70,11 @@ public class ManageGroupsController {
                 System.err.println("Error adding blocked applications: " + e.getMessage());
             }
         } catch (NullPointerException e) {System.err.println(e.getMessage());}
-        System.out.println(groupPairing.size());
     }
 
     @FXML
     private void AddGrouptoDB() {
         String userInput = studyModeTextField.getText();
-        System.out.println(userInput);
-
         String sql = "INSERT INTO Groups(GroupID, Groupname, userID) VALUES(?, ?, ?)";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
@@ -117,15 +107,16 @@ public class ManageGroupsController {
                 System.err.println("Error adding blocked applications: " + e.getMessage());
             }
         } catch (NullPointerException e) {System.err.println(e.getMessage());}
-        System.out.println(groupPairing.size());
     }
 
     @FXML
     private void AddSubGrouptoDB() {
-        if (currentGroup == null) { System.out.println("Select a group!"); return; }
+        if (currentGroup == null) {
+            dashboard.showAlert(Alert.AlertType.ERROR, "Select a Group!", "Select A group First");
+            return;
+        }
         String userInput = subGroupTextField.getText();
         Integer groupID = groupPairing.get(currentGroup);
-        System.out.println(userInput);
 
         String sql = "INSERT INTO SubGroup(subGroupID, name, groupID) VALUES(?, ?, ?)";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -142,14 +133,15 @@ public class ManageGroupsController {
 
     @FXML
     public void GetSelectedItem(Event mouseEvent) {
-        TableView<DisplayObject> selectedTable = (TableView) mouseEvent.getSource();
-        DisplayObject selectedItem = selectedTable.getSelectionModel().getSelectedItem();
-        populateSubGroupTable();
-        if (selectedTable.getId().equals("groupTable")) {
-            currentGroup = selectedItem.groupName;
-            groupName.setText(currentGroup);
-        };
-        if (selectedTable.getId().equals("subGroupTable")) { }
+        try {
+            TableView<DisplayObject> selectedTable = (TableView) mouseEvent.getSource();
+            DisplayObject selectedItem = selectedTable.getSelectionModel().getSelectedItem();
+            populateSubGroupTable();
+            if (selectedTable.getId().equals("groupTable")) {
+                currentGroup = selectedItem.groupName;
+                groupName.setText(currentGroup);
+            }
+        } catch (NullPointerException e) {System.err.println(e.getMessage());}
     }
 
     @FXML

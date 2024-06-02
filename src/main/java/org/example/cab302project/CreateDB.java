@@ -69,7 +69,7 @@ public class CreateDB {
 
             String sqlBlackLists = "CREATE TABLE IF NOT EXISTS BlackLists (" +
                     "blackListID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "userID INTEGER NOT NULL," +
+                    "groupID INTEGER NOT NULL," +
                     "fileName TEXT NOT NULL," +
                     "reason TEXT NOT NULL)";
             stmt.executeUpdate(sqlBlackLists);
