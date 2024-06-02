@@ -15,19 +15,29 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.Objects;
 
+/**
+ * Controller class for the login page
+ */
 public class LoginPageController {
 
-    // DOM HAS MADE CHANGES TO SET THE USER ID AFTER LOGIN VERIFIED
-    // I will comment everywhere I make a change
-    //Dom edit \/
+    /**
+     * User ID for logged in user
+     */
     public static int userID;
+    /**
+     * Name of logged in user
+     */
     public static String nameOfUser;
 
     @FXML
     private TextField emailField;
     @FXML
     private PasswordField passwordField;
-    
+
+    /**
+     * Handle login button action
+     * Verify user credentials and load the dashboard page if successfully logged in
+     */
     @FXML
     private void loginUser() {
         String email = emailField.getText().trim();
@@ -64,6 +74,9 @@ public class LoginPageController {
         }
     }
 
+    /**
+     * Action that goes to the register page
+     */
     @FXML
     private void goToRegisterPage() {
         try {
@@ -88,6 +101,9 @@ public class LoginPageController {
         }
     }
 
+    /**
+     * Action that goes to the forget password page
+     */
     @FXML
     private void goToForgetPasswordPage() {
         try {
@@ -112,6 +128,13 @@ public class LoginPageController {
         }
     }
 
+    /**
+     * Verifies user credentials against the database
+     *
+     * @param email email entered by the user
+     * @param password password entered by the user
+     * @return returns true if the credentials are valid, else return false
+     */
     private boolean verifyUserCredentials(String email, String password) {
         String hashedEmail = hashString(email);
         String hashedPassword = hashString(password);
@@ -138,6 +161,12 @@ public class LoginPageController {
         }
     }
 
+    /**
+     * Using SHA-256 to hash the given input string
+     *
+     * @param input hash the input string
+     * @return the hashed string value
+     */
     private String hashString(String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -152,6 +181,13 @@ public class LoginPageController {
         }
     }
 
+    /**
+     * Displays alert messages with the specified parameters
+     *
+     * @param alertType different type of alert messages
+     * @param title the title for the alert message
+     * @param message the message for the alert
+     */
     private void showAlert(AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -160,6 +196,9 @@ public class LoginPageController {
         alert.showAndWait();
     }
 
+    /**
+     * Initialises the controller class
+     */
     @FXML
     public void initialize() {
     }

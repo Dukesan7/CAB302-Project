@@ -17,6 +17,9 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Controller class for the registration page
+ */
 public class RegisterPageController {
     @FXML
     private TextField nameField;
@@ -27,6 +30,11 @@ public class RegisterPageController {
     @FXML
     private PasswordField confirmPasswordField;
 
+    /**
+     * Handle the action for the registration button
+     * Validate the input field and register for an account
+     * Load the login page after successfully creating an account
+     */
     @FXML
     private void registerUser() {
         String fullName = nameField.getText().trim();
@@ -80,6 +88,12 @@ public class RegisterPageController {
         }
     }
 
+    /**
+     * Check for correct email format
+     *
+     * @param email validate the email address
+     * @return true if email format is correct or else return false with an alert
+     */
     private boolean isValidEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
         Pattern pattern = Pattern.compile(emailRegex);
@@ -87,6 +101,10 @@ public class RegisterPageController {
         return matcher.matches();
     }
 
+    /**
+     * Register the user information into the database
+     * @return true if the registration is successful, else return error message
+     */
     private boolean registerUserInDatabase(String fName, String lName, String email, String pass) {
         String hashedEmail = hashString(email);
         String hashedPass = hashString(pass);
@@ -110,6 +128,12 @@ public class RegisterPageController {
         }
     }
 
+    /**
+     * Hash the input string using SHA-256 algorithm
+     *
+     * @param input hash the input string
+     * @return the hashed string
+     */
     private String hashString(String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -124,6 +148,13 @@ public class RegisterPageController {
         }
     }
 
+    /**
+     * Displays alert messages with the specified parameters
+     *
+     * @param alertType different type of alert messages
+     * @param title the title for the alert message
+     * @param message the message for the alert
+     */
     private void showAlert(AlertType alertType, String title, String message){
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -132,6 +163,9 @@ public class RegisterPageController {
         alert.showAndWait();
     }
 
+    /**
+     * Initialises the controller class
+     */
     @FXML
     public void initialize() {
     }

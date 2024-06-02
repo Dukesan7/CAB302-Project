@@ -21,6 +21,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
+/**
+ * Controller class for the forget password page
+ */
 public class ForgetPasswordPageController {
 
     @FXML
@@ -35,6 +38,9 @@ public class ForgetPasswordPageController {
     @FXML
     private TextField securityAnswerField;
 
+    /**
+     * Initialises the controller class and use combo box to show the security questions
+     */
     @FXML
     public void initialize() {
         securityQuestionComboBox.getItems().addAll(
@@ -45,6 +51,15 @@ public class ForgetPasswordPageController {
         );
     }
 
+    /**
+     * Reset the user's password through email and security question
+     *
+     * @param email the user's email
+     * @param newPassword new password that user have entered
+     * @param securityQuestion user choose which security question they wanted to answer
+     * @param securityAnswer enter the correct answer for the security question
+     * @return true if password have been reset or show alert message
+     */
     public static boolean resetPassword(String email, String newPassword, String securityQuestion, String securityAnswer) {
         String hashedPassword = hashString(newPassword);
         String hashedEmail = hashString(email);
@@ -83,6 +98,13 @@ public class ForgetPasswordPageController {
         }
     }
 
+    /**
+     * Handle the action to reset the password
+     * Check the input field if correct then reset password
+     * Load the landing page after successfully resetting the password
+     *
+     * @param event the action event
+     */
     @FXML
     void resetPassword(ActionEvent event) {
         String email = emailField.getText();
@@ -124,6 +146,12 @@ public class ForgetPasswordPageController {
         }
     }
 
+    /**
+     * Hash the input string using SHA-256 algorithm
+     *
+     * @param input hash the input string
+     * @return the hashed string
+     */
     private static String hashString(String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -138,6 +166,13 @@ public class ForgetPasswordPageController {
         }
     }
 
+    /**
+     * Displays alert messages with the specified parameters
+     *
+     * @param alertType different type of alert messages
+     * @param title the title for the alert message
+     * @param message the message for the alert
+     */
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
