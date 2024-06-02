@@ -93,7 +93,7 @@ public class NotesPageController {
      *
      * @param event The event that triggered the directory selection.
      */
-    @FXML
+    @FXML // function to choose custom notes directory and use it to store files
     public void chooseNotesDirectory(ActionEvent event) {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Select Notes Directory");
@@ -108,7 +108,7 @@ public class NotesPageController {
     /**
      * Initializes the controller, ensures the notes directory exists, and sets up the UI components.
      */
-    @FXML
+    @FXML // run when notes page is loaded
     public void initialize() {
         if (!Files.exists(notesDirectory)) {
             try {
@@ -126,7 +126,7 @@ public class NotesPageController {
      *
      * @param event The event that triggered the editor selection.
      */
-    @FXML
+    @FXML // function to open Windows file select and get name of chosen program
     private void chooseEditor(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Text Editor");
@@ -140,7 +140,7 @@ public class NotesPageController {
     /**
      * Refreshes the list of files shown in the file list view.
      */
-    public void refreshFileList() {
+    public void refreshFileList() { // reload file list to show changes
         fileList.getItems().clear();
         File folder = notesDirectory.toFile();
         File[] files = folder.listFiles();
@@ -159,7 +159,7 @@ public class NotesPageController {
      * @param event The event that triggered the file opening.
      */
     @FXML
-    public void openFile(ActionEvent event) {
+    public void openFile(ActionEvent event) { // open file with either preferred editor or default program.
         String fileName = fileList.getSelectionModel().getSelectedItem();
         if (fileName != null && preferredEditor != null) {
             try {
@@ -176,7 +176,7 @@ public class NotesPageController {
      *
      * @param event The event that triggered the file creation.
      */
-    @FXML
+    @FXML // create file in notes directory with given name
     public void createFile(ActionEvent event) {
         String fileName = fileNameField.getText();
         Path path = notesDirectory.resolve(fileName);
@@ -193,7 +193,7 @@ public class NotesPageController {
      *
      * @param event The event that triggered the file renaming.
      */
-    @FXML
+    @FXML // rename file by moving the file to its new named file
     public void renameFile(ActionEvent event) {
         String oldFileName = fileList.getSelectionModel().getSelectedItem();
         String newFileName = newFileNameField.getText();
@@ -215,7 +215,7 @@ public class NotesPageController {
      *
      * @param event The event that triggered the file deletion.
      */
-    @FXML
+    @FXML // delete file using file name
     public void deleteFile(ActionEvent event) {
         String fileName = fileList.getSelectionModel().getSelectedItem();
         Path path = notesDirectory.resolve(fileName);
@@ -232,7 +232,7 @@ public class NotesPageController {
      *
      * @param event The event that triggered the operation.
      */
-    @FXML
+    @FXML // open file using the default program using Windows utility
     public void openWith(ActionEvent event) {
         String fileName = fileList.getSelectionModel().getSelectedItem();
         if (fileName != null) {
