@@ -67,7 +67,7 @@ public class initialiseSess {
     /**
      *this small method calculates the break interval by dividing the total minutes by the slider in string form for the list
      * @param sliderVal the value of the sliders position at the time of the start session button event
-     * @returns the break interval in string form
+     * returns the break interval in string form
      */
     public String breakInterval(int sliderVal) {
         return String.valueOf(totalMinutes / sliderVal);

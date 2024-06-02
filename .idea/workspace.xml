@@ -7,12 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa8951fd-875e-4d98-8f33-3fbc54a210fc" name="Changes" comment="added java docs and comments to focus sess and its PC and init sess and its PC. tidied up code">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="aa8951fd-875e-4d98-8f33-3fbc54a210fc" name="Changes" comment="working on maven java doc plugin">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/NotesPCTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/NotesPCTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/focusSess/initialiseSess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/focusSess/initialiseSess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/NotesPCTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -345,7 +343,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717329841123</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="working on maven java doc plugin">
+      <option name="closed" value="true" />
+      <created>1717331180916</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1717331180916</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -381,6 +387,7 @@
     <MESSAGE value="removed db functionality from app blocker as bug inhibits functionality" />
     <MESSAGE value="Finalised test cases for focus sess, Dash board, app block, notification and processmanager. fixed bugs with blacklist inserts into db with dom" />
     <MESSAGE value="added java docs and comments to focus sess and its PC and init sess and its PC. tidied up code" />
-    <option name="LAST_COMMIT_MESSAGE" value="added java docs and comments to focus sess and its PC and init sess and its PC. tidied up code" />
+    <MESSAGE value="working on maven java doc plugin" />
+    <option name="LAST_COMMIT_MESSAGE" value="working on maven java doc plugin" />
   </component>
 </project>
