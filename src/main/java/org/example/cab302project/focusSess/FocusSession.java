@@ -45,7 +45,6 @@ public class FocusSession {
         breaks = data[5];
         if (breaks.equals("True")) {
             breakInterval = TimeUnit.MINUTES.toMillis(Integer.parseInt(data[6]));
-            System.out.println("interval: " + breakInterval);
             breakLength = TimeUnit.MINUTES.toMillis(Integer.parseInt(data[7]));
             calcBreakTime();
         }
@@ -72,13 +71,9 @@ public class FocusSession {
         startTime = System.currentTimeMillis();
         endTime = studyLength + startTime;
     }
-//    public void calculateBreakTimes() {
-//        breakEndTime = System.currentTimeMillis() + breakLength;
-//        breakTimeLeft = breakEndTime - System.currentTimeMillis();
-//    }
     public void setRandomMsgTime() {
         long minTime = TimeUnit.MINUTES.toMillis(1);
-        long maxTime = breakInterval - minTime;
+        long maxTime = 300000 - minTime;
         nextRandomMsgTime = System.currentTimeMillis() + (minTime + (long) (Math.random() * (maxTime - minTime)));
     }
     public void getRandMsg() throws AWTException {
@@ -94,7 +89,7 @@ public class FocusSession {
         String msg = msgs[randomMsg];
         notification(msg);
     }
-    static Integer GroupID = SessionManager.currentGroupID;
+
 
     public void getBreakMsg(String msg) throws AWTException {
         notification(msg);
@@ -133,7 +128,7 @@ public class FocusSession {
                 pstmt.setLong(3, breakLength / 60000);
                 pstmt.setString(4, date);
                 pstmt.setInt(5, userID);
-                pstmt.setInt(6, GroupID);
+                pstmt.setInt(6, SessionManager.currentGroupID);
                 pstmt.setInt(7, subGroupID);
 
                 pstmt.executeUpdate();

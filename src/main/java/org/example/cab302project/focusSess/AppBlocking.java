@@ -23,7 +23,7 @@ public class AppBlocking {
 
     static ArrayList<String> paths = new ArrayList<>();
     public static final ArrayList<String> getpaths() {
-
+        paths.clear();
 
         String sql = "SELECT fileName FROM BlackLists WHERE userID = ?";
         try {
@@ -41,7 +41,6 @@ public class AppBlocking {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(paths);
         return paths;
     }
 

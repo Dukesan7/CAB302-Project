@@ -39,12 +39,9 @@ public class FocusSessPageController extends java.lang.Thread {
         String[] data = new InitSessPageController().getInitSessList();
         focusSession.studyLength = focusSession.CalculateTime(data);
         focusSession.collectVariables(data);
+        System.out.println("setting RANDMSG in initialise at the start up");
         focusSession.setRandomMsgTime();
-
-        System.out.println("breakInterval: " + focusSession.breakInterval);
         start();
-
-
         if (Objects.equals(focusSession.blockApp, "True")) {
             appBlockingRun = new AppBlockingRun();
             appBlockingRun.start();
@@ -93,10 +90,12 @@ public class FocusSessPageController extends java.lang.Thread {
 
                 if (System.currentTimeMillis() >= focusSession.nextRandomMsgTime) {
                     try {
+                        System.out.println("trying to get RANDMSG");
                         focusSession.getRandMsg();
                     } catch (AWTException e) {
                         e.printStackTrace();
                     }
+                    System.out.println("that was done and now setting MSG time");
                     focusSession.setRandomMsgTime();
                 }
 
@@ -142,6 +141,7 @@ public class FocusSessPageController extends java.lang.Thread {
                 controlSess.setText("Pause");
                 focusSession.isPaused = false;
                 focusSession.calcBreakTime();
+                System.out.println("setting rand MSG time again in take break");
                 focusSession.setRandomMsgTime();
                 synchronized (FocusSessPageController.this) {
                     FocusSessPageController.this.notify();

@@ -149,7 +149,6 @@ public class InitSessPageController {
             SelectedBreakLength = String.valueOf(breakTimes.getValue());
             int sliderValue = (int) breakSlider.getValue();
             SelectedbreakInterval = InitialiseSess.breakInterval(sliderValue);
-            System.out.println("interval: " + SelectedbreakInterval);
         }
         String hours = initialiseSess.deNullifyTime(SelectedHours);
         String minutes = initialiseSess.deNullifyTime(SelectedMinutes);
