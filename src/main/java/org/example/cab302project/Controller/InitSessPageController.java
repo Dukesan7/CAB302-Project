@@ -16,7 +16,7 @@ public class InitSessPageController {
     @FXML
     HBox hBox;
     @FXML
-    ChoiceBox<String> SubGroup;
+    public ChoiceBox<String> SubGroup;
     @FXML
     ChoiceBox<String> hours;
     @FXML
@@ -44,11 +44,17 @@ public class InitSessPageController {
     @FXML
     Button Dashboard;
     initialiseSess InitialiseSess = new initialiseSess();
+
+
+
+    public Hashtable<Integer, String> subGroups = new Hashtable<Integer, String>();
     @FXML
     public void populateSubGroup() throws SQLException {
-        ArrayList<String> subGroups = InitialiseSess.getSubGroupDB();
-        SubGroup.getItems().addAll(subGroups);
+        subGroups = InitialiseSess.getSubGroupDB();
+        displaySubGroup();
     }
+
+    public void displaySubGroup() {SubGroup.getItems().addAll(subGroups.values()); }
 
     @FXML
     private void handleUpdateBreakNo() {
@@ -130,7 +136,8 @@ public class InitSessPageController {
     private static String[] initsessList = new String[8];
     @FXML
     private void handlestartsess(ActionEvent event) {
-        String SelectedSubGroup = SubGroup.getValue();
+        String SelectedSubGroupName = SubGroup.getValue();
+        String SelectedSubGroup = InitialiseSess.getSubGroupID(SelectedSubGroupName);
         String SelectedHours = hours.getValue();
         String SelectedMinutes = minutes.getValue();
         CheckBox SelectedAppBlock = appBlock;
@@ -138,8 +145,6 @@ public class InitSessPageController {
         String breakcheck = InitialiseSess.checkValue(SelectedBreaks);
         String SelectedbreakInterval = "";
         String SelectedBreakLength = "";
-        System.out.println("Starting Sess:");
-        System.out.println(breakcheck);
         if (breakcheck.equals("True")) {
             SelectedBreakLength = String.valueOf(breakTimes.getValue());
             int sliderValue = (int) breakSlider.getValue();
@@ -176,7 +181,6 @@ public class InitSessPageController {
     @FXML
     private void initialize() throws SQLException {
         InitialiseSess.GroupID = SessionManager.currentGroupID;
-        System.out.println("Current GroupID in init sesspage: " + SessionManager.currentGroupID);
         populateSubGroup();
         breakSlider.setDisable(true);
         breakSlider.setBlockIncrement(1);

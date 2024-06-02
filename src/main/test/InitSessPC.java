@@ -13,11 +13,5 @@ public class InitSessPC {
         initSessPC = new InitSessPageController();
     }
 
-    @Test
-    public void AddToSubGroups() {
-        populateSubGroup.add("New SubGroup");
-        int count = initSessPC.SubGroup.size();
-        if (initSess.SubGroupSchool.get(count - 1) == "New SubGroup" );
-    }
 
 }

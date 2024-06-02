@@ -1,20 +1,13 @@
 package org.example.cab302project.focusSess;
 
-import org.example.cab302project.Controller.ProfilesPageController;
 import org.example.cab302project.DbConnection;
-import org.example.cab302project.LoginPageController;
 import org.example.cab302project.SessionManager;
-
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.Random;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import static org.example.cab302project.LoginPageController.userID;
 
 public class FocusSession {
@@ -39,6 +32,7 @@ public class FocusSession {
     public int breakCount = 0;
     public long sessionStartTime;
     public long totalSessionTime;
+    public int subGroupID;
     public long CalculateTime(String[] data) {
         int hours = Integer.parseInt(data[1]);
         int minutes = Integer.parseInt(data[2]);
@@ -47,13 +41,8 @@ public class FocusSession {
 
     public void collectVariables(String[] data) {
         blockApp = data[3];
-        wallPaper = data[4];
+        subGroupID = Integer.parseInt(data[0]);
         breaks = data[5];
-        System.out.println("collect variables ran");
-        System.out.println(breaks);
-        System.out.println(wallPaper);
-        System.out.println(blockApp);
-        System.out.println(data[6]);
         if (breaks.equals("True")) {
             breakInterval = TimeUnit.MINUTES.toMillis(Integer.parseInt(data[6]));
             System.out.println("interval: " + breakInterval);
@@ -64,7 +53,6 @@ public class FocusSession {
 
     public void calcBreakTime() {
         nextBreakTime = System.currentTimeMillis() + breakInterval;
-        System.out.println("Next break time set for: " + nextBreakTime + " (current time: " + System.currentTimeMillis() + ")");
     }
 
     public String displayTime(long time) {
@@ -83,18 +71,15 @@ public class FocusSession {
     public void calculateEndtime() {
         startTime = System.currentTimeMillis();
         endTime = studyLength + startTime;
-        System.out.println("End time set for: " + endTime + " (current time: " + System.currentTimeMillis() + ")");
     }
-
-    public void calculateBreakTimes() {
-        breakEndTime = System.currentTimeMillis() + breakLength;
-        breakTimeLeft = breakEndTime - System.currentTimeMillis();
-    }
+//    public void calculateBreakTimes() {
+//        breakEndTime = System.currentTimeMillis() + breakLength;
+//        breakTimeLeft = breakEndTime - System.currentTimeMillis();
+//    }
     public void setRandomMsgTime() {
         long minTime = TimeUnit.MINUTES.toMillis(1);
         long maxTime = breakInterval - minTime;
         nextRandomMsgTime = System.currentTimeMillis() + (minTime + (long) (Math.random() * (maxTime - minTime)));
-        System.out.println("Next random message time set for: " + nextRandomMsgTime + " (current time: " + System.currentTimeMillis() + ")");
     }
     public void getRandMsg() throws AWTException {
         String[] msgs = {
@@ -148,8 +133,8 @@ public class FocusSession {
                 pstmt.setLong(3, breakLength / 60000);
                 pstmt.setString(4, date);
                 pstmt.setInt(5, userID);
-                pstmt.setInt(6, GroupID); // Group ID
-                pstmt.setInt(7, 2); // SubGroup ID
+                pstmt.setInt(6, GroupID);
+                pstmt.setInt(7, subGroupID);
 
                 pstmt.executeUpdate();
             } catch (SQLException e) {

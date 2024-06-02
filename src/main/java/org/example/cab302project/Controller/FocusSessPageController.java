@@ -40,12 +40,10 @@ public class FocusSessPageController extends java.lang.Thread {
         focusSession.studyLength = focusSession.CalculateTime(data);
         focusSession.collectVariables(data);
         focusSession.setRandomMsgTime();
+
         System.out.println("breakInterval: " + focusSession.breakInterval);
         start();
 
-        if (Objects.equals(focusSession.wallPaper, "True")) {
-            System.out.println("WallPaper Selected!");
-        }
 
         if (Objects.equals(focusSession.blockApp, "True")) {
             appBlockingRun = new AppBlockingRun();
