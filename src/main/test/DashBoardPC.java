@@ -1,7 +1,6 @@
 import org.example.cab302project.Controller.DashboardPageController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.example.cab302project.Controller.DashboardPageController;
 
 public class DashBoardPC {
     private DashboardPageController dash;

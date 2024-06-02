@@ -5,8 +5,14 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ *
+ */
 public class ProcessManager {
-
+    /**
+     *
+     * @param filePaths
+     */
     public static void killProcess(List<String> filePaths) {
         filePaths.forEach(filePath -> {
             Path path = FileSystems.getDefault().getPath(filePath);
@@ -28,6 +34,11 @@ public class ProcessManager {
         });
     }
 
+    /**
+     *
+     * @param filePath
+     * @return
+     */
     public static boolean isProcessRunning(String filePath) {
         Path path = FileSystems.getDefault().getPath(filePath);
         return ProcessHandle.allProcesses()
@@ -36,6 +47,11 @@ public class ProcessManager {
                 .anyMatch(command -> command.contains(path.toString()));
     }
 
+    /**
+     *
+     * @param filePaths
+     * @return
+     */
     public static List<String> checkIfFilePathsRunning(List<String> filePaths) {
         return filePaths.stream()
                 .filter(ProcessManager::isProcessRunning)

@@ -8,13 +8,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.example.cab302project.LoginPageController.userID;
+
+/**
+ *
+ */
 public class AppBlocking {
 
     static Integer GroupID = SessionManager.currentGroupID;
 
     static ArrayList<String> paths = new ArrayList<>();
+
+    /**
+     *
+     * @return
+     */
     public static final ArrayList<String> getpaths() {
         paths.clear();
 
@@ -38,12 +46,17 @@ public class AppBlocking {
         return paths;
     }
 
+    /**
+     *
+     * @param args
+     */
     public static void appBlocker(String[] args) {
         getpaths();
         FilePathsRunningCheck();
 
         ProcessManager.killProcess(paths);
     }
+
 
     private static void FilePathsRunningCheck() {
         List<String> runningFilePaths = ProcessManager.checkIfFilePathsRunning(paths);
