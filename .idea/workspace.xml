@@ -8,9 +8,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aa8951fd-875e-4d98-8f33-3fbc54a210fc" name="Changes" comment="working on maven java doc plugin">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/maven.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/maven.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/focusSess/initialiseSess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/focusSess/initialiseSess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/NotesPCTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,15 +32,15 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {}
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Dukesan7/CAB302-Project.git",
-    "accountId": "a8a6a05e-48e8-48f1-939a-c984098f770f"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {}
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Dukesan7/CAB302-Project.git&quot;,
+    &quot;accountId&quot;: &quot;a8a6a05e-48e8-48f1-939a-c984098f770f&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/main/java/org/example/cab302project/pages/Home.fxml" root0="SKIP_INSPECTION" />
   </component>
@@ -68,6 +67,7 @@
     "Attach to process.pid 26572.executor": "ProcessAttachDebug",
     "JUnit.LoginPC.executor": "Run",
     "JUnit.focusSessModel.executor": "Run",
+    "Maven.CAB302-Project [org.apache.maven.plugins:maven-javadoc-plugin:3.4.0:javadoc].executor": "Run",
     "Maven.CAB302-Project [package].executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -113,37 +113,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="InitSessPC" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="CAB302-Project" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="InitSessPC" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="LoginPC" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="CAB302-Project" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="LoginPC" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ProfilesPC" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="CAB302-Project" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="ProfilesPC" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="focusSessModel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CAB302-Project" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="focusSessModel" />
+      <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -151,18 +125,12 @@
     </configuration>
     <list>
       <item itemvalue="Application.org.example.cab302project.Main" />
-      <item itemvalue="JUnit.LoginPC" />
       <item itemvalue="JUnit.focusSessModel" />
-      <item itemvalue="JUnit.InitSessPC" />
-      <item itemvalue="JUnit.ProfilesPC" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.org.example.cab302project.Main" />
         <item itemvalue="JUnit.focusSessModel" />
-        <item itemvalue="JUnit.LoginPC" />
-        <item itemvalue="JUnit.ProfilesPC" />
-        <item itemvalue="JUnit.InitSessPC" />
       </list>
     </recent_temporary>
   </component>
@@ -351,7 +319,23 @@
       <option name="project" value="LOCAL" />
       <updated>1717331180916</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="working on maven java doc plugin">
+      <option name="closed" value="true" />
+      <created>1717331978615</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1717331978615</updated>
+    </task>
+    <task id="LOCAL-00024" summary="working on maven java doc plugin">
+      <option name="closed" value="true" />
+      <created>1717332822714</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1717332822714</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
