@@ -22,17 +22,11 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 
 public class ProfilesPageController {
-    private LoginPageController loginPage;
+    private LoginPageController loginPage = new LoginPageController();
     private PageFunctions pageFunctions = new PageFunctions();
-    private Connection connection;
-    private Profiles profiles;
-    private String selectedQuestion;
-    ObservableList<String> potentialQuestions = FXCollections.observableArrayList(
-            "What is the name of your first pet?",
-            "What school did you first attend?",
-            "What suburb did you first live in?",
-            "What is your favourite ice cream flavour?"
-    );
+    private DashboardPageController dashboard = new DashboardPageController();
+    private Profiles profiles = new Profiles();
+
 
     @FXML
     ComboBox<String> changeSecurityQuestion;
@@ -51,28 +45,43 @@ public class ProfilesPageController {
      */
     @FXML
     private void populateSecurityQuestions() {
-        String questionPreview;
-        try {
-            String sql = "SELECT (securityQuestion) FROM UserDetails WHERE userID = ?";
-            try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-                pstmt.setInt(1, loginPage.userID);
-                ResultSet rs = pstmt.executeQuery();
-                questionPreview = rs.getString("securityQuestion");
-                changeSecurityQuestion.setValue(questionPreview);
-            } catch (NullPointerException e) {
-                System.err.println(e.getMessage());
-            }
-            changeSecurityQuestion.getItems().addAll(potentialQuestions);
-        } catch (SQLException e) {
-            System.err.println("Error adding: " + e.getMessage());
-        }
+        String defaultSecurityQuestion = profiles.returnDefaultSecurityQuestion();
+
+        changeSecurityQuestion.getItems().addAll(profiles.getPotentialQuestions());
+        changeSecurityQuestion.setValue(defaultSecurityQuestion);
+
     }
     @FXML
-    private String getSelectedQuestion() { selectedQuestion = changeSecurityQuestion.getValue(); return selectedQuestion; }
+    private String getSelectedQuestion() {
+        return changeSecurityQuestion.getValue();
+    }
+
+    /**
+     * Changes Profile Display name to equal the name of the user
+     * LoginPageController.nameOfUser is set on the login page
+     */
     @FXML
     private void populateProfileDisplayName() {
         try {profileDisplayName.setText("Current Profile: " + LoginPageController.nameOfUser); }
         catch (NullPointerException e) {System.err.println(e.getMessage());}
+    }
+
+    /**
+     * Saves the security question selected along with its response to the database and hashes the answer
+     * Throws a popup if required field are empty
+     * Uses showAltert() method from the DashboardPageController
+     */
+    @FXML
+    public void saveSecurityQuestion() {
+        String question = getSelectedQuestion();
+        String answer = securityQuestionAnswer.getText();
+        boolean saveQuestionsResult =  profiles.saveSecurityQuestionToDB(question, answer);
+        if (question == null || question.isEmpty() || answer == null || answer.isEmpty()) {
+            dashboard.showAlert(Alert.AlertType.WARNING, "Warning", "Security question or answer is empty!");
+            return;
+        }
+        if (saveQuestionsResult) { dashboard.showAlert(Alert.AlertType.INFORMATION, "Success", "Security question and answer saved successfully!"); }
+        if (!saveQuestionsResult) { dashboard.showAlert(Alert.AlertType.ERROR,"Error", "Error saving security question and answer"); }
     }
 
     @FXML
@@ -80,72 +89,24 @@ public class ProfilesPageController {
         return;
     }
 
+    /**
+     * Loads from pageFunctions to switch between scenes
+     * @param event uses the fx:id of the button that was pressed
+     */
     @FXML
     public void goToPage(ActionEvent event) {
         pageFunctions.goToPage(event);
     }
 
+    /**
+     * Runs pre-selected methods to display when the page is first loaded
+     * pageFunctions.AddSideBar() loads and displays the sidebar given the node
+     */
     @FXML
     public void initialize() {
-        // Optional: Any initializations for your controller
-        try {
-            connection = DbConnection.getInstance().getConnection();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
         populateSecurityQuestions();
         populateProfileDisplayName();
         pageFunctions.AddSideBar(hBox);
     }
 
-    @FXML
-    public void saveSecurityQuestion() {
-        String question = getSelectedQuestion();
-        String answer = securityQuestionAnswer.getText();
-
-        if (question == null || question.isEmpty() || answer == null || answer.isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "Warning", "Security question or answer is empty!");
-            return;
-        }
-
-        String hashAnswer = hashString(answer);
-
-        String sql = "UPDATE UserDetails SET securityQuestion = ?, securityAnswer = ? WHERE UserID = ?";
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-
-            int userID = loginPage.userID;
-
-            pstmt.setString(1, question);
-            pstmt.setString(2, hashAnswer);
-            pstmt.setInt(3, userID);
-            pstmt.executeUpdate();
-            showAlert(Alert.AlertType.INFORMATION, "Success", "Security question and answer saved successfully!");
-
-        } catch (SQLException e) {
-            showAlert(Alert.AlertType.ERROR,"Error", "Error saving security question and answer: " + e.getMessage());
-        }
-    }
-
-    private static String hashString(String input) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] hashedBytes = md.digest(input.getBytes());
-            StringBuilder sb = new StringBuilder();
-            for (byte b : hashedBytes) {
-                sb.append(String.format("%02x", b));
-            }
-            return sb.toString();
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void showAlert(Alert.AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 }

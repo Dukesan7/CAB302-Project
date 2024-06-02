@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import org.example.cab302project.DbConnection;
 import org.example.cab302project.LoginPageController;
+import org.example.cab302project.ManageApplications.BlockApplication;
 import org.example.cab302project.PageFunctions;
 
 import java.io.File;
@@ -25,10 +26,10 @@ import java.util.regex.Matcher;
 
 public class BlockApplicationController {
 
+    BlockApplication blockApplication = new BlockApplication();
     private PageFunctions pageFunctions = new PageFunctions();
     private Connection connection;
     private LoginPageController loginPage;
-    String returnString;
     private String appPath = null;
 
     @FXML
@@ -45,51 +46,18 @@ public class BlockApplicationController {
     private void FindApplicationPath() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Application Path");
-        File file = fileChooser.showOpenDialog(null);
-        if (file != null) {
-            appPath = file.getAbsolutePath();
-            Pattern pattern = Pattern.compile( "[^\\\\]*.exe");
-            Matcher matcher = pattern.matcher(appPath);
-            matcher.find();
-            returnString = matcher.group();
-            filePathLabel.setText("File Name: " + returnString);
-
-        }
+        blockApplication.ReturnApplicationPath(fileChooser);
+        filePathLabel.setText("File Name: " + blockApplication.getReturnString());
     }
 
     private void populateGroupList() {
-        try {
-            groupSelection.getItems().clear();
-            String sql = "SELECT * FROM Groups WHERE userID = ?";
-
-            try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-                pstmt.setInt(1, loginPage.userID );
-                ResultSet rs = pstmt.executeQuery();
-                while (rs.next()) {
-                    groupSelection.getItems().add(rs.getString("Groupname"));
-                }
-
-            } catch (SQLException e) {
-                System.err.println("Error adding blocked applications: " + e.getMessage());
-            }
-        } catch (NullPointerException e) {System.err.println(e.getMessage());}
+        groupSelection.getItems().clear();
+        groupSelection.getItems().addAll(blockApplication.returnDataToGroupList());
     }
 
-
-
     public void AddApplications() {
-        String sql = "INSERT INTO BlackLists(blackListID, groupID, fileName, reason) VALUES(?, ?, ?, ?)";
-
-        if (returnString == null || blockReason.getText() == null) { return; }
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setInt(2, loginPage.userID);
-            pstmt.setString(3, appPath);
-            pstmt.setString(4, blockReason.getText());
-            pstmt.executeUpdate();
-
-        } catch (SQLException e) {
-            System.err.println("Error adding: " + e.getMessage());
-        }
+        if (blockApplication.getReturnString() == null || blockReason.getText() == null) { return; }
+        blockApplication.addApplicationToDb(blockReason.getText());
     }
 
 
