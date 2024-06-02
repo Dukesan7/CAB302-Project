@@ -94,7 +94,7 @@ public class RegisterPageController {
      * @param email validate the email address
      * @return true if email format is correct or else return false with an alert
      */
-    private boolean isValidEmail(String email) {
+    public boolean isValidEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
         Pattern pattern = Pattern.compile(emailRegex);
         Matcher matcher = pattern.matcher(email);
@@ -105,7 +105,7 @@ public class RegisterPageController {
      * Register the user information into the database
      * @return true if the registration is successful, else return error message
      */
-    private boolean registerUserInDatabase(String fName, String lName, String email, String pass) {
+    public boolean registerUserInDatabase(String fName, String lName, String email, String pass) {
         String hashedEmail = hashString(email);
         String hashedPass = hashString(pass);
 
@@ -134,7 +134,7 @@ public class RegisterPageController {
      * @param input hash the input string
      * @return the hashed string
      */
-    private String hashString(String input) {
+    public String hashString(String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] hashedBytes = md.digest(input.getBytes());
@@ -155,7 +155,7 @@ public class RegisterPageController {
      * @param title the title for the alert message
      * @param message the message for the alert
      */
-    private void showAlert(AlertType alertType, String title, String message){
+    public void showAlert(AlertType alertType, String title, String message){
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
