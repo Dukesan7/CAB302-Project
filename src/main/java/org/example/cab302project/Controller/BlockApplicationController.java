@@ -31,8 +31,6 @@ public class BlockApplicationController {
     String returnString;
     private String appPath = null;
 
-    ObservableList<String> groupList;
-
     @FXML
     ChoiceBox<String> groupSelection;
     @FXML
@@ -54,12 +52,8 @@ public class BlockApplicationController {
             Matcher matcher = pattern.matcher(appPath);
             matcher.find();
             returnString = matcher.group();
-            System.out.println("return, " + returnString);
             filePathLabel.setText("File Name: " + returnString);
 
-        }
-        if (appPath != null) {
-            System.out.println(appPath);
         }
     }
 
@@ -84,7 +78,7 @@ public class BlockApplicationController {
 
 
     public void AddApplications() {
-        String sql = "INSERT INTO BlackLists(blackListID, userID, fileName, reason) VALUES(?, ?, ?, ?)";
+        String sql = "INSERT INTO BlackLists(blackListID, groupID, fileName, reason) VALUES(?, ?, ?, ?)";
 
         if (returnString == null || blockReason.getText() == null) { return; }
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {

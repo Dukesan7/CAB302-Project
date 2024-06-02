@@ -73,7 +73,7 @@
         <Rectangle arcHeight="5.0" arcWidth="5.0" height="2.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
 
         <HBox>
-            <Label text="Manage Study Groups">
+            <Label text="Manage Focus Groups">
             <HBox.margin>
                <Insets right="10.0" />
             </HBox.margin></Label>
