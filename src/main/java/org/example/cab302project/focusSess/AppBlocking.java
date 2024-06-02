@@ -11,7 +11,8 @@ import java.util.List;
 import static org.example.cab302project.LoginPageController.userID;
 
 /**
- *
+ * This class is the main appblocking model which gets the paths that are running in the file system and checks if they are blacklisted.
+ * it then does the appropriate actions to destroy the instance of the black listed process
  */
 public class AppBlocking {
 
@@ -20,7 +21,7 @@ public class AppBlocking {
     static ArrayList<String> paths = new ArrayList<>();
 
     /**
-     *
+     *this method creates an array list of paths from the db where the userid and the group id are the current users values
      * @return
      */
     public static final ArrayList<String> getpaths() {
@@ -47,17 +48,16 @@ public class AppBlocking {
     }
 
     /**
-     *
+     * this method runs other methods to check if any blacklisted paths are running and if so kill them
      * @param args
      */
     public static void appBlocker(String[] args) {
         getpaths();
         FilePathsRunningCheck();
-
         ProcessManager.killProcess(paths);
     }
 
-
+    //creates a list of filtered and adjusted paths
     private static void FilePathsRunningCheck() {
         List<String> runningFilePaths = ProcessManager.checkIfFilePathsRunning(paths);
         runningFilePaths.forEach(filePath -> {

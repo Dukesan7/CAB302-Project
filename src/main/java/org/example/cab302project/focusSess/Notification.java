@@ -4,13 +4,14 @@ import java.awt.*;
 import java.awt.TrayIcon.MessageType;
 
 /**
- *
+ *This class handles the recieving, processing and displaying of windows notifications on the users OS.
+ * gets the msg string and sets a title for the message as well as message type and displays it
  */
 public class Notification {
     /**
-     *
-     * @param notifyMsg
-     * @throws AWTException
+     *this method recieves the string msg and checks if the users system supports the notifications
+     * @param notifyMsg is the string message to push
+     * @throws AWTException error handling
      */
     public static void notification(String notifyMsg) throws AWTException {
         if (SystemTray.isSupported()) {
@@ -22,9 +23,9 @@ public class Notification {
     }
 
     /**
-     *
-     * @param Msg
-     * @throws AWTException
+     *A method that displays the notification by creating a new msg in the system tray, sets the values for the msg and displays it
+     * @param Msg the string msg to display
+     * @throws AWTException is error handling
      */
     public void displayTray(String Msg) throws AWTException {
         SystemTray tray = SystemTray.getSystemTray();

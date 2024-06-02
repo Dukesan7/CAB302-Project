@@ -84,7 +84,7 @@ public class FocusSession {
     }
 
     /**
-     *
+     * a method gets the current time to calculate the time left and progress through the timer
      */
     public void calculateProgress() {
         currentTime = System.currentTimeMillis();
@@ -93,7 +93,7 @@ public class FocusSession {
     }
 
     /**
-     *
+     * a method that calculates the end time of the session
      */
     public void calculateEndtime() {
         startTime = System.currentTimeMillis();
@@ -101,7 +101,7 @@ public class FocusSession {
     }
 
     /**
-     *
+     * a method that sets a random time between 1 and 5 minutes for a random msg to be done
      */
     public void setRandomMsgTime() {
         long minTime = TimeUnit.MINUTES.toMillis(1);
@@ -110,8 +110,8 @@ public class FocusSession {
     }
 
     /**
-     *
-     * @throws AWTException
+     *a method that selects a random message from a list, and sends it to the notification method to run it
+     * @throws AWTException  for error handling
      */
     public void getRandMsg() throws AWTException {
         String[] msgs = {
@@ -128,25 +128,25 @@ public class FocusSession {
     }
 
     /**
-     *
-     * @param msg
-     * @throws AWTException
+     *a method thats run when a break starts to display a notification
+     * @param msg a string message to be handled as a nottification
+     * @throws AWTException for error handling
      */
     public void getBreakMsg(String msg) throws AWTException {
         notification(msg);
     }
 
     /**
-     *
-     * @param msg
-     * @throws AWTException
+     *a method that sends the msg to the notifications class to display the message
+     * @param msg a string message to be handled as a nottification
+     * @throws AWTException for error handling
      */
     public void notification(String msg) throws AWTException {
         Notification.notification(msg);
     }
 
     /**
-     *
+     * a method that updates the starting time values and resests previous session values
      */
     public void startSession() {
         sessionStartTime = System.currentTimeMillis();
@@ -154,7 +154,7 @@ public class FocusSession {
     }
 
     /**
-     *
+     * a method that updates the endtime values for report data gathering
      */
     public void endSession() {
         totalSessionTime = System.currentTimeMillis() - sessionStartTime;
@@ -162,20 +162,19 @@ public class FocusSession {
     }
 
     /**
-     *
-     * @param date
+     *a method that calculates the total session time actually completed
+     * @param date todays date
      */
     public void getSessionData(String date) {
-
         Integer totalSessionTimeMins = (int) totalSessionTime / 1000;
-
         insertSessionData(totalSessionTimeMins, date);
     }
 
     /**
-     *
-     * @param totalSessionTime
-     * @param date
+     * a method that runs a sql to insert the focus sessions statistics into the reports table for use in the dash view.
+     * also collates the data for the insertion
+     * @param totalSessionTime is the total time actually focused for
+     * @param date todays date
      */
     public void insertSessionData(int totalSessionTime, String date) {
         String sqlInsertReport = "INSERT INTO Reports (totalTime, numberOfBreaks, lengthOfBreaks, date, userID, groupID, subGroupID) VALUES (?, ?, ?, ?, ?, ?, ?)";
