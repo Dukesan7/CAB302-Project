@@ -21,7 +21,7 @@ public class PageFunctions {
 
     /**
      * Creates the sidebar and displays it in the first element of the given HBox
-     * @param hbox
+     * @param hbox The HBox root of the page
      */
     public void AddSideBar(HBox hbox){
         VBox sidebar = new VBox();
