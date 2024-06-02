@@ -67,6 +67,7 @@
           <target>17</target>
         </configuration>
       </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
@@ -99,6 +100,16 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.4.0</version>
+        <configuration>
+          <destDir>javadoc</destDir>
+          <reportOutputDirectory>${project.build.directory}/docs</reportOutputDirectory>
+        </configuration>
+      </plugin>
+
     </plugins>
   </build>
 
