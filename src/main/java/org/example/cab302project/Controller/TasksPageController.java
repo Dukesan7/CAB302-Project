@@ -150,10 +150,11 @@ public class TasksPageController {
         PageFunctions pageFunctions = new PageFunctions();
         pageFunctions.AddSideBar(hBox);
 
+        tasks = new Tasks(subGroupIDs);
+
         // Populates the subgroup choice box
         selectedSubgroup.getItems().addAll(subGroups);
         if(!subGroups.isEmpty()) selectedSubgroup.setValue(subGroups.get(0));
 
-        tasks = new Tasks(subGroupIDs);
     }
 }
