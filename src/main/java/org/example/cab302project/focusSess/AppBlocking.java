@@ -27,13 +27,12 @@ public class AppBlocking {
     public static final ArrayList<String> getpaths() {
         paths.clear();
 
-        String sql = "SELECT fileName FROM BlackLists WHERE userID = ? AND groupID = ?";
+        String sql = "SELECT fileName FROM BlackLists WHERE groupID = ?";
         try {
             Connection connection = DbConnection.getInstance().getConnection();
             try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
-                pstmt.setInt(1, userID);
-                pstmt.setInt(2, GroupID);
+                pstmt.setInt(1, GroupID);
                 ResultSet rs = pstmt.executeQuery();
                 while (rs.next()) {
                     paths.add(rs.getString("fileName"));
