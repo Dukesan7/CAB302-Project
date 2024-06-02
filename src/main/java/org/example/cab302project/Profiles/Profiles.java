@@ -35,6 +35,7 @@ public class Profiles {
             "What is your favourite ice cream flavour?"
     );
 
+    //Singleton for DB connection
     public Profiles() {
         try {
             connection = DbConnection.getInstance().getConnection();
@@ -43,7 +44,10 @@ public class Profiles {
         }
     }
 
-
+    /**
+     * Populates the default security question on the profiles page based on data stored in the database based on UserID
+     * @return returns the default question to then be displayed through the controller
+     */
     public String returnDefaultSecurityQuestion() {
         String defaultQuestion = null;
         try {
@@ -63,6 +67,12 @@ public class Profiles {
     }
 
 
+    /**
+     * Updates the security question and answer in the database
+     * @param question is the question the user wants provided by the controller
+     * @param answer is the answer the user wants
+     * @return returns a true or false statement based on if the operation succeeds or fails
+     */
     public boolean saveSecurityQuestionToDB(String question, String answer) {
         String hashAnswer = loginPage.hashString(answer);
         String sql = "UPDATE UserDetails SET securityQuestion = ?, securityAnswer = ? WHERE UserID = ?";
