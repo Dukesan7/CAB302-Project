@@ -33,6 +33,7 @@ public class ForgetPasswordPageController {
     private PasswordField newPasswordField;
 
     @FXML
+    // ComboBox for selecting security questions
     private ComboBox<String> securityQuestionComboBox;
 
     @FXML
@@ -61,13 +62,16 @@ public class ForgetPasswordPageController {
      * @return true if password have been reset or show alert message
      */
     public static boolean resetPassword(String email, String newPassword, String securityQuestion, String securityAnswer) {
+        // Hash the input values
         String hashedPassword = hashString(newPassword);
         String hashedEmail = hashString(email);
         String hashedSecurityAnswer = hashString(securityAnswer);
 
         try {
+            // Make connections with database
             Connection conn = DbConnection.getInstance().getConnection();
 
+            // Verify the provided details with database records
             PreparedStatement verifyStmt = conn.prepareStatement(
                     "SELECT * FROM UserDetails WHERE email = ? AND securityQuestion = ? AND securityAnswer = ?"
             );
@@ -77,6 +81,7 @@ public class ForgetPasswordPageController {
             ResultSet rs = verifyStmt.executeQuery();
 
             if (rs.next()) {
+                // Update password if details are correct
                 PreparedStatement updateStmt = conn.prepareStatement(
                         "UPDATE UserDetails SET pass = ? WHERE email = ?"
                 );
@@ -107,22 +112,26 @@ public class ForgetPasswordPageController {
      */
     @FXML
     void resetPassword(ActionEvent event) {
+        // Get these input values
         String email = emailField.getText();
         String newPassword = newPasswordField.getText();
         String securityQuestion = securityQuestionComboBox.getValue();
         String securityAnswer = securityAnswerField.getText();
 
+        // Check if any input field is empty
         if (email.isEmpty() || newPassword.isEmpty() || securityQuestion == null || securityQuestion.isEmpty() || securityAnswer.isEmpty()) {
             showAlert(Alert.AlertType.WARNING, "Warning", "Please fill in all the fields!");
             return;
         }
 
+        // Reset password
         boolean success = resetPassword(email, newPassword, securityQuestion, securityAnswer);
 
         if (success) {
             showAlert(Alert.AlertType.INFORMATION, "Success", "Password reset successfully!");
 
             try {
+                // Load dashboard page after password has successfully been reset
                 Parent dashboardPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/org/example/cab302project/Dashboard.fxml")));
                 Scene dashboardScene = new Scene(dashboardPage);
 

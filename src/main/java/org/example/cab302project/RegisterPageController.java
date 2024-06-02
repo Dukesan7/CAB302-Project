@@ -37,34 +37,41 @@ public class RegisterPageController {
      */
     @FXML
     private void registerUser() {
+        // Get and trim input fields
         String fullName = nameField.getText().trim();
         String email = emailField.getText().trim();
         String pass = passwordField.getText();
         String confirmPass = confirmPasswordField.getText();
 
+        // Check if both password matches
         if (!pass.equals(confirmPass)) {
             showAlert(AlertType.ERROR, "Registration Error", "Password does not match!");
             return;
         }
 
+        // Check if any input field is empty
         if (fullName.isEmpty() || email.isEmpty() || pass.isEmpty()) {
             showAlert(AlertType.ERROR, "Registration Error", "Fill in the blanks!");
             return;
         }
 
+        // Check if email format is valid
         if (!isValidEmail(email)) {
             showAlert(AlertType.ERROR, "Registration Error", "Invalid email format!");
             return;
         }
 
+        // Split full name into first name and last name
         String[] names = fullName.split(" ", 2);
         String fName = names.length > 0 ? names[0] : "";
         String lName = names.length > 1 ? names[1] : "";
 
+        // Register user in database
         if (registerUserInDatabase(fName, lName, email, pass)) {
             showAlert(AlertType.INFORMATION, "Registration Successfully", "You have successfully registered.");
 
             try{
+                // Load the login page
                 Parent loginPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Login.fxml")));
                 Scene loginScene = new Scene(loginPage);
 
@@ -95,6 +102,7 @@ public class RegisterPageController {
      * @return true if email format is correct or else return false with an alert
      */
     public boolean isValidEmail(String email) {
+        // Regular expression for validating email format
         String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
         Pattern pattern = Pattern.compile(emailRegex);
         Matcher matcher = pattern.matcher(email);
@@ -106,6 +114,7 @@ public class RegisterPageController {
      * @return true if the registration is successful, else return error message
      */
     public boolean registerUserInDatabase(String fName, String lName, String email, String pass) {
+        // Hash email and password
         String hashedEmail = hashString(email);
         String hashedPass = hashString(pass);
 
@@ -136,10 +145,12 @@ public class RegisterPageController {
      */
     public String hashString(String input) {
         try {
+            // Initialize MessageDigest with SHA-256 algorithm
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] hashedBytes = md.digest(input.getBytes());
             StringBuilder sb = new StringBuilder();
             for (byte b : hashedBytes) {
+                // Convert each byte to hexadecimal and append to StringBuilder
                 sb.append(String.format("%02x", b));
             }
             return sb.toString();

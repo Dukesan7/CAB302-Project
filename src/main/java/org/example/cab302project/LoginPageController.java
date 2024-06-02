@@ -43,15 +43,18 @@ public class LoginPageController {
         String email = emailField.getText().trim();
         String password = passwordField.getText();
 
+        // Check if email and password is empty
         if (email.isEmpty() || password.isEmpty()) {
             showAlert(AlertType.ERROR, "Login Error", "Please fill in the blanks!");
             return;
         }
 
+        // Verify user credentials by checking email and password
         if (verifyUserCredentials(email, password)) {
             showAlert(AlertType.INFORMATION, "Login Successful", "You have successfully logged in.");
 
             try {
+                // Load the dashboard page after successfully logging in
                 Parent dashboardPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Dashboard.fxml")));
                 Scene dashboardScene = new Scene(dashboardPage);
 
@@ -67,9 +70,11 @@ public class LoginPageController {
 
                 currentStage.show();
             } catch (IOException e) {
+                // Print error if dashboard can't be loaded
                 System.err.println("Failed to load the dashboard page: " + e.getMessage());
             }
         } else {
+            // Show login failed alert
             showAlert(AlertType.ERROR, "Login Failed", "Invalid email or password.");
         }
     }
@@ -80,6 +85,7 @@ public class LoginPageController {
     @FXML
     private void goToRegisterPage() {
         try {
+            // Load register page if user need to register for an account
             Parent registerPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Register.fxml")));
 
             Scene registerScene = new Scene(registerPage);
@@ -97,6 +103,7 @@ public class LoginPageController {
             currentPage.show();
         }
         catch (IOException e) {
+            // Print error message if failed to load register page
             System.err.println("Failed to load registration page: " + e.getMessage());
         }
     }
@@ -107,6 +114,7 @@ public class LoginPageController {
     @FXML
     private void goToForgetPasswordPage() {
         try {
+            // Load forget password page if user need to reset their password for their account
             Parent forgetPasswordPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ForgetPassword.fxml")));
 
             Scene forgetPasswordScene = new Scene(forgetPasswordPage);
@@ -124,6 +132,7 @@ public class LoginPageController {
             currentPage.show();
         }
         catch (IOException e) {
+            // Print error message if it fails to load the forget password page
             System.err.println("Failed to load forget password page: " + e.getMessage());
         }
     }
@@ -136,6 +145,7 @@ public class LoginPageController {
      * @return returns true if the credentials are valid, else return false
      */
     public boolean verifyUserCredentials(String email, String password) {
+        // Hash email and password
         String hashedEmail = hashString(email);
         String hashedPassword = hashString(password);
 
@@ -149,13 +159,16 @@ public class LoginPageController {
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                //Dom edit \/
+                // Set userID and nameOfUser for the logged in user
                 userID = rs.getInt("UserID");
                 nameOfUser = rs.getString("fName");
+                // Return true if credentials are correct
                 return true;
             }
+            // Return false if credientials are wrong
             return false;
         } catch (SQLException e) {
+            // Print error message if it fails the verification
             System.err.println("Error verifying user credentials: " + e.getMessage());
             return false;
         }
@@ -169,14 +182,18 @@ public class LoginPageController {
      */
     public String hashString(String input) {
         try {
+            // Initialize MessageDigest with SHA-256 algorithm
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] hashedBytes = md.digest(input.getBytes());
             StringBuilder sb = new StringBuilder();
             for (byte b : hashedBytes) {
+                // Convert each byte to hexadecimal and append to StringBuilder
                 sb.append(String.format("%02x", b));
             }
+            // Return the hashed string
             return sb.toString();
         } catch (NoSuchAlgorithmException e) {
+            // Throw RuntimeException if SHA-256 algorithm is not found
             throw new RuntimeException(e);
         }
     }
