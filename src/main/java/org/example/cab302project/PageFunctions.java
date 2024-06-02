@@ -14,8 +14,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A helper class which stores reused methods
+ */
 public class PageFunctions {
 
+    /**
+     * Creates the sidebar and displays it in the first element of the given HBox
+     * @param hbox
+     */
     public void AddSideBar(HBox hbox){
         VBox sidebar = new VBox();
         sidebar.setMaxWidth(200);
@@ -45,6 +52,10 @@ public class PageFunctions {
         sidebar.getStyleClass().add("sidebar-background");
     }
 
+    /**
+     * Loads a new scene depending on the given ActionEvent
+     * @param event A button onAction event where the fx:id of the button is the name of the desired page
+     */
     @FXML
     public void goToPage(ActionEvent event) {
         Button button = (Button) event.getSource();
@@ -60,6 +71,9 @@ public class PageFunctions {
         }
     }
 
+    /**
+     * Creates a new stage to display the focus session in
+     */
     @FXML
     public void openFocusWin(){
         try {

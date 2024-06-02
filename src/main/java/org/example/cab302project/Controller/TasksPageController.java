@@ -20,8 +20,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+/**
+ * The controller class for the tasks page
+ */
 public class TasksPageController {
 
+    // FXML objects
     public TextField taskName;
     public ChoiceBox<String> selectedSubgroup;
     public Button addTask;
@@ -33,15 +37,23 @@ public class TasksPageController {
     private Tasks tasks;
     private Connection connection;
 
+    // A dictionary of subgroup name keys and subgroupID values
     private Dictionary<String, Integer> subGroupPairing = new Hashtable<>();
 
-
+    /**
+     * Changes the state of the task represented by the checkbox
+     * @param event A task checkbox onAction event
+     */
     @FXML
     public void changeState(ActionEvent event){
         CheckBox checkBox = (CheckBox) event.getSource();
         tasks.SwitchState(subGroupPairing.get(selectedSubgroup.getValue()), checkBox.getText(), checkBox.isSelected());
     }
 
+    /**
+     * Deletes the task represented by the checkbox
+     * @param event A task checkbox button onAction event
+     */
     @FXML
     public void deleteTask(ActionEvent event){
         Button button = (Button) event.getSource();
@@ -50,8 +62,11 @@ public class TasksPageController {
         root.getChildren().remove(parent);
     }
 
+    /**
+     * Displays the tasks of the selected subgroups
+     */
     @FXML
-    public void displayTaskList(ActionEvent event){
+    public void displayTaskList(){
         root.getChildren().clear();
 
         HashMap<String, Boolean> taskList = tasks.GetTaskList().get(subGroupPairing.get(selectedSubgroup.getValue()));
@@ -61,8 +76,11 @@ public class TasksPageController {
         }
     }
 
+    /**
+     * Adds a new task based on the contents of the text box
+     */
     @FXML
-    public void addNewTask(ActionEvent event){
+    public void addNewTask(){
         if(subGroups.isEmpty() || Objects.equals(taskName.getText(), "")) return;
         if(!tasks.GetTaskList().get(subGroupPairing.get(selectedSubgroup.getValue())).containsKey(taskName.getText())){
             CreateCheckbox(taskName.getText(), false);
@@ -70,8 +88,32 @@ public class TasksPageController {
         }
     }
 
-    private void CreateCheckbox(String name, Boolean state){
+    /**
+     * Retrieves and stores the subgroups, subgroup IDs and their pairings
+     */
+    public void RetrieveSubGroups() {
+        try {
+            // Retrieves the data from the Database
+            String sql = "SELECT * FROM SubGroup WHERE groupID = ?";
+            try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                pstmt.setInt(1, SessionManager.currentGroupID);
+                ResultSet rs = pstmt.executeQuery();
 
+                while (rs.next()) {
+                    // Stores the data
+                    subGroupPairing.put(rs.getString("name"), rs.getInt("subGroupID"));
+                    subGroups.add(rs.getString("name"));
+                    subGroupIDs.add(rs.getInt("subGroupID"));
+                }
+            } catch (SQLException e) {
+                System.err.println("Error adding blocked applications: " + e.getMessage());
+            }
+        } catch (NullPointerException e) {System.err.println(e.getMessage());}
+    }
+
+    // Creates a new task checkbox with the given name and state
+    private void CreateCheckbox(String name, Boolean state){
+        // Creates the checkbox
         CheckBox checkBox = new CheckBox(name);
         checkBox.setContentDisplay(ContentDisplay.RIGHT);
         checkBox.setGraphicTextGap(10.0);
@@ -81,6 +123,7 @@ public class TasksPageController {
         checkBox.setFont(new Font(16.0));
         checkBox.setSelected(state);
 
+        // Creates the close button and attaches it to the checkbox
         Button closeButton = new Button("X");
         closeButton.setAlignment(Pos.CENTER_RIGHT);
         closeButton.setContentDisplay(ContentDisplay.RIGHT);
@@ -88,39 +131,29 @@ public class TasksPageController {
         closeButton.setOnAction(this::deleteTask);
         checkBox.setGraphic(closeButton);
 
+        // Displays the checkbox
         root.getChildren().add(checkBox);
     }
 
+    // Runs on initialization
     public void initialize() {
+        // Gets a connection to the database
         try {
             connection = DbConnection.getInstance().getConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        // Gets the subgroup data
         RetrieveSubGroups();
 
+        // Adds the sidebar to the UI
         PageFunctions pageFunctions = new PageFunctions();
         pageFunctions.AddSideBar(hBox);
+
+        // Populates the subgroup choice box
         selectedSubgroup.getItems().addAll(subGroups);
-        tasks = new Tasks(subGroupIDs);
         if(!subGroups.isEmpty()) selectedSubgroup.setValue(subGroups.get(0));
-    }
 
-    public void RetrieveSubGroups() {
-        try {
-            String sql = "SELECT * FROM SubGroup WHERE groupID = ?";
-            try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-                pstmt.setInt(1, SessionManager.currentGroupID);
-                ResultSet rs = pstmt.executeQuery();
-
-                while (rs.next()) {
-                    subGroupPairing.put(rs.getString("name"), rs.getInt("subGroupID"));
-                    subGroups.add(rs.getString("name"));
-                    subGroupIDs.add(rs.getInt("subGroupID"));
-                }
-            } catch (SQLException e) {
-                System.err.println("Error adding blocked applications: " + e.getMessage());
-            }
-        } catch (NullPointerException e) {System.err.println(e.getMessage());}
+        tasks = new Tasks(subGroupIDs);
     }
 }
