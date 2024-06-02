@@ -4,19 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa8951fd-875e-4d98-8f33-3fbc54a210fc" name="Changes" comment="removed db functionality from app blocker as bug inhibits functionality">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/focusSess/ProcessManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/test/Java.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/test/ProcessManagerModel.java" afterDir="false" />
+    <list default="true" id="460991a2-1631-4369-b717-4ae457f4b4c7" name="Changes" comment="Changed userId to GroupID in blacklists">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Groups/ManageGroups.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/ManageApplications/BlockApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/ManageApplications/ManageApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/CreateDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/CreateDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/focusSess/AppBlocking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/focusSess/AppBlocking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/AppBlockingModel.Java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/AppBlockingModel.Java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/InitSessPC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/InitSessPC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/NotificationModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/NotificationModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/focusSessModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/focusSessModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/focusSessPC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/focusSessPC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/initSessModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/initSessModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Controller/BlockApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Controller/BlockApplicationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Controller/ManageApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Controller/ManageApplicationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Controller/ProfilesPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Controller/ProfilesPageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/LoginPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/LoginPageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Profiles/Profiles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302project/Profiles/Profiles.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +23,6 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -34,33 +30,15 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="push-report-data-to-db" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">
-    <option name="selectedUrlAndAccountId">
-      <UrlAndAccount>
-        <option name="accountId" value="a8a6a05e-48e8-48f1-939a-c984098f770f" />
-        <option name="url" value="https://github.com/Dukesan7/CAB302-Project.git" />
-      </UrlAndAccount>
-    </option>
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/main/java/org/example/cab302project/pages/Home.fxml" root0="SKIP_INSPECTION" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 0
+  &quot;associatedIndex&quot;: 5
 }</component>
-  <component name="ProjectId" id="2f7I4MObGocnH9O5pc6EVT16YKn" />
+  <component name="ProjectId" id="2hJNy2D82U0XBAmDQTWq9lBcip9" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
@@ -71,59 +49,18 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main.executor": "Run",
-    "Application.Notification.executor": "Run",
-    "Application.breakTest.executor": "Run",
-    "Application.org.example.cab302project.Main.executor": "Run",
-    "Attach to process.pid 26572.executor": "ProcessAttachDebug",
+    "JUnit.ProfilesPC.executor": "Run",
+    "JUnit.ProfilesPC.testChangePassword_correct.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Allan Li/QUT/Year 2/Semester 1/CAB302 Software Development/Test Project",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+    "git-widget-placeholder": "Dom-JavaDocs",
+    "kotlin-language-version-configured": "true"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\acste\OneDrive\University\2024\Semester 1\cab302\Assignment\src\main\java\org\example\cab302project" />
-      <recent name="C:\Users\Dominic\IdeaProjects\CAB302-Project\src\main\resources\org\example\cab302project" />
-      <recent name="C:\Users\Dominic\IdeaProjects\CAB302-Project\src\main\resources\org\example\cab302project\Profiles" />
-      <recent name="C:\Users\jaric\Desktop\thneeds\qut\CAB302SD\CAB302-Project\src\main\resources\org\example\cab302project" />
-    </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="" />
-      <recent name="org.example.cab302project" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="org.example.cab302project" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Application.org.example.cab302project.Main">
-    <configuration name="org.example.cab302project.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="corretto-17" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="org.example.cab302project.Main" />
       <module name="CAB302-Project" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.cab302project.Tasks.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="InitSessPC" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="CAB302-Project" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="InitSessPC" />
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -137,17 +74,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <list>
-      <item itemvalue="Application.org.example.cab302project.Main" />
-      <item itemvalue="JUnit.InitSessPC" />
-      <item itemvalue="JUnit.ProfilesPC" />
-    </list>
+    <configuration name="ProfilesPC.testChangePassword_correct" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CAB302-Project" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ProfilesPC" />
+      <option name="METHOD_NAME" value="testChangePassword_correct" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.org.example.cab302project.Main" />
+        <item itemvalue="JUnit.ProfilesPC.testChangePassword_correct" />
         <item itemvalue="JUnit.ProfilesPC" />
-        <item itemvalue="JUnit.InitSessPC" />
-        <item itemvalue="Application.org.example.cab302project.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -160,207 +100,44 @@
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="aa8951fd-875e-4d98-8f33-3fbc54a210fc" name="Changes" comment="" />
-      <created>1713145498963</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1713145498963</updated>
-    </task>
-    <task id="LOCAL-00001" summary="Basic app file structure &amp; tabs feature">
+    <task id="LOCAL-00001" summary="Implemented Style Sheets and cleaned up some code sections">
       <option name="closed" value="true" />
-      <created>1713146877221</created>
+      <created>1717246513632</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1713146877221</updated>
+      <updated>1717246513633</updated>
     </task>
-    <task id="LOCAL-00002" summary="Basic app file structure &amp; tabs feature">
+    <task id="LOCAL-00002" summary="Reimplemented deletion of groups and apps">
       <option name="closed" value="true" />
-      <created>1713147617603</created>
+      <created>1717254410222</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1713147617603</updated>
+      <updated>1717254410222</updated>
     </task>
-    <task id="LOCAL-00003" summary="Removed ability to close tabs">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="460991a2-1631-4369-b717-4ae457f4b4c7" name="Changes" comment="Reimplemented deletion of groups and apps" />
+      <created>1717308474739</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1717308474739</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Changed userId to GroupID in blacklists">
       <option name="closed" value="true" />
-      <created>1713147715842</created>
+      <created>1717314892291</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1713147715842</updated>
+      <updated>1717314892291</updated>
     </task>
-    <task id="LOCAL-00004" summary="added IDEA workspace to git ignore">
-      <option name="closed" value="true" />
-      <created>1714137154885</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1714137154885</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Rewrite - changed tabbed menu to button menu">
-      <option name="closed" value="true" />
-      <created>1714183445846</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1714183445846</updated>
-    </task>
-    <task id="LOCAL-00006" summary="moved fxml to correct directory">
-      <option name="closed" value="true" />
-      <created>1714353527334</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1714353527334</updated>
-    </task>
-    <task id="LOCAL-00007" summary="added per page functionality">
-      <option name="closed" value="true" />
-      <created>1714467000665</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1714467000665</updated>
-    </task>
-    <task id="LOCAL-00008" summary="removed redundant Profiles.java">
-      <option name="closed" value="true" />
-      <created>1714467238333</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1714467238333</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Added create database function into main">
-      <option name="closed" value="true" />
-      <created>1714476548693</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1714476548693</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Completed ComboBox population">
-      <option name="closed" value="true" />
-      <created>1714794001112</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1714794001112</updated>
-    </task>
-    <task id="LOCAL-00011" summary="Completed profilename display and added variables to LoginPageController.java">
-      <option name="closed" value="true" />
-      <created>1714799939140</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1714799939140</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Added values to drop downs to choose group, subgroup, and time. added function to call array of focus session values. added function to create new window when session is started">
-      <option name="closed" value="true" />
-      <created>1714806538799</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1714806538799</updated>
-    </task>
-    <task id="LOCAL-00013" summary="added base app blocking functionality, searches task list for all exe's, checks the list for blacklisted paths, if blacklisted it will immediately destroy the processes instance. ends when timer ends">
-      <option name="closed" value="true" />
-      <created>1714892924630</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1714892924630</updated>
-    </task>
-    <task id="LOCAL-00014" summary="added Play pause buttons to session thats running. stops timer when pressed, changes name of button to signify buttons new functionality when paused. &#10;&#10;added end session button to end thread and shut window.">
-      <option name="closed" value="true" />
-      <created>1715999962580</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1715999962580</updated>
-    </task>
-    <task id="LOCAL-00015" summary="refactored controllers and created packages for class sections">
-      <option name="closed" value="true" />
-      <created>1716367854744</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1716367854744</updated>
-    </task>
-    <task id="LOCAL-00016" summary="refactored init session section and updated functionality to be smoother.">
-      <option name="closed" value="true" />
-      <created>1716392655370</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1716392655370</updated>
-    </task>
-    <task id="LOCAL-00017" summary="refactored init session section further and also refactored focussess except for threads.">
-      <option name="closed" value="true" />
-      <created>1716453404887</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1716453404887</updated>
-    </task>
-    <task id="LOCAL-00018" summary="fixed error regarding focus session not incuring its breaks as designed. now runs through breaks as expected. added base methods for inspirational notifications">
-      <option name="closed" value="true" />
-      <created>1716560258987</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1716560258987</updated>
-    </task>
-    <task id="LOCAL-00019" summary="added db functionality to report section, added db call to appblock to use blacklisted items from the db. started to pop sub groups through db">
-      <option name="closed" value="true" />
-      <created>1716722787580</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1716722787581</updated>
-    </task>
-    <task id="LOCAL-00020" summary="removed db functionality from app blocker as bug inhibits functionality">
-      <option name="closed" value="true" />
-      <created>1716722987628</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1716722987628</updated>
-    </task>
-    <option name="localTasksCounter" value="21" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Basic app file structure &amp; tabs feature" />
-    <MESSAGE value="Removed ability to close tabs" />
-    <MESSAGE value="added IDEA workspace to git ignore" />
-    <MESSAGE value="Rewrite - changed tabbed menu to button menu" />
-    <MESSAGE value="moved fxml to correct directory" />
-    <MESSAGE value="each page has controller&#10;fixed page navigation" />
-    <MESSAGE value="removed redundant Profiles.java" />
-    <MESSAGE value="Added create database function into main" />
-    <MESSAGE value="Completed ComboBox population" />
-    <MESSAGE value="Completed profilename display and added variables to LoginPageController.java" />
-    <MESSAGE value="Added values to drop downs to choose group, subgroup, and time. added function to call array of focus session values. added function to create new window when session is started" />
-    <MESSAGE value="added base app blocking functionality, searches task list for all exe's, checks the list for blacklisted paths, if blacklisted it will immediately destroy the processes instance. ends when timer ends" />
-    <MESSAGE value="added Play pause buttons to session thats running. stops timer when pressed, changes name of button to signify buttons new functionality when paused. &#10;&#10;added end session button to end thread and shut window." />
-    <MESSAGE value="refactored controllers and created packages for class sections" />
-    <MESSAGE value="refactored init session section and updated functionality to be smoother." />
-    <MESSAGE value="refactored init session section further and also refactored focussess except for threads." />
-    <MESSAGE value="fixed error regarding focus session not incuring its breaks as designed. now runs through breaks as expected. added base methods for inspirational notifications" />
-    <MESSAGE value="added db functionality to report section, added db call to appblock to use blacklisted items from the db. started to pop sub groups through db" />
-    <MESSAGE value="removed db functionality from app blocker as bug inhibits functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed db functionality from app blocker as bug inhibits functionality" />
+    <MESSAGE value="Implemented Style Sheets and cleaned up some code sections" />
+    <MESSAGE value="Reimplemented deletion of groups and apps" />
+    <MESSAGE value="Changed userId to GroupID in blacklists" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed userId to GroupID in blacklists" />
   </component>
 </project>

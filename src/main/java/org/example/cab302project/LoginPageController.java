@@ -138,7 +138,7 @@ public class LoginPageController {
         }
     }
 
-    private String hashString(String input) {
+    public String hashString(String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] hashedBytes = md.digest(input.getBytes());
