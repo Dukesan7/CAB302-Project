@@ -1,20 +1,16 @@
-import org.example.cab302project.Controller.InitSessPageController;
-import org.example.cab302project.focusSess.ProcessManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.example.cab302project.focusSess.FocusSession;
 
 
 public class focusSessModel {
-    private FocusSession FocussessPC;
+    private FocusSession Focussess;
     private String[] data = new String[8];
 
 
     @BeforeEach
     public void SetUp() {
-        FocussessPC = new FocusSession();
+        Focussess = new FocusSession();
         data[0] = "1";
         data[1] = "1";
         data[2] = "30";
@@ -27,39 +23,57 @@ public class focusSessModel {
 
     @Test
     public void TestCalculateTime() {
-        long time = FocussessPC.CalculateTime(data);
+        long time = Focussess.CalculateTime(data);
         if (time == 5400000){}
     }
 
     @Test
     public void collectVarTest() {
-        FocussessPC.collectVariables(data);
-        if (FocussessPC.breakInterval == 360000 && FocussessPC.breakLength == 300000){}
+        Focussess.collectVariables(data);
+        if (Focussess.breakInterval == 360000 && Focussess.breakLength == 300000){}
     }
 
     @Test
     public void calcBreakTimeTest() {
-        FocussessPC.calcBreakTime();
-        if (FocussessPC.nextBreakTime == System.currentTimeMillis() + FocussessPC.breakInterval){}
+        Focussess.calcBreakTime();
+        if (Focussess.nextBreakTime == System.currentTimeMillis() + Focussess.breakInterval){}
     }
 
     @Test
     public void getDisplayTimeTest() {
-        if (FocussessPC.displayTime(5305000) == "01:28:25"){}
+        if (Focussess.displayTime(5305000) == "01:28:25"){}
     }
 
 
     @Test
     public void calculateEndTimeTest() {
-        FocussessPC.calculateEndtime();
+        Focussess.studyLength = 5400000;
+        long startTime = System.currentTimeMillis();
+        Focussess.calculateEndtime();
 
-        if (FocussessPC.endTime == 5400000){}
+        if (Focussess.studyLength + startTime == Focussess.endTime){}
     }
 
     @Test
     public void calculateProgressTest() {
-        FocussessPC.calculateProgress();
-
-        if (FocussessPC.displayTime(5305000) == "01:28:25"){}
+        Focussess.calculateProgress();
+        if (Focussess.displayTime(5305000) == "01:28:25"){}
     }
+
+    @Test
+    public void randMSGTimeTest() {
+        long currentTime = System.currentTimeMillis();
+        Focussess.setRandomMsgTime();
+        long randTime = Focussess.nextRandomMsgTime;
+        if (randTime > currentTime+60000 && randTime < currentTime+30000){}
+    }
+
+
+    @Test
+    public void endSessTest() {
+        long currentTime = System.currentTimeMillis();
+        Focussess.endSession();
+        if (Focussess.totalSessionTime == currentTime - Focussess.sessionStartTime){}
+    }
+
 }

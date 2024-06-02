@@ -1,20 +1,13 @@
 package org.example.cab302project.focusSess;
 
-import org.example.cab302project.Controller.ProfilesPageController;
 import org.example.cab302project.DbConnection;
 import org.example.cab302project.SessionManager;
-
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import org.example.cab302project.SessionManager;
 
 import static org.example.cab302project.LoginPageController.userID;
 public class AppBlocking {
@@ -25,12 +18,13 @@ public class AppBlocking {
     public static final ArrayList<String> getpaths() {
         paths.clear();
 
-        String sql = "SELECT fileName FROM BlackLists WHERE userID = ?";
+        String sql = "SELECT fileName FROM BlackLists WHERE userID = ? AND groupID = ?";
         try {
             Connection connection = DbConnection.getInstance().getConnection();
             try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
                 pstmt.setInt(1, userID);
+                pstmt.setInt(2, GroupID);
                 ResultSet rs = pstmt.executeQuery();
                 while (rs.next()) {
                     paths.add(rs.getString("fileName"));

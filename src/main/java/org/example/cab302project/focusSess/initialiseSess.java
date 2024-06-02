@@ -23,7 +23,6 @@ public class initialiseSess {
 
 
     public Hashtable<Integer, String> getSubGroupDB() throws SQLException {
-        //ArrayList<String> subGroups = new ArrayList<>();
         Hashtable<Integer, String> subGroups = new Hashtable<Integer, String>();
         String sql = "SELECT * FROM SubGroup WHERE groupID = ?";
         try {

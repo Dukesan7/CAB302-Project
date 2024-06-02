@@ -2,7 +2,6 @@ package org.example.cab302project.Controller;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -13,14 +12,11 @@ import org.example.cab302project.DbConnection;
 import org.example.cab302project.LoginPageController;
 import org.example.cab302project.PageFunctions;
 import org.example.cab302project.SessionManager;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Dictionary;
 import java.util.Hashtable;
-
 import javafx.scene.control.Alert.AlertType;
 public class DashboardPageController {
     PageFunctions pageFunctions = new PageFunctions();
@@ -160,12 +156,12 @@ public class DashboardPageController {
                 }
 
             } catch (SQLException e) {
-                System.err.println("Error adding blocked applications: " + e.getMessage());
+                System.err.println("Error populating report table: " + e.getMessage());
             }
         } catch (NullPointerException e) {System.err.println(e.getMessage());}
     }
 
-    private String timeConversion(int seconds) {
+    public String timeConversion(int seconds) {
         if (seconds < 60) {
             return (seconds + " Second" + (seconds == 1 ? "" : "s"));
         } else if (seconds < 3600) {
