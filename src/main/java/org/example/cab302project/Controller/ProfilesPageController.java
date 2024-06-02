@@ -49,7 +49,6 @@ public class ProfilesPageController {
 
         changeSecurityQuestion.getItems().addAll(profiles.getPotentialQuestions());
         changeSecurityQuestion.setValue(defaultSecurityQuestion);
-
     }
     @FXML
     private String getSelectedQuestion() {
@@ -67,9 +66,10 @@ public class ProfilesPageController {
     }
 
     /**
-     * Saves the security question selected along with its response to the database and hashes the answer
+     * Provides the question and answer fields to the model and checks for required fields
      * Throws a popup if required field are empty
-     * Uses showAltert() method from the DashboardPageController
+     * Uses showAltert() method from the DashboardPageController based on if the saveSecurityQuestionsToDB method
+     * returns true or false
      */
     @FXML
     public void saveSecurityQuestion() {

@@ -29,8 +29,6 @@ public class BlockApplicationController {
     BlockApplication blockApplication = new BlockApplication();
     private PageFunctions pageFunctions = new PageFunctions();
     private Connection connection;
-    private LoginPageController loginPage;
-    private String appPath = null;
 
     @FXML
     ChoiceBox<String> groupSelection;
@@ -42,6 +40,8 @@ public class BlockApplicationController {
     Label filePathLabel;
 
 
+    //Returns the file pathway for the selected program through the FileChooser class
+    //Further sets the label to the path based on the getReturnString for the view
     @FXML
     private void FindApplicationPath() {
         FileChooser fileChooser = new FileChooser();
@@ -50,11 +50,13 @@ public class BlockApplicationController {
         filePathLabel.setText("File Name: " + blockApplication.getReturnString());
     }
 
+    //populates the groupList
     private void populateGroupList() {
         groupSelection.getItems().clear();
         groupSelection.getItems().addAll(blockApplication.returnDataToGroupList());
     }
 
+    //Adds the application to be blocked if the fields have been filled in
     public void AddApplications() {
         if (blockApplication.getReturnString() == null || blockReason.getText() == null) { return; }
         blockApplication.addApplicationToDb(blockReason.getText());

@@ -51,6 +51,9 @@ public class ManageGroupsController {
     @FXML
     TableColumn<DisplayObject, String> subGroupColumn;
 
+    /**
+     * Populates the groupTable based upon the database values
+     */
     @FXML
     public void populateGroupTable() {
         try {
@@ -72,6 +75,7 @@ public class ManageGroupsController {
         } catch (NullPointerException e) {System.err.println(e.getMessage());}
     }
 
+    //Adds a new group to the database
     @FXML
     private void AddGrouptoDB() {
         String userInput = studyModeTextField.getText();
@@ -88,7 +92,9 @@ public class ManageGroupsController {
         populateSubGroupTable();
     }
 
-
+    /**
+     * Populates the subGroup Table based upon the values stored in the database
+     */
     public void populateSubGroupTable() {
         try {
             subGroupTable.getItems().clear();
@@ -109,6 +115,7 @@ public class ManageGroupsController {
         } catch (NullPointerException e) {System.err.println(e.getMessage());}
     }
 
+    //Adds a subGroup to the database
     @FXML
     private void AddSubGrouptoDB() {
         if (currentGroup == null) {
@@ -130,7 +137,10 @@ public class ManageGroupsController {
         populateSubGroupTable();
     }
 
-
+    /**
+     * Sets the selected Group to the item selected in the TableView
+     * @param mouseEvent waits for the user to select an item on the TableView
+     */
     @FXML
     public void GetSelectedItem(Event mouseEvent) {
         try {
@@ -144,6 +154,9 @@ public class ManageGroupsController {
         } catch (NullPointerException e) {System.err.println(e.getMessage());}
     }
 
+    /**
+     * Deletes the selected group in the dataBase with the Selected group in the tableview
+     */
     @FXML
     public void DeleteGroup() {
         DisplayObject result = groupTable.getSelectionModel().getSelectedItem();
@@ -159,6 +172,9 @@ public class ManageGroupsController {
         } catch (NullPointerException e) {System.err.println(e.getMessage());}
     }
 
+    /**
+     * Deletes the selected SubGroup from the databased based on the selected TableView Item
+     */
     @FXML
     public void DeleteSubgroup() {
         DisplayObject result = subGroupTable.getSelectionModel().getSelectedItem();

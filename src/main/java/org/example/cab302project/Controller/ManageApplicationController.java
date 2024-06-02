@@ -39,6 +39,15 @@ public class ManageApplicationController {
     @FXML
     ComboBox<String> selectGroup;
 
+
+    /**
+     * Creates a new Display Object class with String Values
+     * This is to allow the tableView to add multiple values at once as TableView requires an Object when using its
+     * .add() method.
+     *
+     * Attempted to Refactor this page and ManageGroups, however the displayObject class was throwing errors when
+     * working between classes as it required its fields to be static which caused more problems in the code
+     */
     public class DisplayObject {
         private String name = null; private String reason = null;
 
@@ -54,6 +63,7 @@ public class ManageApplicationController {
             this.name = name; this.reason = reason;
         } }
 
+    //populates the groupList based on the user ID
     private void populateGroupList() {
         try {
             selectGroup.getItems().clear();
@@ -73,7 +83,9 @@ public class ManageApplicationController {
         } catch (NullPointerException e) {System.err.println(e.getMessage());}
     }
 
-
+    /**
+     * populates the Blocked application list from the DB
+     */
     public void populateApplicationList() {
         try {
             applicationTable.getItems().clear();
@@ -84,10 +96,12 @@ public class ManageApplicationController {
                 pstmt.setInt(1, currentGroupID);
                 ResultSet rs = pstmt.executeQuery();
 
+                //The setCellValueFactory preps the TableView Columns to input the "name" and "reason" variables
                 fileNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
                 reasonColumn.setCellValueFactory(new PropertyValueFactory<>("reason"));
                 while (rs.next()) {
                     String appPath = ReturnFileShortened(rs.getString("fileName"));
+                    //Creates a new Display Object based on the Database data to be inputted into the TableView
                     DisplayObject displayObject  = new DisplayObject(appPath, rs.getString("reason"));
                     applicationTable.getItems().add(displayObject);
                 }
@@ -98,6 +112,12 @@ public class ManageApplicationController {
         } catch (NullPointerException e) {System.err.println(e.getMessage());}
     }
 
+    /**
+     * From the shortened filepath displayed in the TableView, checks it against the stored full filepaths in the DB
+     * and returns the full filepath that matches
+     * ALlows for delete functionality to work properly
+     * @return extended filepath
+     */
     public String ReturnFileExtended() {
         String extendedPath = null;
 
@@ -118,6 +138,7 @@ public class ManageApplicationController {
         return extendedPath;
     }
 
+    //returns the shortened filepath (example.exe) based upon the full filePath using regex
     private String ReturnFileShortened(String filePath) {
         Pattern pattern = Pattern.compile( "[^\\\\]*.exe");
         Matcher matcher = pattern.matcher(filePath);
@@ -126,6 +147,10 @@ public class ManageApplicationController {
     }
 
 
+    /**
+     * Deletes the application from the database where the filepath matches the shortened path
+     * provided from ReturnFileShortened
+     */
     public void deleteApplications() {
         DisplayObject fileShort = applicationTable.getSelectionModel().selectedItemProperty().get();
         String result = ReturnFileExtended();
