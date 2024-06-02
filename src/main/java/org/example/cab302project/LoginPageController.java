@@ -135,7 +135,7 @@ public class LoginPageController {
      * @param password password entered by the user
      * @return returns true if the credentials are valid, else return false
      */
-    private boolean verifyUserCredentials(String email, String password) {
+    public boolean verifyUserCredentials(String email, String password) {
         String hashedEmail = hashString(email);
         String hashedPassword = hashString(password);
 
@@ -167,7 +167,7 @@ public class LoginPageController {
      * @param input hash the input string
      * @return the hashed string value
      */
-    private String hashString(String input) {
+    public String hashString(String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] hashedBytes = md.digest(input.getBytes());
@@ -188,7 +188,7 @@ public class LoginPageController {
      * @param title the title for the alert message
      * @param message the message for the alert
      */
-    private void showAlert(AlertType alertType, String title, String message) {
+    public void showAlert(AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);

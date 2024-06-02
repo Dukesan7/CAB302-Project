@@ -55,26 +55,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Notification.executor&quot;: &quot;Run&quot;,
-    &quot;Application.breakTest.executor&quot;: &quot;Run&quot;,
-    &quot;Application.org.example.cab302project.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Attach to process.pid 26572.executor&quot;: &quot;ProcessAttachDebug&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Allan Li/QUT/Year 2/Semester 1/CAB302 Software Development/Test Project&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.Notification.executor": "Run",
+    "Application.breakTest.executor": "Run",
+    "Application.org.example.cab302project.Main.executor": "Run",
+    "Attach to process.pid 26572.executor": "ProcessAttachDebug",
+    "JUnit.LoginPC.executor": "Run",
+    "JUnit.focusSessModel.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Allan Li/QUT/Year 2/Semester 1/CAB302 Software Development/Test Project",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\acste\OneDrive\University\2024\Semester 1\cab302\Assignment\src\main\java\org\example\cab302project" />
@@ -90,7 +92,7 @@
       <recent name="org.example.cab302project" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.org.example.cab302project.Main">
+  <component name="RunManager" selected="JUnit.focusSessModel">
     <configuration name="org.example.cab302project.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="corretto-17" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -115,6 +117,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="LoginPC" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CAB302-Project" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="LoginPC" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ProfilesPC" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CAB302-Project" />
       <option name="PACKAGE_NAME" value="" />
@@ -124,17 +135,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="focusSessModel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CAB302-Project" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="focusSessModel" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Application.org.example.cab302project.Main" />
+      <item itemvalue="JUnit.LoginPC" />
+      <item itemvalue="JUnit.focusSessModel" />
       <item itemvalue="JUnit.InitSessPC" />
       <item itemvalue="JUnit.ProfilesPC" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.focusSessModel" />
+        <item itemvalue="JUnit.LoginPC" />
         <item itemvalue="Application.org.example.cab302project.Main" />
         <item itemvalue="JUnit.ProfilesPC" />
         <item itemvalue="JUnit.InitSessPC" />
-        <item itemvalue="Application.org.example.cab302project.Main" />
       </list>
     </recent_temporary>
   </component>

@@ -18,6 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Hashtable;
 import javafx.scene.control.Alert.AlertType;
+
 public class DashboardPageController {
     PageFunctions pageFunctions = new PageFunctions();
     Connection connection;
